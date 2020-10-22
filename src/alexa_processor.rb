@@ -161,15 +161,6 @@ class AlexaProcessor
     res = URI.open(url).read
   end
 
-  # https://www.ineedagyro.com/recs?lat=1&lng=8
-  def gyro_service(lat, lng)
-    url = "https://www.ineedagyro.com/recs?lat=#{lat}1&lng=#{lng}"
-
-    res = URI.open(url)
-    read = JSON.parse res.read
-    read['locs']
-  end
-
   private_class_method def self.sanitize(text)
     text.gsub(/&/, 'and')
   end
