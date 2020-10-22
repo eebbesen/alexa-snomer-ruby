@@ -31,21 +31,21 @@ class AlexaProcessor
 
   def generate_text(info)
     page = if info['yesCondition'].size > 0
-      get_page info['site']
-    else
-      ''
-    end
+             get_page info['site']
+           else
+             ''
+           end
 
     yes = info['yesCondition'].select { |c| page.downcase.include?(c) }.size > 0
     no = info['noCondition'].select { |c| page.downcase.include?(c) }.size > 0
 
     text = if yes
-      "#{city} has declared a snow emergency"
-    elsif no || page.size > 0
-      "There is not a snow emergency in #{city}"
-    else
-      "#{city} doesn't post snow emergencies. #{info['policy']}"
-    end
+             "#{city} has declared a snow emergency"
+           elsif no || page.size > 0
+             "There is not a snow emergency in #{city}"
+           else
+             "#{city} doesn't post snow emergencies. #{info['policy']}"
+           end
   end
 
   def process
@@ -88,9 +88,10 @@ class AlexaProcessor
 
   def loc_processor
     return unless city
+
     file = File.open('database/city_map.json')
     cities = JSON.parse(file.read)
-    return cities[city]
+    cities[city]
   end
 
   def parse_loc_data(locs)
@@ -165,4 +166,3 @@ class AlexaProcessor
     text.gsub(/&/, 'and')
   end
 end
-
