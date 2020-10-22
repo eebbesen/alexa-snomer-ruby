@@ -1,0 +1,46 @@
+{
+  "version": "1.0",
+  "session": {
+    "new": false,
+    "sessionId": "amzn1.echo-api.session.eeeee",
+    "application": {
+      "applicationId": "amzn1.ask.skill.44444"
+    },
+    "user": {
+      "userId": "amzn1.ask.account.AAAAA",
+      "permissions": {
+        "consentToken": "eeeee"
+      }
+    }
+  },
+  "context": {
+    "System": {
+      "application": {
+        "applicationId": "amzn1.ask.skill.44444"
+      },
+      "user": {
+        "userId": "amzn1.ask.account.AAAAA",
+        "permissions": {
+          "consentToken": "eeeee"
+        }
+      },
+      "device": {
+        "deviceId": "amzn1.ask.device.GGGGGG",
+        "supportedInterfaces": {}
+      },
+      "apiEndpoint": "https://api.amazonalexa.com",
+      "apiAccessToken": "yyyyy"
+    }
+  },
+  "request": {
+    "type": "SessionEndedRequest",
+    "requestId": "amzn1.echo-api.request.88888",
+    "timestamp": "2019-01-19T18:36:41Z",
+    "locale": "en-US",
+    "reason": "ERROR",
+    "error": {
+      "type": "INVALID_RESPONSE",
+      "message": "SpeechletResponse was null"
+    }
+  }
+}
