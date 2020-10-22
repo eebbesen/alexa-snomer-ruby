@@ -1,6 +1,5 @@
 .notes
 .byebug_history
 .bundle
-vendor
 target/
 !.keep

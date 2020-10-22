@@ -4,7 +4,7 @@ require 'open-uri'
 
 ##
 class AddressPermissionError < StandardError
-  MSG = 'Please grant me permission to access your device address. Without this permission I cannot find yeeros near you!'
+  MSG = 'Please grant me permission to access your device address. Without this permission I cannot find locations near you!'
   def initialize
     super(MSG)
   end

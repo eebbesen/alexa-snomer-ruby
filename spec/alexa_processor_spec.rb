@@ -32,7 +32,7 @@ RSpec.describe AlexaProcessor do
         info = ap.send(:loc_processor)
         t = ap.generate_text info
 
-        expect(t).to eq("minneapolis has declared a snow emergency")
+        expect(t).to eq('minneapolis has declared a snow emergency')
       end
     end
 
@@ -42,7 +42,7 @@ RSpec.describe AlexaProcessor do
         info = ap.send(:loc_processor)
         t = ap.generate_text info
 
-        expect(t).to eq("There is not a snow emergency in saintpaul")
+        expect(t).to eq('There is not a snow emergency in saintpaul')
       end
     end
 

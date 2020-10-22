@@ -1,4 +1,7 @@
-# Ruby interface for Alexa with APL
+# alexa-snomer-ruby
+Minnesota snow emergency information
+
+Working towards a reusable Ruby interface for Alexa skills with APL
 
 ## package
 Generates zip file for upload to AWS Lambda for Ruby
@@ -7,7 +10,7 @@ Generates zip file for upload to AWS Lambda for Ruby
 ```
 
 ## manual test
-src/ex.rb is an attempt to simulate the way Alexa accesses the lambda.
+src/ex.rb is an attempt to simulate the way Alexa accesses the Lambda function
 ### device with no screen
 ```bash
 src/ex.rb ns
@@ -19,6 +22,10 @@ src/ex.rb
 ```
 
 ## unit test
+```bash
+bundle exec rspec
+```
+or
 ```bash
 bundle exec rake
 ```

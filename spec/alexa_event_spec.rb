@@ -76,9 +76,9 @@ RSpec.describe AlexaEvent do
   end
 
   def request_builder(intent_type, address_perm: false, args: {})
-    intent_name = args[:intent_name] || 'iNeedAGyroIntent'
-    food = args[:food] || nil
-    count = args[:count] || nil
+    intent_name = args[:intent_name] || 'LaunchRequest'
+    city = args[:cityName] || nil
+    state = args[:stateName] || nil
     screen = args[:screen] || false
 
     apl_string = <<~SSCC
@@ -95,22 +95,22 @@ RSpec.describe AlexaEvent do
       }
     SSCC
     address_permission_string = '"consentToken": "abcdefgh123456790"'
-    food_string = food ? "\"value\": \"#{food}\"," : ''
-    count_string = count ? "\"value\": \"#{count}\"," : ''
+    city_string = city ? "\"value\": \"#{city}\"," : ''
+    state_string = state ? "\"value\": \"#{state}\"," : ''
     intent_string = <<~INTENT
       ,"intent": {
         "name": "#{intent_name}",
         "confirmationStatus": "NONE",
         "slots": {
-          "foodItem": {
-            #{food_string}
-            "name": "foodItem",
+          "cityName": {
+            #{city_string}
+            "name": "cityName",
             "confirmationStatus": "NONE",
             "source": "USER"
           },
-          "locCount": {
-            #{count_string}
-            "name": "locCount",
+          "stateName": {
+            #{state_string}
+            "name": "stateName",
             "confirmationStatus": "NONE",
             "source": "USER"
           }

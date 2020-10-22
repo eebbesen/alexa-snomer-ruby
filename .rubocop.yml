@@ -1,0 +1,30 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  NewCops: enable
+
+Layout/LineLength:
+  Exclude:
+    - spec/**/*
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - spec/**/*
+
+Metrics/MethodLength:
+  Exclude:
+    - spec/**/*
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - spec/**/*
+
+Naming/MethodParameterName:
+  Enabled: false
+
+Style/FormatStringToken:
+  Enabled: false

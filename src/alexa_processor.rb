@@ -30,18 +30,18 @@ class AlexaProcessor
   end
 
   def generate_text(info)
-    page = if info['yesCondition'].size > 0
-      get_page info['site']
-    else
-      ''
-    end
+    page = if info['yesCondition'].size.positive?
+             get_page info['site']
+           else
+             ''
+           end
 
-    yes = info['yesCondition'].select { |c| page.downcase.include?(c) }.size > 0
-    no = info['noCondition'].select { |c| page.downcase.include?(c) }.size > 0
+    yes = info['yesCondition'].select { |c| page.downcase.include?(c) }.size.positive?
+    no = info['noCondition'].select { |c| page.downcase.include?(c) }.size.positive?
 
-    text = if yes
+    if yes
       "#{city} has declared a snow emergency"
-    elsif no || page.size > 0
+    elsif no || page.size.positive?
       "There is not a snow emergency in #{city}"
     else
       "#{city} doesn't post snow emergencies. #{info['policy']}"
@@ -77,7 +77,7 @@ class AlexaProcessor
       puts "Didn't get an expected intent: #{intent}"
       [respond("I'm sorry, I don't understand.")]
     end
-  rescue AddressPermissionError, FoodNameError => e
+  rescue AddressPermissionError
     [respond(e.message)]
   rescue StandardError => e
     puts "error:\n#{e}\nresponding with:\n#{e.message}"
@@ -88,9 +88,10 @@ class AlexaProcessor
 
   def loc_processor
     return unless city
+
     file = File.open('database/city_map.json')
     cities = JSON.parse(file.read)
-    return cities[city]
+    cities[city]
   end
 
   def parse_loc_data(locs)
@@ -98,7 +99,7 @@ class AlexaProcessor
     locs.map do |l|
       puts "parse loc data\n#{l[:name]}--#{l[:street]}"
       n = ' next' if s.length.positive?
-      s += "Your#{n} closest yeero is #{l[:name]}"
+      s += "Your#{n} closest location is #{l[:name]}"
       s += " at #{l[:street]}" if l[:street]
       s += '.<break time=\\"500ms\\"/>'
     end
@@ -150,7 +151,7 @@ class AlexaProcessor
     a = CGI.escape([address['addressLine1'], address['city'], address['stateOrRegion'], address['postalCode']].compact.join(','))
     raise "You don't have any address information with your device" if a == ''
 
-    res = URI.open(url + a)
+    res = URI.parse(url + a).open
     status = res.status[0]
     read = JSON.parse res.read
     read['results'][0]['geometry']['location'] if status == '200'
@@ -158,27 +159,10 @@ class AlexaProcessor
 
   # gets target page
   def get_page(url)
-    res = URI.open(url).read
-  end
-
-  # https://www.ineedagyro.com/recs?lat=1&lng=8
-  def gyro_service(lat, lng)
-    url = "https://www.ineedagyro.com/recs?lat=#{lat}1&lng=#{lng}"
-
-    res = URI.open(url)
-    read = JSON.parse res.read
-    read['locs']
+    URI.parse(url).open.read
   end
 
   private_class_method def self.sanitize(text)
     text.gsub(/&/, 'and')
-  end
-end
-
-##
-class FoodNameError < StandardError
-  MSG = "I'm sorry, I can only find yeeros"
-  def initialize
-    super(MSG)
   end
 end
