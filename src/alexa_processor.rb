@@ -77,7 +77,7 @@ class AlexaProcessor
       puts "Didn't get an expected intent: #{intent}"
       [respond("I'm sorry, I don't understand.")]
     end
-  rescue AddressPermissionError, FoodNameError => e
+  rescue AddressPermissionError
     [respond(e.message)]
   rescue StandardError => e
     puts "error:\n#{e}\nresponding with:\n#{e.message}"
@@ -175,10 +175,3 @@ class AlexaProcessor
   end
 end
 
-##
-class FoodNameError < StandardError
-  MSG = "I'm sorry, I can only find yeeros"
-  def initialize
-    super(MSG)
-  end
-end
