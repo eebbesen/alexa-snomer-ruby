@@ -4,6 +4,7 @@ require_relative './alexa_event'
 require_relative './apl_assembler'
 require 'cgi'
 require 'forwardable'
+require 'logger'
 require 'open-uri'
 
 ##
@@ -57,14 +58,14 @@ class AlexaProcessor
       text = generate_text(info)
 
       r = respond text # speech
-      puts "RESPONSE STRING\n#{r}"
+      logger.info "RESPONSE STRING\n#{r}"
 
       if apl?
-        puts 'IS APL'
-        directives = AplAssembler.build_directives d
+        logger.info 'IS APL'
+        directives = AplAssembler.build_directives info['policy']
         [r, directives]
       else
-        puts 'IS NOT APL'
+        logger.info 'IS NOT APL'
         [r]
       end
     when 'SessionEndedRequest', 'CancelIntent'
@@ -74,17 +75,21 @@ class AlexaProcessor
     when 'StopIntent'
       [respond('Bye!')]
     else
-      puts "Didn't get an expected intent: #{intent}"
+      logger.info "Didn't get an expected intent: #{intent}"
       [respond("I'm sorry, I don't understand.")]
     end
   rescue AddressPermissionError
     [respond(e.message)]
   rescue StandardError => e
-    puts "error:\n#{e}\nresponding with:\n#{e.message}"
+    logger.info "error:\n#{e}\nresponding with:\n#{e.message}"
     [respond("I'm having issues, please try again later")]
   end
 
   private
+
+  def logger
+    @logger ||= Logger.new($stdout)
+  end
 
   def loc_processor
     return unless city
@@ -97,7 +102,7 @@ class AlexaProcessor
   def parse_loc_data(locs)
     s = ''
     locs.map do |l|
-      puts "parse loc data\n#{l[:name]}--#{l[:street]}"
+      logger.info "parse loc data\n#{l[:name]}--#{l[:street]}"
       n = ' next' if s.length.positive?
       s += "Your#{n} closest location is #{l[:name]}"
       s += " at #{l[:street]}" if l[:street]
@@ -146,7 +151,7 @@ class AlexaProcessor
 
   # https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
   def geocode(address)
-    puts 'starting geocode'
+    logger.info 'starting geocode'
     url = "https://maps.googleapis.com/maps/api/geocode/json?key=#{ENV['GOOGLE_API_KEY']}&address="
     a = CGI.escape([address['addressLine1'], address['city'], address['stateOrRegion'], address['postalCode']].compact.join(','))
     raise "You don't have any address information with your device" if a == ''

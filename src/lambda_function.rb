@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 require 'json'
+require 'logger'
 require_relative './alexa_event'
 require_relative './alexa_processor'
 
 ##
 def lambda_handler(event:, context:)
-  puts("event: #{event}")
-  puts("context: #{context}")
+  logger.info("event: #{event}")
+  logger.info("context: #{context}")
 
   ap = AlexaProcessor.new event
   payload = ap.process
@@ -42,6 +43,6 @@ def lambda_handler(event:, context:)
          PP
        end
   pp = JSON.parse pp
-  puts "RETURN: #{pp}"
+  logger.info "RETURN: #{pp}"
   pp
 end
