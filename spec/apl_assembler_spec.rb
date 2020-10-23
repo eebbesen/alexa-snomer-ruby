@@ -138,17 +138,17 @@ RSpec.describe AplAssembler do
 
   context 'truncates names' do
     it 'preserves short strings' do
-      ret = AplAssembler.send(:truncate_name, 'Gyro Hero')
+      ret = AplAssembler.send(:truncate_text, 'Gyro Hero')
       expect(ret).to eql('Gyro Hero')
     end
 
     it 'truncates long strings with spaces' do
-      ret = AplAssembler.send(:truncate_name, 'Greek Kitchen Modern Mediterranean')
+      ret = AplAssembler.send(:truncate_text, 'Greek Kitchen Modern Mediterranean')
       expect(ret).to eql('Greek Kitchen Modern')
     end
 
     it 'truncates long strings without spaces' do
-      ret = AplAssembler.send(:truncate_name, 'averynicedayisfromthebestpartofanywhere')
+      ret = AplAssembler.send(:truncate_text, 'averynicedayisfromthebestpartofanywhere')
       expect(ret).to eql('averynicedayisfromthebestparto')
     end
   end

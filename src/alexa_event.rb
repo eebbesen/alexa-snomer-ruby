@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'logger'
 require 'open-uri'
 
 ##
@@ -73,13 +74,19 @@ class AlexaEvent
   end
 
   def amazon_address_request
-    puts 'starting address request'
+    logger.info 'starting address request'
     res = URI.open(device_api_endpoint,
                    'Accept' => 'application/json',
                    'Authorization' => "Bearer #{api_access_token}")
-    puts "ending address request\\n#{res}"
+    logger.info "ending address request\\n#{res}"
     status = res.status[0]
 
     return JSON.parse(res.read) if status == '200'
+  end
+
+  private
+
+  def logger
+    @logger ||= Logger.new($stdout)
   end
 end
