@@ -73,6 +73,8 @@ class AlexaEvent
       system['device']['supportedInterfaces']['Display']
   end
 
+  # get physical address of device
+  # this value is user-entered and could be zip code or full address
   def amazon_address_request
     logger.info 'starting address request'
     res = URI.open(device_api_endpoint,

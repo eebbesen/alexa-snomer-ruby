@@ -12,18 +12,18 @@ class AlexaProcessor
   extend Forwardable
 
   def_delegators :@alexa_event,
-                 :system,
-                 :device_api_endpoint,
-                 :api_access_token,
-                 :api_endpoint,
-                 :device_id,
-                 :request_id,
-                 :slots,
-                 :address,
-                 :find_intent_type,
-                 :device_permission?,
-                 :apl?,
-                 :amazon_address_request
+                   :system,
+                   :device_api_endpoint,
+                   :api_access_token,
+                   :api_endpoint,
+                   :device_id,
+                   :request_id,
+                   :slots,
+                   :address,
+                   :find_intent_type,
+                   :device_permission?,
+                   :apl?,
+                   :amazon_address_request
 
   def initialize(event)
     @event = event
@@ -62,7 +62,12 @@ class AlexaProcessor
 
       if apl?
         logger.info 'IS APL'
-        directives = AplAssembler.build_directives info['policy']
+        data = {
+          title: r,
+          text: info['policy'],
+          to_speak: r
+        }
+        directives = AplAssembler.build_directives data
         [r, directives]
       else
         logger.info 'IS NOT APL'

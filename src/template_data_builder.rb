@@ -97,15 +97,28 @@ class TemplateDataBuilder
     (LT % item).to_s
   end
 
-  def self.build_data_template(items)
-    locs = items.map { |i| build_list_item i }
+  def self.build_data_template_list(items)
+    list = items.map { |i| build_list_item i }
     d = {
-      list_size: locs.size,
-      list_items: locs.join(','),
+      list_size: list.size,
+      list_items: list.join(','),
       app_name: ENV['APP_NAME'],
       logo_url: ENV['LOGO_URL']
     }
 
     JSON.parse "{#{LIH % d}}"
+  end
+
+  def self.build_data_template_text(data)
+    byebug
+    d = {
+      title: data[:title],
+      text: data[:text],
+      to_speak: data[:to_speak],
+      app_name: ENV['APP_NAME'],
+      logo_url: ENV['LOGO_URL']
+    }
+
+    JSON.parse "{#{LT % d}}"
   end
 end

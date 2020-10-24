@@ -12,6 +12,7 @@ def lambda_handler(event:, context:)
 
   ap = AlexaProcessor.new event
   payload = ap.process
+  logger.info("payload: #{payload}")
   pp = if payload.length == 1
          <<~PP
            {

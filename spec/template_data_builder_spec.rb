@@ -87,7 +87,7 @@ RSpec.describe TemplateDataBuilder do
         }
       TTT
 
-      ret = TemplateDataBuilder.send(:build_data_template, d)
+      ret = TemplateDataBuilder.send(:build_data_template_list, d)
 
       expect(ret).to eql(ex)
     end

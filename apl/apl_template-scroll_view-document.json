@@ -50,7 +50,7 @@
                                 "items": [
                                     {
                                         "type": "Text",
-                                        "id": "CheeseContent",
+                                        "id": "Content",
                                         "style": "textStyleBody",
                                         "text": "${payload.longTextTemplateData.properties.textContent.primaryText.text}",
                                         "speech": "${payload.longTextTemplateData.properties.cheeseInfoSpeech}",
@@ -67,7 +67,7 @@
     "onMount": [
         {
             "type": "SpeakItem",
-            "componentId": "CheeseContent",
+            "componentId": "Content",
             "highlightMode": "line",
             "align": "center"
         }
