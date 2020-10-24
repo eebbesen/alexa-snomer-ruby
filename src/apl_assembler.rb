@@ -23,6 +23,7 @@ class AplAssembler
     else
       raise StandardError.new "unrecognized APL type: #{type}. Only :list and :text are valid."
     end
+
     <<~DIR
       "directives": [
         {
