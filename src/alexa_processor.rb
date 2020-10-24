@@ -67,7 +67,7 @@ class AlexaProcessor
           text: info['policy'],
           to_speak: r
         }
-        directives = AplAssembler.build_directives data
+        directives = AplAssembler.build_directives data, :text
         [r, directives]
       else
         logger.info 'IS NOT APL'

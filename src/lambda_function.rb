@@ -7,6 +7,8 @@ require_relative './alexa_processor'
 
 ##
 def lambda_handler(event:, context:)
+
+  logger = Logger.new($stdout)
   logger.info("event: #{event}")
   logger.info("context: #{context}")
 

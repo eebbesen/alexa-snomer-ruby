@@ -42,49 +42,47 @@ class TemplateDataBuilder
   LIST_ITEM
 
   LT = <<~LONG_TEXT
-    {
-        "longTextTemplateData": {
-            "type": "object",
-            "objectId": "longTextSample",
-            "properties": {
-                "backgroundImage": {
-                    "contentDescription": null,
-                    "smallSourceUrl": null,
-                    "largeSourceUrl": null,
-                    "sources": [
-                        {
-                            "url": "%{logo_url}",
-                            "size": "small",
-                            "widthPixels": 0,
-                            "heightPixels": 0
-                        },
-                        {
-                            "url": "%{logo_url}",
-                            "size": "large",
-                            "widthPixels": 0,
-                            "heightPixels": 0
-                        }
-                    ]
-                },
-                "title": "%{card_title}",
-                "textContent": {
-                    "primaryText": {
-                        "type": "PlainText",
-                        "text": "%{card_text}"
-                    }
-                },
-                "logoUrl": "%{logo_url}",
-                "speechSSML": "<speak>%{text_to_speak}</speak>"
-            },
-            "transformers": [
-                {
-                    "inputPath": "speechSSML",
-                    "transformer": "ssmlToSpeech",
-                    "outputName": "infoSpeech"
-                }
-            ]
-        }
-    }
+      "longTextTemplateData": {
+          "type": "object",
+          "objectId": "longTextSample",
+          "properties": {
+              "backgroundImage": {
+                  "contentDescription": null,
+                  "smallSourceUrl": null,
+                  "largeSourceUrl": null,
+                  "sources": [
+                      {
+                          "url": "%{logo_url}",
+                          "size": "small",
+                          "widthPixels": 0,
+                          "heightPixels": 0
+                      },
+                      {
+                          "url": "%{logo_url}",
+                          "size": "large",
+                          "widthPixels": 0,
+                          "heightPixels": 0
+                      }
+                  ]
+              },
+              "title": "%{card_title}",
+              "textContent": {
+                  "primaryText": {
+                      "type": "PlainText",
+                      "text": "%{card_text}"
+                  }
+              },
+              "logoUrl": "%{logo_url}",
+              "speechSSML": "<speak>%{text_to_speak}</speak>"
+          },
+          "transformers": [
+              {
+                  "inputPath": "speechSSML",
+                  "transformer": "ssmlToSpeech",
+                  "outputName": "infoSpeech"
+              }
+          ]
+      }
   LONG_TEXT
 
   # interpolated String of list item data
@@ -110,11 +108,10 @@ class TemplateDataBuilder
   end
 
   def self.build_data_template_text(data)
-    byebug
     d = {
-      title: data[:title],
-      text: data[:text],
-      to_speak: data[:to_speak],
+      card_title: data[:title],
+      card_text: data[:text],
+      text_to_speak: data[:to_speak],
       app_name: ENV['APP_NAME'],
       logo_url: ENV['LOGO_URL']
     }
