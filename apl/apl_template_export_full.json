@@ -1,0 +1,123 @@
+{
+    "document": {
+        "type": "APL",
+        "version": "1.4",
+        "settings": {},
+        "theme": "dark",
+        "import": [
+            {
+                "name": "alexa-layouts",
+                "version": "1.2.0"
+            }
+        ],
+        "resources": [],
+        "styles": {},
+        "graphics": {},
+        "commands": {},
+        "layouts": {},
+        "mainTemplate": {
+            "parameters": [
+                "payload"
+            ],
+            "item": [
+                {
+                    "type": "Container",
+                    "height": "100vh",
+                    "items": [
+                        {
+                            "type": "AlexaBackground",
+                            "backgroundImageSource": "${payload.longTextTemplateData.properties.backgroundImage.sources[0].url}",
+                            "backgroundBlur": false,
+                            "colorOverlay": true,
+                            "backgroundScale": "best-fill"
+                        },
+                        {
+                            "type": "Container",
+                            "height": "100vh",
+                            "width": "100vw",
+                            "items": [
+                                {
+                                    "type": "AlexaHeader",
+                                    "headerTitle": "${payload.longTextTemplateData.properties.title}",
+                                    "headerAttributionImage": "${payload.longTextTemplateData.properties.logoUrl}"
+                                },
+                                {
+                                    "type": "ScrollView",
+                                    "grow": 1,
+                                    "paddingTop": "@spacingMedium",
+                                    "paddingBottom": "${@spacing3XLarge + @spacingXSmall}",
+                                    "paddingLeft": "@marginHorizontal",
+                                    "paddingRight": "@marginHorizontal",
+                                    "items": [
+                                        {
+                                            "type": "Text",
+                                            "id": "CheeseContent",
+                                            "style": "textStyleBody",
+                                            "text": "${payload.longTextTemplateData.properties.textContent.primaryText.text}",
+                                            "speech": "${payload.longTextTemplateData.properties.cheeseInfoSpeech}",
+                                            "textAlign": "left"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "onMount": [
+            {
+                "type": "SpeakItem",
+                "componentId": "CheeseContent",
+                "highlightMode": "line",
+                "align": "center"
+            }
+        ]
+    },
+
+
+    "datasources": {
+        "longTextTemplateData": {
+            "type": "object",
+            "objectId": "longTextSample",
+            "properties": {
+                "backgroundImage": {
+                    "contentDescription": null,
+                    "smallSourceUrl": null,
+                    "largeSourceUrl": null,
+                    "sources": [
+                        {
+                            "url": "https://d2o906d8ln7ui1.cloudfront.net/images/templates_v2/bg_cheese_2.jpg",
+                            "size": "small",
+                            "widthPixels": 0,
+                            "heightPixels": 0
+                        },
+                        {
+                            "url": "https://d2o906d8ln7ui1.cloudfront.net/images/templates_v2/bg_cheese_2.jpg",
+                            "size": "large",
+                            "widthPixels": 0,
+                            "heightPixels": 0
+                        }
+                    ]
+                },
+                "title": "Saint Paul: No snow emergency",
+                "textContent": {
+                    "primaryText": {
+                        "type": "PlainText",
+                        "text": "A Snow Emergency is typically declared after snowfalls of 3\" or more, or after an accumulation of 3\" or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed."
+                    }
+                },
+                "logoUrl": "https://d2o906d8ln7ui1.cloudfront.net/images/templates_v2/icon_cheese.png",
+                "cheeseSpeechSSML": "<speak>But in reality, mice prefer grains, fruits, and manmade foods that are high in sugar, and tend to turn up their noses at very smelly foods, like cheese. In fact, a 2006 study found that mice actively avoid cheese and dairy in general.</speak>"
+            },
+            "transformers": [
+                {
+                    "inputPath": "cheeseSpeechSSML",
+                    "transformer": "ssmlToSpeech",
+                    "outputName": "cheeseInfoSpeech"
+                }
+            ]
+        }
+    },
+    "sources": {}
+}
