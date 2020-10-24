@@ -9,6 +9,12 @@ Generates zip file for upload to AWS Lambda for Ruby
 ./package.sh
 ```
 
+## deploy
+For display please set the following environment variables
+* `APP_NAME`
+* `LOGO_URL`
+
+
 ## manual test
 src/ex.rb is an attempt to simulate the way Alexa accesses the Lambda function
 ### device with no screen

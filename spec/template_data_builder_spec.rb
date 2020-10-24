@@ -5,6 +5,11 @@ require 'json'
 require 'spec_helper'
 
 RSpec.describe TemplateDataBuilder do
+  before(:each) do
+    ENV['APP_NAME'] = 'Snow Emergency'
+    ENV['LOGO_URL'] = 'https://images-na.ssl-images-amazon.com/images/I/81QXYqxgqhL._SL210_QL95_BG0,0,0,0_FMpng_.png'
+  end
+
   context 'final template' do
     it 'builds template' do
       d = [{
@@ -14,15 +19,15 @@ RSpec.describe TemplateDataBuilder do
         secondary_text: '100 Main Street',
         tertiary_text: '2 miles',
         token: 'gyrohero'
-      },
-           {
-             id: 'greekgrille',
-             ordinal_no: 2,
-             primary_text: 'Greek Grille',
-             secondary_text: '88 Elm Street',
-             tertiary_text: '2.5 miles',
-             token: 'greekgrille'
-           }]
+       },
+       {
+         id: 'greekgrille',
+         ordinal_no: 2,
+         primary_text: 'Greek Grille',
+         secondary_text: '88 Elm Street',
+         tertiary_text: '2.5 miles',
+         token: 'greekgrille'
+       }]
 
       ex = JSON.parse <<~TTT
         {

@@ -101,7 +101,9 @@ class TemplateDataBuilder
     locs = items.map { |i| build_list_item i }
     d = {
       list_size: locs.size,
-      list_items: locs.join(',')
+      list_items: locs.join(','),
+      app_name: ENV['APP_NAME'],
+      logo_url: ENV['LOGO_URL']
     }
 
     JSON.parse "{#{LIH % d}}"
