@@ -68,7 +68,8 @@ We'll generate our datasources dynamically at runtime
 I don't know what this is for.
 
 ## request payload examples
-### request with food slot
+### items
+#### request with food slot
 ```json
 {
     "version": "1.0",
@@ -161,7 +162,7 @@ I don't know what this is for.
 }
 ```
 
-### request with screen
+#### request with screen
 ```json
 {
     "requestEnvelope": {
@@ -260,7 +261,8 @@ I don't know what this is for.
 }
 ```
 ## return payloads
-### Text-only payload example
+### items
+#### Text-only payload example
 ```json
 {
     "outputSpeech": {
@@ -270,7 +272,7 @@ I don't know what this is for.
 }
 ```
 
-### APL payload example
+#### APL payload example
 ```json
 {
     "outputSpeech": {
