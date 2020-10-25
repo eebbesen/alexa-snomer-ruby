@@ -37,6 +37,10 @@ class AlexaProcessor
              ''
            end
 
+    if page == 'ERROR'
+      return "The website for #{city} is not responding. #{info['policy']}"
+    end
+
     yes = info['yesCondition'].select { |c| page.downcase.include?(c) }.size.positive?
     no = info['noCondition'].select { |c| page.downcase.include?(c) }.size.positive?
 
