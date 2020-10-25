@@ -10,7 +10,7 @@ RSpec.describe AplAssembler do
     ENV['LOGO_URL'] = 'https://images-na.ssl-images-amazon.com/images/I/81QXYqxgqhL._SL210_QL95_BG0,0,0,0_FMpng_.png'
   end
 
-  it 'assembles directives' do
+  it 'assembles directives for list' do
     ex_data = <<~EEXXDD
       {
          "listTemplate1Metadata": {
@@ -86,6 +86,78 @@ RSpec.describe AplAssembler do
     ]
 
     ret = AplAssembler.build_directives locs, :list
+
+    expect(JSON.parse("{#{ret}}")).to eql(JSON.parse(ex))
+  end
+
+    it 'assembles directives for scroll' do
+    ex_data = <<~EEXXDD
+      {
+        "longTextTemplateData": {
+          "type": "object",
+          "objectId": "longTextSample",
+          "properties": {
+            "backgroundImage": {
+              "contentDescription": null,
+              "smallSourceUrl": null,
+              "largeSourceUrl": null,
+              "sources": [
+                {
+                  "url": "https://images-na.ssl-images-amazon.com/images/I/81QXYqxgqhL._SL210_QL95_BG0,0,0,0_FMpng_.png",
+                  "size": "small",
+                  "widthPixels": 0,
+                  "heightPixels": 0
+                },
+                {
+                  "url": "https://images-na.ssl-images-amazon.com/images/I/81QXYqxgqhL._SL210_QL95_BG0,0,0,0_FMpng_.png",
+                  "size": "large",
+                  "widthPixels": 0,
+                  "heightPixels": 0
+                }
+              ]
+            },
+            "title": "Saint Paul: No snow emergency",
+            "textContent": {
+              "primaryText": {
+                "type": "PlainText",
+                "text": "A Snow Emergency is typically declared after snowfalls of 3 inches or more, or after an accumulation of 3 inches or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed."
+              }
+            },
+            "logoUrl": "https://images-na.ssl-images-amazon.com/images/I/81QXYqxgqhL._SL210_QL95_BG0,0,0,0_FMpng_.png",
+            "speechSSML": "<speak>There is a snow emergency in saintpaul</speak>"
+          },
+          "transformers": [
+              {
+                  "inputPath": "speechSSML",
+                  "transformer": "ssmlToSpeech",
+                  "outputName": "infoSpeech"
+              }
+          ]
+        }
+      }
+    EEXXDD
+
+    ex = <<~EEXX
+      {"directives": [
+        {
+          "type": "Alexa.Presentation.APL.RenderDocument",
+          "version": "1.0",
+          "document": #{File.read('./apl/apl_template-scroll_view-document.json') % { header_background_color: 'red' }},
+          "datasources": #{ex_data}
+        }
+      ]}
+    EEXX
+
+    data = {
+      header_background_color: 'red',
+      title: 'Saint Paul: No snow emergency',
+      text: 'A Snow Emergency is typically declared after snowfalls of 3 inches or more, or after an accumulation of 3 inches or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed.',
+      to_speak: 'There is a snow emergency in saintpaul',
+      app_name: ENV['APP_NAME'],
+      logo_url: ENV['LOGO_URL']
+    }
+
+    ret = AplAssembler.build_directives data, :text
 
     expect(JSON.parse("{#{ret}}")).to eql(JSON.parse(ex))
   end
