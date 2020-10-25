@@ -52,9 +52,8 @@ class AlexaProcessor
   def process
     intent = find_intent_type
     case intent
-    when 'LaunchRequest', 'IntentRequest'
+    when 'IntentRequest'
       info = loc_processor
-
       text = generate_text(info)
 
       r = respond text # speech
@@ -75,7 +74,7 @@ class AlexaProcessor
       end
     when 'SessionEndedRequest', 'CancelIntent'
       ['']
-    when 'HelpIntent'
+    when 'LaunchRequest', 'HelpIntent'
       [respond("Request a Minnesota city and I'll get snow emergency info for you!")]
     when 'StopIntent'
       [respond('Bye!')]
@@ -147,7 +146,8 @@ class AlexaProcessor
   end
 
   def slot_vals
-    return unless slots
+    logger.info("slot_vals: #{slots}")
+    return [] unless slots
 
     city = slots && slots['cityName'] && slots['cityName']['value']
     state = slots && slots['stateName'] && slots['stateName']['value']
