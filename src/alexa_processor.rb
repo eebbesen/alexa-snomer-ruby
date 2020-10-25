@@ -170,6 +170,9 @@ class AlexaProcessor
   # gets target page
   def get_page(url)
     URI.parse(url).open.read
+  rescue StandardError => se
+    logger.error("Error accessing #{url}:\n#{se.message}")
+    'ERROR'
   end
 
   private_class_method def self.sanitize(text)

@@ -5,6 +5,17 @@ require 'json'
 require 'spec_helper'
 
 RSpec.describe AlexaProcessor do
+  context '#getPage' do
+    it 'returns text "ERROR" when error accessing site' do
+      site = 'http://www2.minneapolismn.gov/snow/index.htm'
+      ap = AlexaProcessor.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'Minneapolis' }
+      VCR.use_cassette('minneapolis_503') do
+        r = ap.send(:get_page, site)
+        expect(r).to eq('ERROR')
+      end
+    end
+  end
+
   context '#loc_processor' do
     it 'finds city info case insensitive' do
       ap = AlexaProcessor.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'Minneapolis' }
