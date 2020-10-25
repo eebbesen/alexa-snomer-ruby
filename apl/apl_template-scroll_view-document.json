@@ -38,7 +38,8 @@
                             {
                                 "type": "AlexaHeader",
                                 "headerTitle": "${payload.longTextTemplateData.properties.title}",
-                                "headerAttributionImage": "${payload.longTextTemplateData.properties.logoUrl}"
+                                "headerAttributionImage": "${payload.longTextTemplateData.properties.logoUrl}",
+                                "headerBackgroundColor": "%{header_background_color}"
                             },
                             {
                                 "type": "ScrollView",

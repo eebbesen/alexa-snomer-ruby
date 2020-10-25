@@ -68,7 +68,8 @@ class AlexaProcessor
         data = {
           title: r,
           text: info['policy'],
-          to_speak: r
+          to_speak: r,
+          header_background_color: r.include?('not a snow') ? 'green' : 'red'
         }
         directives = AplAssembler.build_directives data, :text
         [r, directives]

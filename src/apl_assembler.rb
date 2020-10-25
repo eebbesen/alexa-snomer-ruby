@@ -3,7 +3,7 @@
 require_relative './template_data_builder'
 
 ## Class to build APL templates
-# You'll need to cusom define
+# You'll need to custom define
 # * a document part (I build this using the Alexa Developer Console and save it to another file)
 # * code to transform your data into the format APL expect
 class AplAssembler
@@ -19,7 +19,8 @@ class AplAssembler
       document_part = File.read('./apl/apl_template-list_view-document.json')
     elsif type == :text
       data_part = TemplateDataBuilder.build_data_template_text(data).to_json
-      document_part = File.read('./apl/apl_template-scroll_view-document.json')
+      document_part = File.read('./apl/apl_template-scroll_view-document.json') % data
+      # need to populate header_background_color
     else
       raise StandardError.new "unrecognized APL type: #{type}. Only :list and :text are valid."
     end
