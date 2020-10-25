@@ -5,6 +5,17 @@ require 'json'
 require 'spec_helper'
 
 RSpec.describe AlexaProcessor do
+  context '#getPage' do
+    it 'returns text "ERROR" when error accessing site' do
+      site = 'http://www2.minneapolismn.gov/snow/index.htm'
+      ap = AlexaProcessor.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'Minneapolis' }
+      VCR.use_cassette('minneapolis_503') do
+        r = ap.send(:get_page, site)
+        expect(r).to eq('ERROR')
+      end
+    end
+  end
+
   context '#loc_processor' do
     it 'finds city info case insensitive' do
       ap = AlexaProcessor.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'Minneapolis' }
@@ -53,6 +64,16 @@ RSpec.describe AlexaProcessor do
         t = ap.generate_text info
 
         expect(t).to eq("plymouth doesn't post snow emergencies. If less than 2.5 inches falls, only major streets in the city system are plowed. If more than 2.5 inches of snow falls, a snow emergency is declared and all city streets are plowed curb-to-curb.")
+      end
+    end
+
+    it 'municipality website error' do
+      ap = AlexaProcessor.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'Minneapolis' }
+      VCR.use_cassette('minneapolis_503') do
+        info = ap.send(:loc_processor)
+        t = ap.generate_text info
+
+        expect(t).to eq("The website for minneapolis is not responding. Snow Emergencies are called after significant snowfall and before 6 p.m. on any given day. During a Snow Emergency, special parking rules go into effect that allow City crews to plow streets and emergency vehicles to travel safely.")
       end
     end
   end

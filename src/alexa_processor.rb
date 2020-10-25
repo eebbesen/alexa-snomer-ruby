@@ -37,6 +37,10 @@ class AlexaProcessor
              ''
            end
 
+    if page == 'ERROR'
+      return "The website for #{city} is not responding. #{info['policy']}"
+    end
+
     yes = info['yesCondition'].select { |c| page.downcase.include?(c) }.size.positive?
     no = info['noCondition'].select { |c| page.downcase.include?(c) }.size.positive?
 
@@ -170,6 +174,9 @@ class AlexaProcessor
   # gets target page
   def get_page(url)
     URI.parse(url).open.read
+  rescue StandardError => se
+    logger.error("Error accessing #{url}:\n#{se.message}")
+    'ERROR'
   end
 
   private_class_method def self.sanitize(text)
