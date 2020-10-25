@@ -10,11 +10,13 @@ def lambda_handler(event:, context:)
 
   logger = Logger.new($stdout)
   logger.info("event: #{event}")
-  logger.info("context: #{context}")
+  logger.info("context: #{context.inspect}")
 
   ap = AlexaProcessor.new event
   payload = ap.process
   logger.info("payload: #{payload}")
+
+  end_session = %w(StopIntent SessionEndedRequest CancelIntent).include? event['request']['type'] ? true : false
   pp = if payload.length == 1
          <<~PP
            {
@@ -24,7 +26,7 @@ def lambda_handler(event:, context:)
                  "type": "SSML",
                  "ssml": "#{payload[0]}"
                },
-               "shouldEndSession": true
+               "shouldEndSession": #{end_session}
              },
              "sessionAttributes": {}
            }
@@ -38,7 +40,7 @@ def lambda_handler(event:, context:)
                  "type": "SSML",
                  "ssml": "#{payload[0]}"
                },
-               "shouldEndSession": true,
+               "shouldEndSession": #{end_session},
                #{payload[1]}
              },
              "sessionAttributes": {}
