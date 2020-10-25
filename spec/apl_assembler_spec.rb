@@ -5,6 +5,11 @@ require 'json'
 require 'spec_helper'
 
 RSpec.describe AplAssembler do
+  before(:each) do
+    ENV['APP_NAME'] = 'Snow Emergency'
+    ENV['LOGO_URL'] = 'https://images-na.ssl-images-amazon.com/images/I/81QXYqxgqhL._SL210_QL95_BG0,0,0,0_FMpng_.png'
+  end
+
   it 'assembles directives' do
     ex_data = <<~EEXXDD
       {
@@ -80,7 +85,7 @@ RSpec.describe AplAssembler do
       { city: 'Saint Paul', name: 'Gyro Hero', street: '100 Peach Ave N', distance: 1006.7278773057899 }
     ]
 
-    ret = AplAssembler.build_directives locs
+    ret = AplAssembler.build_directives locs, :list
 
     expect(JSON.parse("{#{ret}}")).to eql(JSON.parse(ex))
   end

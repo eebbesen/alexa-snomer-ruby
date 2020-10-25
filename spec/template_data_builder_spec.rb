@@ -5,6 +5,11 @@ require 'json'
 require 'spec_helper'
 
 RSpec.describe TemplateDataBuilder do
+  before(:each) do
+    ENV['APP_NAME'] = 'Snow Emergency'
+    ENV['LOGO_URL'] = 'https://images-na.ssl-images-amazon.com/images/I/81QXYqxgqhL._SL210_QL95_BG0,0,0,0_FMpng_.png'
+  end
+
   context 'final template' do
     it 'builds template' do
       d = [{
@@ -14,15 +19,15 @@ RSpec.describe TemplateDataBuilder do
         secondary_text: '100 Main Street',
         tertiary_text: '2 miles',
         token: 'gyrohero'
-      },
-           {
-             id: 'greekgrille',
-             ordinal_no: 2,
-             primary_text: 'Greek Grille',
-             secondary_text: '88 Elm Street',
-             tertiary_text: '2.5 miles',
-             token: 'greekgrille'
-           }]
+       },
+       {
+         id: 'greekgrille',
+         ordinal_no: 2,
+         primary_text: 'Greek Grille',
+         secondary_text: '88 Elm Street',
+         tertiary_text: '2.5 miles',
+         token: 'greekgrille'
+       }]
 
       ex = JSON.parse <<~TTT
         {
@@ -82,7 +87,7 @@ RSpec.describe TemplateDataBuilder do
         }
       TTT
 
-      ret = TemplateDataBuilder.send(:build_data_template, d)
+      ret = TemplateDataBuilder.send(:build_data_template_list, d)
 
       expect(ret).to eql(ex)
     end
@@ -124,6 +129,67 @@ RSpec.describe TemplateDataBuilder do
       ret = JSON.parse(TemplateDataBuilder.send(:build_list_item, d))
 
       expect(ret).to eql(ex)
+    end
+  end
+
+  context 'long text' do
+    it 'formats entry' do
+      ex = JSON.parse <<~LONG_TEXT
+          {
+              "longTextTemplateData": {
+                  "type": "object",
+                  "objectId": "longTextSample",
+                  "properties": {
+                      "backgroundImage": {
+                          "contentDescription": null,
+                          "smallSourceUrl": null,
+                          "largeSourceUrl": null,
+                          "sources": [
+                              {
+                                  "url": "https://somepic.com/abcdef.jpg",
+                                  "size": "small",
+                                  "widthPixels": 0,
+                                  "heightPixels": 0
+                              },
+                              {
+                                  "url": "https://somepic.com/abcdef.jpg",
+                                  "size": "large",
+                                  "widthPixels": 0,
+                                  "heightPixels": 0
+                              }
+                          ]
+                      },
+                      "title": "No snow emergency in Saint Paul",
+                      "textContent": {
+                          "primaryText": {
+                              "type": "PlainText",
+                              "text": "A Snow Emergency is typically declared after snowfalls of 3 inches or more, or after an accumulation of 3 inches or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed."
+                          }
+                      },
+                      "logoUrl": "https://somepic.com/abcdef.jpg",
+                      "speechSSML": "<speak>There is not a snow emergency in saint paul.</speak>"
+                  },
+                  "transformers": [
+                      {
+                          "inputPath": "speechSSML",
+                          "transformer": "ssmlToSpeech",
+                          "outputName": "infoSpeech"
+                      }
+                  ]
+              }
+          }
+        LONG_TEXT
+
+        d = {
+          logo_url: 'https://somepic.com/abcdef.jpg',
+          card_title: 'No snow emergency in Saint Paul',
+          card_text: "A Snow Emergency is typically declared after snowfalls of 3 inches or more, or after an accumulation of 3 inches or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed.",
+          text_to_speak: 'There is not a snow emergency in saint paul.'
+        }
+
+        ret = JSON.parse("{#{TemplateDataBuilder.send(:build_long_text, d)}}")
+
+        expect(ret).to eql(ex)
     end
   end
 end

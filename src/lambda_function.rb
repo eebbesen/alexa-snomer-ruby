@@ -7,11 +7,14 @@ require_relative './alexa_processor'
 
 ##
 def lambda_handler(event:, context:)
+
+  logger = Logger.new($stdout)
   logger.info("event: #{event}")
   logger.info("context: #{context}")
 
   ap = AlexaProcessor.new event
   payload = ap.process
+  logger.info("payload: #{payload}")
   pp = if payload.length == 1
          <<~PP
            {
