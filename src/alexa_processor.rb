@@ -69,7 +69,7 @@ class AlexaProcessor
           title: r,
           text: info['policy'],
           to_speak: r,
-          header_background_color: r.include?('not a snow') ? 'green' : 'red'
+          header_background_color: AlexaProcessor.color_picker(info, r)
         }
         directives = AplAssembler.build_directives data, :text
         [r, directives]
@@ -92,6 +92,14 @@ class AlexaProcessor
   rescue StandardError => e
     logger.info "error:\n#{e}\nresponding with:\n#{e.message}"
     [respond("I'm having issues, please try again later")]
+  end
+
+  def self.color_picker(info, text)
+    if info['yesCondition'].size + info['noCondition'].size > 0
+      text.include?('not a snow') ? 'green' : 'red'
+    else
+      'yellow'
+    end
   end
 
   private
