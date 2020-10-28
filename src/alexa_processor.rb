@@ -49,7 +49,7 @@ class AlexaProcessor
     elsif no || page.size.positive?
       "There is not a snow emergency in #{city}"
     else
-      "#{city} doesn't post snow emergencies. #{info['policy']}"
+      "#{city} doesn't post snow emergencies."
     end
   end
 

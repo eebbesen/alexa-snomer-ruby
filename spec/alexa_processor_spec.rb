@@ -92,7 +92,7 @@ RSpec.describe AlexaProcessor do
         info = ap.send(:loc_processor)
         t = ap.generate_text info
 
-        expect(t).to eq("plymouth doesn't post snow emergencies. If less than 2.5 inches falls, only major streets in the city system are plowed. If more than 2.5 inches of snow falls, a snow emergency is declared and all city streets are plowed curb-to-curb.")
+        expect(t).to eq("plymouth doesn't post snow emergencies.")
       end
     end
 
