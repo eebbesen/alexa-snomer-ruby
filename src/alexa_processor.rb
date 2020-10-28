@@ -67,9 +67,9 @@ class AlexaProcessor
         logger.info 'IS APL'
         header_background_color = AlexaProcessor.color_picker(info, r)
         data = {
-          title: r,
+          title: text,
           text: info['policy'],
-          to_speak: r,
+          # to_speak: text, # leaving this causes device to overlap speaking test twice
           header_background_color: header_background_color,
           header_theme: header_background_color == 'yellow' ? 'light' : 'dark'
         }
