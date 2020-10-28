@@ -65,11 +65,13 @@ class AlexaProcessor
 
       if apl?
         logger.info 'IS APL'
+        header_background_color = AlexaProcessor.color_picker(info, r)
         data = {
           title: r,
           text: info['policy'],
           to_speak: r,
-          header_background_color: AlexaProcessor.color_picker(info, r)
+          header_background_color: header_background_color,
+          header_theme: header_background_color == 'yellow' ? 'light' : 'dark'
         }
         directives = AplAssembler.build_directives data, :text
         [r, directives]
