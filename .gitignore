@@ -1,6 +1,6 @@
 .notes
 .byebug_history
-.bundle
+coverage/
 target/
 version.txt
 !.keep
