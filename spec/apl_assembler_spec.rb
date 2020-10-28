@@ -90,6 +90,13 @@ RSpec.describe AplAssembler do
     expect(JSON.parse("{#{ret}}")).to eql(JSON.parse(ex))
   end
 
+  it 'raises error with invalid type' do
+    AplAssembler.build_directives nil, :html
+    raise StandardError.new 'should have thrown error'
+  rescue => e
+    expect(e.message).to eq('unrecognized APL type: html. Only :list and :text are valid.')
+  end
+
   it 'assembles directives for scroll' do
     ex_data = <<~EEXXDD
       {
