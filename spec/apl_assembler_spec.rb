@@ -90,7 +90,7 @@ RSpec.describe AplAssembler do
     expect(JSON.parse("{#{ret}}")).to eql(JSON.parse(ex))
   end
 
-    it 'assembles directives for scroll' do
+  it 'assembles directives for scroll' do
     ex_data = <<~EEXXDD
       {
         "longTextTemplateData": {
@@ -142,14 +142,15 @@ RSpec.describe AplAssembler do
         {
           "type": "Alexa.Presentation.APL.RenderDocument",
           "version": "1.0",
-          "document": #{File.read('./apl/apl_template-scroll_view-document.json') % { header_background_color: 'red' }},
+          "document": #{File.read('./apl/apl_template-scroll_view-document.json') % { header_background_color: 'green', header_theme: 'dark' }},
           "datasources": #{ex_data}
         }
       ]}
     EEXX
 
     data = {
-      header_background_color: 'red',
+      header_background_color: 'green',
+      header_theme: 'dark',
       title: 'Saint Paul: No snow emergency',
       text: 'A Snow Emergency is typically declared after snowfalls of 3 inches or more, or after an accumulation of 3 inches or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed.',
       to_speak: 'There is a snow emergency in saintpaul',

@@ -49,7 +49,7 @@ class AlexaProcessor
     elsif no || page.size.positive?
       "There is not a snow emergency in #{city}"
     else
-      "#{city} doesn't post snow emergencies. #{info['policy']}"
+      "#{city} doesn't post snow emergencies."
     end
   end
 
@@ -65,11 +65,13 @@ class AlexaProcessor
 
       if apl?
         logger.info 'IS APL'
+        header_background_color = AlexaProcessor.color_picker(info, r)
         data = {
           title: r,
           text: info['policy'],
           to_speak: r,
-          header_background_color: AlexaProcessor.color_picker(info, r)
+          header_background_color: header_background_color,
+          header_theme: header_background_color == 'yellow' ? 'light' : 'dark'
         }
         directives = AplAssembler.build_directives data, :text
         [r, directives]
