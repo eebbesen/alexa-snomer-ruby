@@ -7,7 +7,6 @@ require_relative './alexa_processor'
 
 ##
 def lambda_handler(event:, context:)
-
   logger = Logger.new($stdout)
   logger.info("event: #{event}")
   logger.info("context: #{context.inspect}")
@@ -16,7 +15,7 @@ def lambda_handler(event:, context:)
   payload = ap.process
   logger.info("payload: #{payload}")
 
-  end_session = %w(StopIntent SessionEndedRequest CancelIntent).include? event['request']['type'] ? true : false
+  end_session = %w[StopIntent SessionEndedRequest CancelIntent].include? event['request']['type'] ? true : false
   pp = if payload.length == 1
          <<~PP
            {

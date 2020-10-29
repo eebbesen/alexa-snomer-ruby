@@ -38,7 +38,7 @@ RSpec.describe AlexaProcessor do
     it 'generates non-APL response' do
       VCR.use_cassette('saint paul') do
         r = @ap.intent_request_handler @loc_info, false
-        expect(r[0]).to eq( '<speak>There is not a snow emergency in saintpaul</speak>')
+        expect(r[0]).to eq('<speak>There is not a snow emergency in saintpaul</speak>')
         expect(r.size).to eq(1)
       end
     end
@@ -130,7 +130,7 @@ RSpec.describe AlexaProcessor do
         info = ap.send(:loc_processor)
         t = ap.generate_text info
 
-        expect(t).to eq("The website for minneapolis is not responding. Snow Emergencies are called after significant snowfall and before 6 p.m. on any given day. During a Snow Emergency, special parking rules go into effect that allow City crews to plow streets and emergency vehicles to travel safely.")
+        expect(t).to eq('The website for minneapolis is not responding. Snow Emergencies are called after significant snowfall and before 6 p.m. on any given day. During a Snow Emergency, special parking rules go into effect that allow City crews to plow streets and emergency vehicles to travel safely.')
       end
     end
   end

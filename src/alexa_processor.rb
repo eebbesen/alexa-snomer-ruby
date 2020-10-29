@@ -12,18 +12,18 @@ class AlexaProcessor
   extend Forwardable
 
   def_delegators :@alexa_event,
-                   :system,
-                   :device_api_endpoint,
-                   :api_access_token,
-                   :api_endpoint,
-                   :device_id,
-                   :request_id,
-                   :slots,
-                   :address,
-                   :find_intent_type,
-                   :device_permission?,
-                   :apl?,
-                   :amazon_address_request
+                 :system,
+                 :device_api_endpoint,
+                 :api_access_token,
+                 :api_endpoint,
+                 :device_id,
+                 :request_id,
+                 :slots,
+                 :address,
+                 :find_intent_type,
+                 :device_permission?,
+                 :apl?,
+                 :amazon_address_request
 
   def initialize(event)
     @event = event
@@ -37,9 +37,7 @@ class AlexaProcessor
              ''
            end
 
-    if page == 'ERROR'
-      return "The website for #{city} is not responding. #{info['policy']}"
-    end
+    return "The website for #{city} is not responding. #{info['policy']}" if page == 'ERROR'
 
     yes = info['yesCondition'].select { |c| page.downcase.include?(c) }.size.positive?
     no = info['noCondition'].select { |c| page.downcase.include?(c) }.size.positive?
@@ -189,8 +187,8 @@ class AlexaProcessor
   # gets target page
   def get_page(url)
     URI.parse(url).open.read
-  rescue StandardError => se
-    logger.error("Error accessing #{url}:\n#{se.message}")
+  rescue StandardError => e
+    logger.error("Error accessing #{url}:\n#{e.message}")
     'ERROR'
   end
 

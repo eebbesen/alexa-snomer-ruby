@@ -22,7 +22,7 @@ class AplAssembler
       document_part = File.read('./apl/apl_template-scroll_view-document.json') % data
       # need to populate header_background_color
     else
-      raise StandardError.new "unrecognized APL type: #{type}. Only :list and :text are valid."
+      raise StandardError, "unrecognized APL type: #{type}. Only :list and :text are valid."
     end
 
     <<~DIR
@@ -37,8 +37,7 @@ class AplAssembler
     DIR
   end
 
-  def self.transform_policy(text)
-  end
+  def self.transform_policy(text); end
 
   # locaction-specific
   def self.transform_locs(locs)
@@ -63,7 +62,6 @@ class AplAssembler
       token: id
     }
   end
-
 
   # move to util
   # will try to break text where there are spaces

@@ -92,8 +92,8 @@ RSpec.describe AplAssembler do
 
   it 'raises error with invalid type' do
     AplAssembler.build_directives nil, :html
-    raise StandardError.new 'should have thrown error'
-  rescue => e
+    raise StandardError, 'should have thrown error'
+  rescue StandardError => e
     expect(e.message).to eq('unrecognized APL type: html. Only :list and :text are valid.')
   end
 
@@ -149,7 +149,7 @@ RSpec.describe AplAssembler do
         {
           "type": "Alexa.Presentation.APL.RenderDocument",
           "version": "1.0",
-          "document": #{File.read('./apl/apl_template-scroll_view-document.json') % { header_background_color: 'green', header_theme: 'dark' }},
+          "document": #{format(File.read('./apl/apl_template-scroll_view-document.json'), header_background_color: 'green', header_theme: 'dark')},
           "datasources": #{ex_data}
         }
       ]}
