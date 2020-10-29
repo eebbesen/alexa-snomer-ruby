@@ -2,7 +2,10 @@
 
 require 'bundler/setup'
 require 'byebug'
+require 'simplecov'
 require 'vcr'
+
+SimpleCov.start
 
 VCR.configure do |config|
   config.cassette_library_dir = 'spec/vcr_cassettes'

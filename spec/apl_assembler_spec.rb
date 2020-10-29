@@ -90,6 +90,13 @@ RSpec.describe AplAssembler do
     expect(JSON.parse("{#{ret}}")).to eql(JSON.parse(ex))
   end
 
+  it 'raises error with invalid type' do
+    AplAssembler.build_directives nil, :html
+    raise StandardError, 'should have thrown error'
+  rescue StandardError => e
+    expect(e.message).to eq('unrecognized APL type: html. Only :list and :text are valid.')
+  end
+
   it 'assembles directives for scroll' do
     ex_data = <<~EEXXDD
       {
@@ -142,7 +149,7 @@ RSpec.describe AplAssembler do
         {
           "type": "Alexa.Presentation.APL.RenderDocument",
           "version": "1.0",
-          "document": #{File.read('./apl/apl_template-scroll_view-document.json') % { header_background_color: 'green', header_theme: 'dark' }},
+          "document": #{format(File.read('./apl/apl_template-scroll_view-document.json'), header_background_color: 'green', header_theme: 'dark')},
           "datasources": #{ex_data}
         }
       ]}

@@ -20,6 +20,7 @@ group :test do
   gem 'capybara'
   gem 'rspec'
   gem 'selenium-webdriver'
+  gem 'simplecov'
   gem 'vcr'
   gem 'webdrivers'
   gem 'webmock'

@@ -12,18 +12,18 @@ class AlexaProcessor
   extend Forwardable
 
   def_delegators :@alexa_event,
-                   :system,
-                   :device_api_endpoint,
-                   :api_access_token,
-                   :api_endpoint,
-                   :device_id,
-                   :request_id,
-                   :slots,
-                   :address,
-                   :find_intent_type,
-                   :device_permission?,
-                   :apl?,
-                   :amazon_address_request
+                 :system,
+                 :device_api_endpoint,
+                 :api_access_token,
+                 :api_endpoint,
+                 :device_id,
+                 :request_id,
+                 :slots,
+                 :address,
+                 :find_intent_type,
+                 :device_permission?,
+                 :apl?,
+                 :amazon_address_request
 
   def initialize(event)
     @event = event
@@ -37,9 +37,7 @@ class AlexaProcessor
              ''
            end
 
-    if page == 'ERROR'
-      return "The website for #{city} is not responding. #{info['policy']}"
-    end
+    return "The website for #{city} is not responding. #{info['policy']}" if page == 'ERROR'
 
     yes = info['yesCondition'].select { |c| page.downcase.include?(c) }.size.positive?
     no = info['noCondition'].select { |c| page.downcase.include?(c) }.size.positive?
@@ -53,32 +51,36 @@ class AlexaProcessor
     end
   end
 
+  def intent_request_handler(loc_info, apl)
+    text = generate_text(loc_info)
+
+    r = respond text # speech
+    logger.info "RESPONSE STRING\n#{r}"
+
+    if apl
+      logger.info 'IS APL'
+      header_background_color = AlexaProcessor.color_picker(loc_info, r)
+      data = {
+        title: text,
+        text: loc_info['policy'],
+        # to_speak: text, # leaving this causes device to overlap speaking test twice
+        header_background_color: header_background_color,
+        header_theme: header_background_color == 'yellow' ? 'light' : 'dark'
+      }
+      directives = AplAssembler.build_directives data, :text
+      [r, directives]
+    else
+      logger.info 'IS NOT APL'
+      [r]
+    end
+  end
+
   def process
     intent = find_intent_type
     case intent
     when 'IntentRequest'
       info = loc_processor
-      text = generate_text(info)
-
-      r = respond text # speech
-      logger.info "RESPONSE STRING\n#{r}"
-
-      if apl?
-        logger.info 'IS APL'
-        header_background_color = AlexaProcessor.color_picker(info, r)
-        data = {
-          title: r,
-          text: info['policy'],
-          to_speak: r,
-          header_background_color: header_background_color,
-          header_theme: header_background_color == 'yellow' ? 'light' : 'dark'
-        }
-        directives = AplAssembler.build_directives data, :text
-        [r, directives]
-      else
-        logger.info 'IS NOT APL'
-        [r]
-      end
+      intent_request_handler info
     when 'SessionEndedRequest', 'CancelIntent'
       ['']
     when 'LaunchRequest', 'HelpIntent'
@@ -97,7 +99,7 @@ class AlexaProcessor
   end
 
   def self.color_picker(info, text)
-    if info['yesCondition'].size + info['noCondition'].size > 0
+    if (info['yesCondition'].size + info['noCondition'].size).positive?
       text.include?('not a snow') ? 'green' : 'red'
     else
       'yellow'
@@ -185,8 +187,8 @@ class AlexaProcessor
   # gets target page
   def get_page(url)
     URI.parse(url).open.read
-  rescue StandardError => se
-    logger.error("Error accessing #{url}:\n#{se.message}")
+  rescue StandardError => e
+    logger.error("Error accessing #{url}:\n#{e.message}")
     'ERROR'
   end
 
