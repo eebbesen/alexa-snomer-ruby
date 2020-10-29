@@ -53,32 +53,36 @@ class AlexaProcessor
     end
   end
 
+  def intent_request_handler(loc_info, apl)
+    text = generate_text(loc_info)
+
+    r = respond text # speech
+    logger.info "RESPONSE STRING\n#{r}"
+
+    if apl
+      logger.info 'IS APL'
+      header_background_color = AlexaProcessor.color_picker(loc_info, r)
+      data = {
+        title: text,
+        text: loc_info['policy'],
+        # to_speak: text, # leaving this causes device to overlap speaking test twice
+        header_background_color: header_background_color,
+        header_theme: header_background_color == 'yellow' ? 'light' : 'dark'
+      }
+      directives = AplAssembler.build_directives data, :text
+      [r, directives]
+    else
+      logger.info 'IS NOT APL'
+      [r]
+    end
+  end
+
   def process
     intent = find_intent_type
     case intent
     when 'IntentRequest'
       info = loc_processor
-      text = generate_text(info)
-
-      r = respond text # speech
-      logger.info "RESPONSE STRING\n#{r}"
-
-      if apl?
-        logger.info 'IS APL'
-        header_background_color = AlexaProcessor.color_picker(info, r)
-        data = {
-          title: text,
-          text: info['policy'],
-          # to_speak: text, # leaving this causes device to overlap speaking test twice
-          header_background_color: header_background_color,
-          header_theme: header_background_color == 'yellow' ? 'light' : 'dark'
-        }
-        directives = AplAssembler.build_directives data, :text
-        [r, directives]
-      else
-        logger.info 'IS NOT APL'
-        [r]
-      end
+      intent_request_handler info
     when 'SessionEndedRequest', 'CancelIntent'
       ['']
     when 'LaunchRequest', 'HelpIntent'

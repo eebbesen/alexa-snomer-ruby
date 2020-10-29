@@ -16,6 +16,34 @@ RSpec.describe AlexaProcessor do
     end
   end
 
+  context '#intent_request_handler' do
+    before(:each) do
+      @ap = AlexaProcessor.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'Saint Paul' }
+      @loc_info = {
+        'yesCondition' => ['saint paul declares snow emergency'],
+        'noCondition' => ['A Snow Emergency is typically declared after snowfalls of 3 inches or more, or after an accumulation of 3 inches or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed.'],
+        'policy' => 'A Snow Emergency is typically declared after snowfalls of 3 inches or more, or after an accumulation of 3 inches or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed.',
+        'site' => 'https://www.stpaul.gov/departments/public-works/street-maintenance/snow-emergency-update'
+      }
+    end
+    it 'generates APL response' do
+      VCR.use_cassette('saint paul') do
+        r = @ap.intent_request_handler @loc_info, true
+        expect(r[0]).to eq('<speak>There is not a snow emergency in saintpaul</speak>')
+        expect(r[1]).to include('"headerBackgroundColor": "green"')
+        expect(r[1]).to include(@loc_info['policy'])
+      end
+    end
+
+    it 'generates non-APL response' do
+      VCR.use_cassette('saint paul') do
+        r = @ap.intent_request_handler @loc_info, false
+        expect(r[0]).to eq( '<speak>There is not a snow emergency in saintpaul</speak>')
+        expect(r.size).to eq(1)
+      end
+    end
+  end
+
   context '.color_picker' do
     it 'returns red if snow emergency declared' do
       info = {
