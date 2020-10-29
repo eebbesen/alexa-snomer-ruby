@@ -13,11 +13,12 @@ class AplAssembler
     document_part = nil
     data_part = nil
 
-    if type == :list
+    case type
+    when :list
       tl = transform_locs data
       data_part = TemplateDataBuilder.build_data_template_list(tl).to_json
       document_part = File.read('./apl/apl_template-list_view-document.json')
-    elsif type == :text
+    when :text
       data_part = TemplateDataBuilder.build_data_template_text(data).to_json
       document_part = File.read('./apl/apl_template-scroll_view-document.json') % data
       # need to populate header_background_color

@@ -99,7 +99,7 @@ class AlexaProcessor
   end
 
   def self.color_picker(info, text)
-    if info['yesCondition'].size + info['noCondition'].size > 0
+    if (info['yesCondition'].size + info['noCondition'].size).positive?
       text.include?('not a snow') ? 'green' : 'red'
     else
       'yellow'
