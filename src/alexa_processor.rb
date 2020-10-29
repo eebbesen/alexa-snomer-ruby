@@ -84,7 +84,7 @@ class AlexaProcessor
         return [respond("I don't have information for #{city}. Request another Minnesota city and I'll get snow emergency info for you!")]
       end
 
-      intent_request_handler info
+      intent_request_handler info, apl?
     when 'SessionEndedRequest', 'CancelIntent'
       ['']
     when 'LaunchRequest', 'HelpIntent'

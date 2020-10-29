@@ -205,6 +205,15 @@ RSpec.describe AlexaProcessor do
       expect(ap.process).to eql(["<speak>I don't have information for frostbitefalls. Request another Minnesota city and I'll get snow emergency info for you!</speak>"])
     end
 
+    it 'knonwn city' do
+      event = request_builder 'LocationRequest', address_perm: false, args: { cityName: 'Saint Paul' }
+      ap = AlexaProcessor.new event
+
+      VCR.use_cassette('saint paul') do
+        expect(ap.process).to eql(['<speak>There is not a snow emergency in saintpaul</speak>'])
+      end
+    end
+
     it 'responds to help intent' do
       event = request_builder('HelpIntent', address_perm: false)
       ap = AlexaProcessor.new event
