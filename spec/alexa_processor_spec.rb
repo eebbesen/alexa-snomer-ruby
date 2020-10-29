@@ -5,7 +5,7 @@ require 'json'
 require 'spec_helper'
 
 RSpec.describe AlexaProcessor do
-  context '#getPage' do
+  context '#get_page' do
     it 'returns text "ERROR" when error accessing site' do
       site = 'http://www2.minneapolismn.gov/snow/index.htm'
       ap = AlexaProcessor.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'Minneapolis' }
@@ -197,7 +197,23 @@ RSpec.describe AlexaProcessor do
     end
   end
 
-  context 'other intents' do
+  context '#process' do
+    it 'unknonwn city' do
+      event = request_builder 'LocationRequest', address_perm: false, args: { cityName: 'Frostbite Falls' }
+      ap = AlexaProcessor.new event
+
+      expect(ap.process).to eql(["<speak>I don't have information for frostbitefalls. Request another Minnesota city and I'll get snow emergency info for you!</speak>"])
+    end
+
+    it 'knonwn city' do
+      event = request_builder 'LocationRequest', address_perm: false, args: { cityName: 'Saint Paul' }
+      ap = AlexaProcessor.new event
+
+      VCR.use_cassette('saint paul') do
+        expect(ap.process).to eql(['<speak>There is not a snow emergency in saintpaul</speak>'])
+      end
+    end
+
     it 'responds to help intent' do
       event = request_builder('HelpIntent', address_perm: false)
       ap = AlexaProcessor.new event

@@ -52,7 +52,7 @@ class AlexaProcessor
   end
 
   def intent_request_handler(loc_info, apl)
-    text = generate_text(loc_info)
+    text = generate_text loc_info
 
     r = respond text # speech
     logger.info "RESPONSE STRING\n#{r}"
@@ -78,9 +78,13 @@ class AlexaProcessor
   def process
     intent = find_intent_type
     case intent
-    when 'IntentRequest'
+    when 'IntentRequest', 'LocationRequest'
       info = loc_processor
-      intent_request_handler info
+      unless info&.size&.positive?
+        return [respond("I don't have information for #{city}. Request another Minnesota city and I'll get snow emergency info for you!")]
+      end
+
+      intent_request_handler info, apl?
     when 'SessionEndedRequest', 'CancelIntent'
       ['']
     when 'LaunchRequest', 'HelpIntent'
