@@ -80,9 +80,10 @@ class AlexaProcessor
     case intent
     when 'IntentRequest', 'LocationRequest'
       info = loc_processor
-      unless info && info.size.positive?
+      unless info&.size&.positive?
         return [respond("I don't have information for #{city}. Request another Minnesota city and I'll get snow emergency info for you!")]
       end
+
       intent_request_handler info
     when 'SessionEndedRequest', 'CancelIntent'
       ['']
