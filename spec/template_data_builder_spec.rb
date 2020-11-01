@@ -20,14 +20,14 @@ RSpec.describe TemplateDataBuilder do
         tertiary_text: '2 miles',
         token: 'gyrohero'
       },
-       {
-         id: 'greekgrille',
-         ordinal_no: 2,
-         primary_text: 'Greek Grille',
-         secondary_text: '88 Elm Street',
-         tertiary_text: '2.5 miles',
-         token: 'greekgrille'
-       }]
+           {
+             id: 'greekgrille',
+             ordinal_no: 2,
+             primary_text: 'Greek Grille',
+             secondary_text: '88 Elm Street',
+             tertiary_text: '2.5 miles',
+             token: 'greekgrille'
+           }]
 
       ex = JSON.parse <<~TTT
         {

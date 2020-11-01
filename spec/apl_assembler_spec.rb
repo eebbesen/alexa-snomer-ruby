@@ -170,6 +170,50 @@ RSpec.describe AplAssembler do
     expect(JSON.parse("{#{ret}}")).to eql(JSON.parse(ex))
   end
 
+  it 'assembles directives for round' do
+    ex_data = <<~EEXXDD
+      {
+        "roundTextTemplateData": {
+            "type": "object",
+            "objectId": "roundTextSample",
+            "properties": {
+                "speechSSML": "<speak>There is a snow emergency in saintpaul</speak>",
+                "text": "YES"
+            },
+            "transformers": [
+                {
+                    "inputPath": "speechSSML",
+                    "transformer": "ssmlToSpeech",
+                    "outputName": "infoSpeech"
+                }
+            ]
+        }
+      }
+    EEXXDD
+
+    ex = <<~EEXX
+      {"directives": [
+        {
+          "type": "Alexa.Presentation.APL.RenderDocument",
+          "version": "1.0",
+          "document": #{File.read('./apl/apl_template-round_view-document.json')},
+          "datasources": #{ex_data}
+        }
+      ]}
+    EEXX
+
+    data = {
+      text: 'YES',
+      to_speak: 'There is a snow emergency in saintpaul',
+      app_name: ENV['APP_NAME'],
+      logo_url: ENV['LOGO_URL']
+    }
+
+    ret = AplAssembler.build_directives data, :round
+
+    expect(JSON.parse("{#{ret}}")).to eql(JSON.parse(ex))
+  end
+
   context 'converts meters to miles' do
     it 'handles less than a mile' do
       expect(AplAssembler.meters_to_miles(100)).to eql(0.06)

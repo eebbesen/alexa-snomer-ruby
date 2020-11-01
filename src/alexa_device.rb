@@ -10,18 +10,12 @@ class AlexaDevice
     end
 
     if event['context']['System']['device']['supportedInterfaces'] &&
-      event['context']['System']['device']['supportedInterfaces']['Alexa.Presentation.APL']
+       event['context']['System']['device']['supportedInterfaces']['Alexa.Presentation.APL']
       @apl_version = event['context']['System']['device']['supportedInterfaces']['Alexa.Presentation.APL']['runtime']['maxVersion']
     end
   end
 
-  def height
-    @height
-  end
-
-  def width
-    @width
-  end
+  attr_reader :height, :width
 
   def round?
     @shape == 'ROUND'
@@ -109,7 +103,6 @@ end
 #     "Display": {}
 #   }
 # }
-
 
 ## Medium Hub (1024 * 600)
 # {

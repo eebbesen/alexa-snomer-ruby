@@ -13,22 +13,22 @@ class AlexaProcessor
   extend Forwardable
 
   def_delegators :@alexa_event,
-    :system,
-    :device_api_endpoint,
-    :api_access_token,
-    :api_endpoint,
-    :device_id,
-    :request_id,
-    :slots,
-    :address,
-    :find_intent_type,
-    :device_permission?,
-    # :apl?,
-    :amazon_address_request
+                 :system,
+                 :device_api_endpoint,
+                 :api_access_token,
+                 :api_endpoint,
+                 :device_id,
+                 :request_id,
+                 :slots,
+                 :address,
+                 :find_intent_type,
+                 :device_permission?,
+                 # :apl?,
+                 :amazon_address_request
 
   def_delegators :@alexa_device,
-    :round?,
-    :apl?
+                 :round?,
+                 :apl?
 
   def initialize(event)
     @alexa_event = AlexaEvent.new event
