@@ -46,30 +46,15 @@ RSpec.describe AlexaProcessor do
 
   context '.color_picker' do
     it 'returns red if snow emergency declared' do
-      info = {
-        'yesCondition' => ['snow emergency declared'],
-        'noCondition' => ['there is not a snow emergency']
-      }
-      text = 'Minneapolis has declared a snow emergency'
-      expect(AlexaProcessor.color_picker(info, text)).to eq('red')
+      expect(AlexaProcessor.color_picker('yes')).to eq('red')
     end
 
     it 'returns red if snow emergency declared' do
-      info = {
-        'yesCondition' => ['snow emergency declared'],
-        'noCondition' => ['there is not a snow emergency']
-      }
-      text = 'There is not a snow emergency in Minneapolis'
-      expect(AlexaProcessor.color_picker(info, text)).to eq('green')
+      expect(AlexaProcessor.color_picker('no')).to eq('green')
     end
 
     it 'returns red if snow emergency declared' do
-      info = {
-        'yesCondition' => [],
-        'noCondition' => []
-      }
-      text = "Eagan doesn't post snow emergencies."
-      expect(AlexaProcessor.color_picker(info, text)).to eq('yellow')
+      expect(AlexaProcessor.color_picker('maybe')).to eq('yellow')
     end
   end
 

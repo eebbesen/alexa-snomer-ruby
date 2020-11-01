@@ -67,20 +67,11 @@ class AlexaProcessor
 
     if apl
       logger.info 'IS APL'
-      header_background_color = AlexaProcessor.color_picker(loc_info, r)
       data = {}
       directives = nil
       if round?
-        text = if header_background_color == 'yellow'
-          '?'
-        elsif header_background_color == 'red'
-          'YES'
-        else
-          'NO'
-        end
-
         data = {
-          text: text
+          text: @snow_emergency == 'maybe' ? '?' : @snow_emergency.upcase
         }
 
         directives = AplAssembler.build_directives data, :round
@@ -89,8 +80,8 @@ class AlexaProcessor
           title: text,
           text: loc_info['policy'],
           # to_speak: text, # leaving this causes device to overlap speaking test twice
-          header_background_color: header_background_color,
-          header_theme: header_background_color == 'yellow' ? 'light' : 'dark'
+          header_background_color: AlexaProcessor.color_picker(@snow_emergency),
+          header_theme: @snow_emergency == 'maybe' ? 'light' : 'dark'
         }
         directives = AplAssembler.build_directives data, :text
       end
@@ -128,11 +119,13 @@ class AlexaProcessor
     [respond("I'm having issues, please try again later")]
   end
 
-  def self.color_picker(info, text)
-    if (info['yesCondition'].size + info['noCondition'].size).positive?
-      text.include?('not a snow') ? 'green' : 'red'
-    else
+  def self.color_picker(snow_emergency)
+    if snow_emergency == 'yes'
+      'red'
+    elsif snow_emergency == 'maybe'
       'yellow'
+    else
+      'green'
     end
   end
 
