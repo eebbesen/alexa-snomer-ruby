@@ -13,6 +13,6 @@ version=$(git rev-parse HEAD)
 echo $version >> version.txt
 ver=$(echo $version | cut -c1-6)
 #touch target/iag-ruby_${ver}.zip
-zip -rj target/iag-ruby_${ver}v.zip src/lambda_function.rb src/alexa_event.rb src/alexa_processor.rb src/apl_assembler.rb src/template_data_builder.rb version.txt
+zip -rj target/iag-ruby_${ver}v.zip src/lambda_function.rb src/alexa_device.rb src/alexa_event.rb src/alexa_processor.rb src/apl_assembler.rb src/template_data_builder.rb version.txt
 zip -ur target/iag-ruby_${ver}v.zip apl/apl_template-list_view-document.json apl/apl_template-scroll_view-document.json database/city_map.json
 # bundle install --with development test
