@@ -20,14 +20,14 @@ RSpec.describe TemplateDataBuilder do
         tertiary_text: '2 miles',
         token: 'gyrohero'
       },
-           {
-             id: 'greekgrille',
-             ordinal_no: 2,
-             primary_text: 'Greek Grille',
-             secondary_text: '88 Elm Street',
-             tertiary_text: '2.5 miles',
-             token: 'greekgrille'
-           }]
+       {
+         id: 'greekgrille',
+         ordinal_no: 2,
+         primary_text: 'Greek Grille',
+         secondary_text: '88 Elm Street',
+         tertiary_text: '2.5 miles',
+         token: 'greekgrille'
+       }]
 
       ex = JSON.parse <<~TTT
         {
@@ -146,13 +146,13 @@ RSpec.describe TemplateDataBuilder do
                         "largeSourceUrl": null,
                         "sources": [
                             {
-                                "url": "https://somepic.com/abcdef.jpg",
+                                "url": "https://images-na.ssl-images-amazon.com/images/I/81QXYqxgqhL._SL210_QL95_BG0,0,0,0_FMpng_.png",
                                 "size": "small",
                                 "widthPixels": 0,
                                 "heightPixels": 0
                             },
                             {
-                                "url": "https://somepic.com/abcdef.jpg",
+                                "url": "https://images-na.ssl-images-amazon.com/images/I/81QXYqxgqhL._SL210_QL95_BG0,0,0,0_FMpng_.png",
                                 "size": "large",
                                 "widthPixels": 0,
                                 "heightPixels": 0
@@ -166,7 +166,7 @@ RSpec.describe TemplateDataBuilder do
                             "text": "A Snow Emergency is typically declared after snowfalls of 3 inches or more, or after an accumulation of 3 inches or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed."
                         }
                     },
-                    "logoUrl": "https://somepic.com/abcdef.jpg",
+                    "logoUrl": "https://images-na.ssl-images-amazon.com/images/I/81QXYqxgqhL._SL210_QL95_BG0,0,0,0_FMpng_.png",
                     "speechSSML": "<speak>There is not a snow emergency in saint paul.</speak>"
                 },
                 "transformers": [
@@ -181,13 +181,45 @@ RSpec.describe TemplateDataBuilder do
       LONG_TEXT
 
       d = {
-        logo_url: 'https://somepic.com/abcdef.jpg',
-        card_title: 'No snow emergency in Saint Paul',
-        card_text: 'A Snow Emergency is typically declared after snowfalls of 3 inches or more, or after an accumulation of 3 inches or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed.',
-        text_to_speak: 'There is not a snow emergency in saint paul.'
+        title: 'No snow emergency in Saint Paul',
+        text: 'A Snow Emergency is typically declared after snowfalls of 3 inches or more, or after an accumulation of 3 inches or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed.',
+        to_speak: 'There is not a snow emergency in saint paul.'
       }
 
-      ret = JSON.parse("{#{TemplateDataBuilder.send(:build_long_text, d)}}")
+      ret = TemplateDataBuilder.send(:build_data_template_text, d)
+
+      expect(ret).to eql(ex)
+    end
+  end
+
+  context 'round text' do
+    it 'formats entry' do
+      ex = JSON.parse <<~ROUND_TEXT
+        {
+          "roundTextTemplateData": {
+              "type": "object",
+              "objectId": "roundTextSample",
+              "properties": {
+                  "speechSSML": "<speak>There is not a snow emergency in saint paul.</speak>",
+                  "text": "NO"
+              },
+              "transformers": [
+                  {
+                      "inputPath": "speechSSML",
+                      "transformer": "ssmlToSpeech",
+                      "outputName": "infoSpeech"
+                  }
+              ]
+          }
+        }
+      ROUND_TEXT
+
+      d = {
+        to_speak: 'There is not a snow emergency in saint paul.',
+        text: 'NO'
+      }
+
+      ret = TemplateDataBuilder.send(:build_data_template_round, d)
 
       expect(ret).to eql(ex)
     end

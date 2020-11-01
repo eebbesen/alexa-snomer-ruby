@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative './alexa_event'
+require_relative './alexa_device'
 require_relative './apl_assembler'
 require 'cgi'
 require 'forwardable'
@@ -12,22 +13,26 @@ class AlexaProcessor
   extend Forwardable
 
   def_delegators :@alexa_event,
-                 :system,
-                 :device_api_endpoint,
-                 :api_access_token,
-                 :api_endpoint,
-                 :device_id,
-                 :request_id,
-                 :slots,
-                 :address,
-                 :find_intent_type,
-                 :device_permission?,
-                 :apl?,
-                 :amazon_address_request
+    :system,
+    :device_api_endpoint,
+    :api_access_token,
+    :api_endpoint,
+    :device_id,
+    :request_id,
+    :slots,
+    :address,
+    :find_intent_type,
+    :device_permission?,
+    # :apl?,
+    :amazon_address_request
+
+  def_delegators :@alexa_device,
+    :round?,
+    :apl?
 
   def initialize(event)
-    @event = event
-    @alexa_event = AlexaEvent.new @event
+    @alexa_event = AlexaEvent.new event
+    @alexa_device = AlexaDevice.new event
   end
 
   def generate_text(info)
@@ -43,10 +48,13 @@ class AlexaProcessor
     no = info['noCondition'].select { |c| page.downcase.include?(c) }.size.positive?
 
     if yes
+      @snow_emergency = 'yes'
       "#{city} has declared a snow emergency"
     elsif no || page.size.positive?
+      @snow_emergency = 'no'
       "There is not a snow emergency in #{city}"
     else
+      @snow_emergency = 'maybe'
       "#{city} doesn't post snow emergencies."
     end
   end
@@ -60,14 +68,32 @@ class AlexaProcessor
     if apl
       logger.info 'IS APL'
       header_background_color = AlexaProcessor.color_picker(loc_info, r)
-      data = {
-        title: text,
-        text: loc_info['policy'],
-        # to_speak: text, # leaving this causes device to overlap speaking test twice
-        header_background_color: header_background_color,
-        header_theme: header_background_color == 'yellow' ? 'light' : 'dark'
-      }
-      directives = AplAssembler.build_directives data, :text
+      data = {}
+      directives = nil
+      if round?
+        text = if header_background_color == 'yellow'
+          '?'
+        elsif header_background_color == 'red'
+          'YES'
+        else
+          'NO'
+        end
+
+        data = {
+          text: text
+        }
+
+        directives = AplAssembler.build_directives data, :round
+      else
+        data = {
+          title: text,
+          text: loc_info['policy'],
+          # to_speak: text, # leaving this causes device to overlap speaking test twice
+          header_background_color: header_background_color,
+          header_theme: header_background_color == 'yellow' ? 'light' : 'dark'
+        }
+        directives = AplAssembler.build_directives data, :text
+      end
       [r, directives]
     else
       logger.info 'IS NOT APL'

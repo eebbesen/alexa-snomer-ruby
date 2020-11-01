@@ -18,6 +18,8 @@ class AplAssembler
       tl = transform_locs data
       data_part = TemplateDataBuilder.build_data_template_list(tl).to_json
       document_part = File.read('./apl/apl_template-list_view-document.json')
+    when :round
+      document_part = File.read('./apl/apl_template-round_view-document.json')
     when :text
       data_part = TemplateDataBuilder.build_data_template_text(data).to_json
       document_part = File.read('./apl/apl_template-scroll_view-document.json') % data
