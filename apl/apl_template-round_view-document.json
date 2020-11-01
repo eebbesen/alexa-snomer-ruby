@@ -27,7 +27,7 @@
                         "type": "Text",
                         "paddingTop": "12dp",
                         "paddingBottom": "12dp",
-                        "text": "${payload.longTextTemplateData.properties.shortResponse}",
+                        "text": "${payload.roundTextTemplateData.properties.text}",
                         "fontSize": "170dp",
                         "textAlign": "center",
                         "textAlignVertical": "center"
