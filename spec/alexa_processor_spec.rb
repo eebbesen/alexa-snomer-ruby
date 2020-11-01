@@ -46,30 +46,15 @@ RSpec.describe AlexaProcessor do
 
   context '.color_picker' do
     it 'returns red if snow emergency declared' do
-      info = {
-        'yesCondition' => ['snow emergency declared'],
-        'noCondition' => ['there is not a snow emergency']
-      }
-      text = 'Minneapolis has declared a snow emergency'
-      expect(AlexaProcessor.color_picker(info, text)).to eq('red')
+      expect(AlexaProcessor.color_picker('yes')).to eq('red')
     end
 
     it 'returns red if snow emergency declared' do
-      info = {
-        'yesCondition' => ['snow emergency declared'],
-        'noCondition' => ['there is not a snow emergency']
-      }
-      text = 'There is not a snow emergency in Minneapolis'
-      expect(AlexaProcessor.color_picker(info, text)).to eq('green')
+      expect(AlexaProcessor.color_picker('no')).to eq('green')
     end
 
     it 'returns red if snow emergency declared' do
-      info = {
-        'yesCondition' => [],
-        'noCondition' => []
-      }
-      text = "Eagan doesn't post snow emergencies."
-      expect(AlexaProcessor.color_picker(info, text)).to eq('yellow')
+      expect(AlexaProcessor.color_picker('maybe')).to eq('yellow')
     end
   end
 
@@ -101,6 +86,7 @@ RSpec.describe AlexaProcessor do
         t = ap.generate_text info
 
         expect(t).to eq('minneapolis has declared a snow emergency')
+        expect(ap.instance_variable_get(:@snow_emergency)).to eq('yes')
       end
     end
 
@@ -111,6 +97,7 @@ RSpec.describe AlexaProcessor do
         t = ap.generate_text info
 
         expect(t).to eq('There is not a snow emergency in saintpaul')
+        expect(ap.instance_variable_get(:@snow_emergency)).to eq('no')
       end
     end
 
@@ -121,6 +108,7 @@ RSpec.describe AlexaProcessor do
         t = ap.generate_text info
 
         expect(t).to eq("plymouth doesn't post snow emergencies.")
+        expect(ap.instance_variable_get(:@snow_emergency)).to eq('maybe')
       end
     end
 
@@ -298,6 +286,7 @@ RSpec.describe AlexaProcessor do
     city = args[:cityName] || nil
     state = args[:stateName] || nil
     screen = args[:screen] || false
+    shape = args[:shape] || 'RECTANGLE'
 
     apl_string = <<~SSCC
       ,"supportedInterfaces": {
@@ -353,7 +342,11 @@ RSpec.describe AlexaProcessor do
             "apiEndpoint": "https://api.amazonalexa.com",
             "apiAccessToken": "eyJ0eXA"
           },
-          "Viewport": {}
+          "Viewport": {
+            "pixelWidth": 1363,
+            "pixelHeight": 799,
+            "shape": "#{shape}"
+          }
         },
         "request": {
           "type": "#{intent_type}",

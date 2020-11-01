@@ -1,0 +1,48 @@
+{
+    "type": "APL",
+    "version": "1.4",
+    "settings": {},
+    "theme": "dark",
+    "import": [
+        {
+            "name": "alexa-layouts",
+            "version": "1.2.0"
+        }
+    ],
+    "resources": [],
+    "styles": {},
+    "graphics": {},
+    "commands": {},
+    "layouts": {},
+    "mainTemplate": {
+        "parameters": [
+            "payload"
+        ],
+        "item": [
+            {
+                "type": "Container",
+                "height": "100vh",
+                "items": [
+                    {
+                        "type": "Text",
+                        "paddingTop": "12dp",
+                        "paddingBottom": "12dp",
+                        "text": "${payload.roundTextTemplateData.properties.text}",
+                        "fontSize": "170dp",
+                        "textAlign": "center",
+                        "textAlignVertical": "center"
+                    }
+                ],
+                "justifyContent": "center"
+            }
+        ]
+    },
+    "onMount": [
+        {
+            "type": "SpeakItem",
+            "componentId": "Content",
+            "highlightMode": "line",
+            "align": "center"
+        }
+    ]
+}

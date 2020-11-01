@@ -85,14 +85,36 @@ class TemplateDataBuilder
     }
   LONG_TEXT
 
+  RT = <<~ROUND_TEXT
+    "roundTextTemplateData": {
+        "type": "object",
+        "objectId": "roundTextSample",
+        "properties": {
+            "speechSSML": "<speak>%{text_to_speak}</speak>",
+            "text": "%{text}"
+        },
+        "transformers": [
+            {
+                "inputPath": "speechSSML",
+                "transformer": "ssmlToSpeech",
+                "outputName": "infoSpeech"
+            }
+        ]
+    }
+  ROUND_TEXT
+
   # interpolated String of list item data
   private_class_method def self.build_list_item(item)
     (LI % item).to_s
   end
 
-  # interpolated String of long text data
-  private_class_method def self.build_long_text(item)
-    (LT % item).to_s
+  def self.build_data_template_round(data)
+    d = {
+      text_to_speak: data[:to_speak],
+      text: data[:text]
+    }
+
+    JSON.parse "{#{RT % d}}"
   end
 
   def self.build_data_template_list(items)
