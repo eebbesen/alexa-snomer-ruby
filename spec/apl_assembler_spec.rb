@@ -160,7 +160,7 @@ RSpec.describe AplAssembler do
       header_theme: 'dark',
       title: 'Saint Paul: No snow emergency',
       text: 'A Snow Emergency is typically declared after snowfalls of 3 inches or more, or after an accumulation of 3 inches or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed.',
-      to_speak: 'There is a snow emergency in saintpaul',
+      to_speak: '<speak>There is a snow emergency in saintpaul</speak>',
       app_name: ENV['APP_NAME'],
       logo_url: ENV['LOGO_URL']
     }
@@ -204,7 +204,7 @@ RSpec.describe AplAssembler do
 
     data = {
       text: 'YES',
-      to_speak: 'There is a snow emergency in saintpaul',
+      to_speak: '<speak>There is a snow emergency in saintpaul</speak>',
       app_name: ENV['APP_NAME'],
       logo_url: ENV['LOGO_URL']
     }
