@@ -6,6 +6,7 @@ require_relative './alexa_event'
 require_relative './alexa_processor'
 
 ##
+# for APL, we don't have an outputSpeech entry because APL audio takes care of it
 def lambda_handler(event:, context:)
   logger = Logger.new($stdout)
   logger.info("event: #{event}")
@@ -35,10 +36,6 @@ def lambda_handler(event:, context:)
            {
              "version": "1.0",
              "response": {
-               "outputSpeech": {
-                 "type": "SSML",
-                 "ssml": "#{payload[0]}"
-               },
                "shouldEndSession": #{end_session},
                #{payload[1]}
              },

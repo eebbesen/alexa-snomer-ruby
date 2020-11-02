@@ -79,7 +79,7 @@ class AlexaProcessor
         data = {
           title: text,
           text: loc_info['policy'],
-          # to_speak: respond(text), # leaving this causes device to overlap speaking test twice
+          to_speak: respond(text),
           header_background_color: AlexaProcessor.color_picker(@snow_emergency),
           header_theme: @snow_emergency == 'maybe' ? 'light' : 'dark'
         }
