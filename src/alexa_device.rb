@@ -2,6 +2,43 @@
 
 ## represents different device types
 class AlexaDevice
+  DIMENSIONS = {
+    round: {
+      height: 480,
+      width: 480,
+      font: "170db"
+    },
+    small: {
+      height: 480,
+      width: 960,
+      font: "30db"
+    },
+    medium: {
+      height: 600,
+      width: 1024,
+      font: "40db"
+    },
+    large: {
+      height: 800,
+      width: 1080,
+      font: "50db"
+    },
+    tv: {
+      height: 1200,
+      width: 2048,
+      font: "40db"
+    }
+  }
+
+  # 30: hub small landscape
+  # 40: hub meedium
+  # 50: hub landscape
+  # 40: tv
+  def pick_font_size(h, w)
+
+
+  end
+
   def initialize(event)
     if event['context']['Viewport']
       @shape = event['context']['Viewport']['shape']

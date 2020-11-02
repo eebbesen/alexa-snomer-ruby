@@ -56,7 +56,8 @@
                                         "style": "textStyleBody",
                                         "text": "${payload.longTextTemplateData.properties.textContent.primaryText.text}",
                                         "speech": "${payload.longTextTemplateData.properties.infoSpeech}",
-                                        "textAlign": "left"
+                                        "textAlign": "left",
+                                        "fontSize": "${payload.longTextTemplateData.properties.textContent.primaryText.fontSize}"
                                     }
                                 ]
                             }
