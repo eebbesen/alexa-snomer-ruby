@@ -73,7 +73,7 @@ class TemplateDataBuilder
                 }
             },
             "logoUrl": "%{logo_url}",
-            "speechSSML": "<speak>%{text_to_speak}</speak>"
+            "speechSSML": "%{text_to_speak}"
         },
         "transformers": [
             {
@@ -90,7 +90,7 @@ class TemplateDataBuilder
         "type": "object",
         "objectId": "roundTextSample",
         "properties": {
-            "speechSSML": "<speak>%{text_to_speak}</speak>",
+            "speechSSML": "%{text_to_speak}",
             "text": "%{text}"
         },
         "transformers": [

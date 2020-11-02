@@ -183,7 +183,7 @@ RSpec.describe TemplateDataBuilder do
       d = {
         title: 'No snow emergency in Saint Paul',
         text: 'A Snow Emergency is typically declared after snowfalls of 3 inches or more, or after an accumulation of 3 inches or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed.',
-        to_speak: 'There is not a snow emergency in saint paul.'
+        to_speak: '<speak>There is not a snow emergency in saint paul.</speak>'
       }
 
       ret = TemplateDataBuilder.send(:build_data_template_text, d)
@@ -215,7 +215,7 @@ RSpec.describe TemplateDataBuilder do
       ROUND_TEXT
 
       d = {
-        to_speak: 'There is not a snow emergency in saint paul.',
+        to_speak: '<speak>There is not a snow emergency in saint paul.</speak>',
         text: 'NO'
       }
 
