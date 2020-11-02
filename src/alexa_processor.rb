@@ -120,9 +120,10 @@ class AlexaProcessor
   end
 
   def self.color_picker(snow_emergency)
-    if snow_emergency == 'yes'
+    case snow_emergency
+    when 'yes'
       'red'
-    elsif snow_emergency == 'maybe'
+    when 'maybe'
       'yellow'
     else
       'green'
