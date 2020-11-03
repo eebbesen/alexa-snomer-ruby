@@ -24,7 +24,11 @@ class AlexaProcessor
                  :find_intent_type,
                  :device_permission?,
                  # :apl?,
-                 :amazon_address_request
+                 :amazon_address_request,
+                 :city,
+                 :state,
+                 :slot_vals,
+                 :original_city
 
   def_delegators :@alexa_device,
                  :round?,
@@ -175,30 +179,6 @@ class AlexaProcessor
       }
     end
     d
-  end
-
-  def city
-    @original_city = slot_vals[:city]
-    slot_vals[:city] ? slot_vals[:city].downcase.gsub(' ', '') : slot_vals[:city]
-  end
-
-  def state
-    slot_vals[:state] ? slot_vals[:state].downcase.gsub(' ', '') : slot_vals[:state]
-  end
-
-  def slot_vals
-    logger.info("slot_vals: #{slots}")
-    return [] unless slots
-
-    c = slots && slots['cityName'] && slots['cityName']['value']
-    s = slots && slots['stateName'] && slots['stateName']['value']
-    { city: c, state: s }
-  end
-
-  def original_city
-    return '' unless @original_city
-
-    @original_city.split.map(&:capitalize).join(' ')
   end
 
   # https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY

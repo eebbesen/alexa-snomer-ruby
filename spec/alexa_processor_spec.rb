@@ -27,6 +27,7 @@ RSpec.describe AlexaProcessor do
         'site' => 'https://www.stpaul.gov/departments/public-works/street-maintenance/snow-emergency-update'
       }
     end
+
     it 'generates APL response' do
       VCR.use_cassette('saint paul') do
         r = @ap.intent_request_handler @loc_info, true

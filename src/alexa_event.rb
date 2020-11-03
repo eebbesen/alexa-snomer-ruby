@@ -13,6 +13,58 @@ end
 
 ##
 class AlexaEvent
+  US_STATES = [
+    'alabama',
+    'alaska',
+    'arizona',
+    'arkansas',
+    'california',
+    'colorado',
+    'connecticut',
+    'delaware',
+    'florida',
+    'georgia',
+    'hawaii',
+    'idaho',
+    'illinois',
+    'indiana',
+    'iowa',
+    'kansas',
+    'kentucky',
+    'louisiana',
+    'maine',
+    'maryland',
+    'massachusetts',
+    'michigan',
+    'minnesota',
+    'mississippi',
+    'missouri',
+    'montana',
+    'nebraska',
+    'nevada',
+    'new hampshire',
+    'new jersey',
+    'new mexico',
+    'new york',
+    'north carolina',
+    'north dakota',
+    'ohio',
+    'oklahoma',
+    'oregon',
+    'pennsylvania',
+    'rhode island',
+    'south carolina',
+    'south dakota',
+    'tennessee',
+    'texas',
+    'utah',
+    'vermont',
+    'virginia',
+    'washington',
+    'west virginia',
+    'wisconsin',
+    'wyoming'
+  ].freeze
   def initialize(event)
     @event = event
   end
@@ -86,9 +138,47 @@ class AlexaEvent
     return JSON.parse(res.read) if status == '200'
   end
 
+  def city
+    return @city if @city
+
+    @original_city ||= slot_vals[:city]
+    @city ||= slot_vals[:city] ? slot_vals[:city].downcase.gsub(' ', '') : slot_vals[:city]
+  end
+
+  def state
+    return @state if @state
+
+    @original_state ||= slot_vals[:state]
+    @state ||= slot_vals[:state] ? slot_vals[:state].downcase.gsub(' ', '') : slot_vals[:state]
+  end
+
+  def slot_vals
+    logger.info("slot_vals: #{slots}")
+    return [] unless slots
+
+    c = slots && slots['cityName'] && slots['cityName']['value']
+    s = slots && slots['stateName'] && slots['stateName']['value']
+    { city: c, state: s }
+  end
+
+  def original_city
+    return '' unless @original_city
+
+    @original_city.split.map(&:capitalize).join(' ')
+  end
+
+  # sometiems Alexa splits a city into city and state
+  # try combining them
+  def combine_city_state
+    @city = "#{city} #{state}"
+    @original_city = "#{@original_city} #{@original_state}"
+  end
+
   private
 
   def logger
     @logger ||= Logger.new($stdout)
   end
+
+  attr_writer :state, :city
 end
