@@ -7,7 +7,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby 2.7.2
@@ -20,6 +19,9 @@ jobs:
         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
         restore-keys: |
           ${{ runner.os }}-gems-
+
+    - name: rubocop
+      run: bundle exec rubocop
 
     - name: Build and test with rspec
       env:
