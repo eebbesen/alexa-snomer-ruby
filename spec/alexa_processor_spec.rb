@@ -19,6 +19,7 @@ RSpec.describe AlexaProcessor do
   context '#intent_request_handler' do
     before(:each) do
       @ap = AlexaProcessor.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'Saint Paul' }
+      @ap.send(:loc_processor) # this happens earlier than the call to intent_request_handler
       @loc_info = {
         'yesCondition' => ['saint paul declares snow emergency'],
         'noCondition' => ['A Snow Emergency is typically declared after snowfalls of 3 inches or more, or after an accumulation of 3 inches or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed.'],
@@ -29,7 +30,7 @@ RSpec.describe AlexaProcessor do
     it 'generates APL response' do
       VCR.use_cassette('saint paul') do
         r = @ap.intent_request_handler @loc_info, true
-        expect(r[0]).to eq('<speak>There is not a snow emergency in saintpaul</speak>')
+        expect(r[0]).to eq('<speak>There is not a snow emergency in Saint Paul</speak>')
         expect(r[1]).to include('"headerBackgroundColor": "green"')
         expect(r[1]).to include(@loc_info['policy'])
       end
@@ -38,7 +39,7 @@ RSpec.describe AlexaProcessor do
     it 'generates non-APL response' do
       VCR.use_cassette('saint paul') do
         r = @ap.intent_request_handler @loc_info, false
-        expect(r[0]).to eq('<speak>There is not a snow emergency in saintpaul</speak>')
+        expect(r[0]).to eq('<speak>There is not a snow emergency in Saint Paul</speak>')
         expect(r.size).to eq(1)
       end
     end
@@ -85,7 +86,7 @@ RSpec.describe AlexaProcessor do
         info = ap.send(:loc_processor)
         t = ap.generate_text info
 
-        expect(t).to eq('frostbitefalls has declared a snow emergency')
+        expect(t).to eq('Frostbite Falls has declared a snow emergency')
         expect(ap.instance_variable_get(:@snow_emergency)).to eq('yes')
       end
     end
@@ -96,7 +97,7 @@ RSpec.describe AlexaProcessor do
         info = ap.send(:loc_processor)
         t = ap.generate_text info
 
-        expect(t).to eq('There is not a snow emergency in saintpaul')
+        expect(t).to eq('There is not a snow emergency in Saint Paul')
         expect(ap.instance_variable_get(:@snow_emergency)).to eq('no')
       end
     end
@@ -107,7 +108,7 @@ RSpec.describe AlexaProcessor do
         info = ap.send(:loc_processor)
         t = ap.generate_text info
 
-        expect(t).to eq("plymouth doesn't post snow emergencies.")
+        expect(t).to eq("Plymouth doesn't post snow emergencies.")
         expect(ap.instance_variable_get(:@snow_emergency)).to eq('maybe')
       end
     end
@@ -118,7 +119,7 @@ RSpec.describe AlexaProcessor do
         info = ap.send(:loc_processor)
         t = ap.generate_text info
 
-        expect(t).to eq('The website for minneapolis is not responding. Snow Emergencies are called after significant snowfall and before 6 p.m. on any given day. During a Snow Emergency, special parking rules go into effect that allow City crews to plow streets and emergency vehicles to travel safely.')
+        expect(t).to eq('The website for Minneapolis is not responding. Snow Emergencies are called after significant snowfall and before 6 p.m. on any given day. During a Snow Emergency, special parking rules go into effect that allow City crews to plow streets and emergency vehicles to travel safely.')
       end
     end
   end
@@ -190,7 +191,7 @@ RSpec.describe AlexaProcessor do
       event = request_builder 'LocationRequest', address_perm: false, args: { cityName: 'Saint Olaf' }
       ap = AlexaProcessor.new event
 
-      expect(ap.process).to eql(["<speak>I don't have information for saintolaf. Request another Minnesota city and I'll get snow emergency info for you!</speak>"])
+      expect(ap.process).to eql(["<speak>I don't have information for Saint Olaf. Request another Minnesota city and I'll get snow emergency info for you!</speak>"])
     end
 
     it 'knonwn city' do
@@ -198,7 +199,7 @@ RSpec.describe AlexaProcessor do
       ap = AlexaProcessor.new event
 
       VCR.use_cassette('saint paul') do
-        expect(ap.process).to eql(['<speak>There is not a snow emergency in saintpaul</speak>'])
+        expect(ap.process).to eql(['<speak>There is not a snow emergency in Saint Paul</speak>'])
       end
     end
 

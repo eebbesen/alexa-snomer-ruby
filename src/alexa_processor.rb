@@ -42,20 +42,20 @@ class AlexaProcessor
              ''
            end
 
-    return "The website for #{city} is not responding. #{info['policy']}" if page == 'ERROR'
+    return "The website for #{original_city} is not responding. #{info['policy']}" if page == 'ERROR'
 
     yes = info['yesCondition'].select { |c| page.downcase.include?(c) }.size.positive?
     no = info['noCondition'].select { |c| page.downcase.include?(c) }.size.positive?
 
     if yes
       @snow_emergency = 'yes'
-      "#{city} has declared a snow emergency"
+      "#{original_city} has declared a snow emergency"
     elsif no || page.size.positive?
       @snow_emergency = 'no'
-      "There is not a snow emergency in #{city}"
+      "There is not a snow emergency in #{original_city}"
     else
       @snow_emergency = 'maybe'
-      "#{city} doesn't post snow emergencies."
+      "#{original_city} doesn't post snow emergencies."
     end
   end
 
@@ -97,7 +97,7 @@ class AlexaProcessor
     when 'IntentRequest', 'LocationRequest'
       info = loc_processor
       unless info&.size&.positive?
-        return [respond("I don't have information for #{city}. Request another Minnesota city and I'll get snow emergency info for you!")]
+        return [respond("I don't have information for #{original_city}. Request another Minnesota city and I'll get snow emergency info for you!")]
       end
 
       intent_request_handler info, apl?
@@ -178,6 +178,7 @@ class AlexaProcessor
   end
 
   def city
+    @original_city = slot_vals[:city]
     slot_vals[:city] ? slot_vals[:city].downcase.gsub(' ', '') : slot_vals[:city]
   end
 
@@ -189,9 +190,15 @@ class AlexaProcessor
     logger.info("slot_vals: #{slots}")
     return [] unless slots
 
-    city = slots && slots['cityName'] && slots['cityName']['value']
-    state = slots && slots['stateName'] && slots['stateName']['value']
-    { city: city, state: state }
+    c = slots && slots['cityName'] && slots['cityName']['value']
+    s = slots && slots['stateName'] && slots['stateName']['value']
+    { city: c, state: s }
+  end
+
+  def original_city
+    return '' unless @original_city
+
+    @original_city.split.map(&:capitalize).join(' ')
   end
 
   # https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
