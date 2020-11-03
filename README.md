@@ -19,12 +19,12 @@ For display please set the following environment variables
 src/ex.rb is an attempt to simulate the way Alexa accesses the Lambda function
 ### device with no screen
 ```bash
-src/ex.rb ns
+ruby src/ex.rb ns
 ```
 
 ### device with screen
 ```bash
-src/ex.rb
+ruby src/ex.rb
 ```
 
 ## unit test
