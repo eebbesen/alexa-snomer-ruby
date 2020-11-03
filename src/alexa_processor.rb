@@ -197,6 +197,7 @@ class AlexaProcessor
 
   def original_city
     return '' unless @original_city
+
     @original_city.split.map(&:capitalize).join(' ')
   end
 
