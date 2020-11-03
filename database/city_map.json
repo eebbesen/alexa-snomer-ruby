@@ -169,6 +169,18 @@
    "contact":{"phone":""}
   }
 ,
+"egan":
+  {"site":"https://www.cityofeagan.com/snow",
+   "yesCondition": [],
+   "noCondition": [],
+   "policy": "The City of Eagan has an odd/even winter parking schedule in place from November 15 – April 15. On even days: Parking is ALLOWED on the side of the street with EVEN house addresses. On odd days: Parking is ALLOWED on the side of the street with ODD house addresses.",
+   "tow":true,
+   "notify":{},
+   "threshold":"2",
+   "text":"",
+   "contact":{"phone":""}
+  }
+,
 "edenprairie":
   {"site":"http://www.edenprairie.org/city-government/departments/public-works/streets-maintenance/snow-removal",
    "yesCondition": [],
