@@ -79,13 +79,13 @@ RSpec.describe AlexaProcessor do
   end
 
   context '#generate_text' do
-    skip 'yes condition exists' do
-      ap = AlexaProcessor.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'Minneapolis' }
-      VCR.use_cassette('minneapolis') do
+    it 'yes condition exists' do
+      ap = AlexaProcessor.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'Frostbite Falls' }
+      VCR.use_cassette('frostbite_falls') do
         info = ap.send(:loc_processor)
         t = ap.generate_text info
 
-        expect(t).to eq('minneapolis has declared a snow emergency')
+        expect(t).to eq('frostbitefalls has declared a snow emergency')
         expect(ap.instance_variable_get(:@snow_emergency)).to eq('yes')
       end
     end
@@ -187,10 +187,10 @@ RSpec.describe AlexaProcessor do
 
   context '#process' do
     it 'unknonwn city' do
-      event = request_builder 'LocationRequest', address_perm: false, args: { cityName: 'Frostbite Falls' }
+      event = request_builder 'LocationRequest', address_perm: false, args: { cityName: 'Saint Olaf' }
       ap = AlexaProcessor.new event
 
-      expect(ap.process).to eql(["<speak>I don't have information for frostbitefalls. Request another Minnesota city and I'll get snow emergency info for you!</speak>"])
+      expect(ap.process).to eql(["<speak>I don't have information for saintolaf. Request another Minnesota city and I'll get snow emergency info for you!</speak>"])
     end
 
     it 'knonwn city' do
