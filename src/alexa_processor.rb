@@ -67,7 +67,6 @@ class AlexaProcessor
 
     if apl
       logger.info 'IS APL'
-      data = {}
       directives = nil
       if round?
         data = {
