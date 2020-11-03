@@ -1,3 +1,5 @@
+![unit tests](https://github.com/eebbesen/alexa-snomer-ruby/workflows/unit%20tests/badge.svg)
+
 # alexa-snomer-ruby
 Minnesota snow emergency information
 
