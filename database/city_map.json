@@ -1,4 +1,3 @@
-
 {"saintpaul":
   {"site":"https://www.stpaul.gov/departments/public-works/street-maintenance/snow-emergency-update",
    "yesCondition": ["saint paul declares snow emergency"],
@@ -288,5 +287,16 @@
    "threshold":"3",
    "text":"",
    "contact":{"phone": "(952) 924-2180"}
+  },
+"frostbitefalls":
+  {"site":"https://google.com",
+   "yesCondition": ["about"],
+   "noCondition": ["a snow emergency is currently not in effect"],
+   "policy": "The city declares snow emergencies for major snow events of three inches or more. During a snow emergency, you must park your vehicle off the street to avoid ticketing and towing until the street is plowed to the curb.",
+   "tow":true,
+   "notify":{},
+   "threshold":"3",
+   "text":"",
+   "contact":{"phone": "(763) 555-1212"}
   }
 }
