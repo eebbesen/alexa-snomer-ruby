@@ -15,6 +15,30 @@ RSpec.describe AlexaEvent do
     end
   end
 
+  context 'slots' do
+    %w[LaunchRequest IntentRequest].each do |r|
+      it "handles nils for #{r}" do
+        event = request_builder r, address_perm: false
+        ae = AlexaEvent.new event
+
+        expect(ae.send(:slot_vals)[:food]).to be_nil
+        expect(ae.send(:city)).to be_nil
+        expect(ae.send(:slot_vals)[:count]).to be_nil
+        expect(ae.send(:state)).to be_nil
+      end
+    end
+
+    context 'saint paul' do
+      it 'handles gyro' do
+        event = request_builder 'IntentRequest', address_perm: false, args: { cityName: 'saint paul' }
+        ae = AlexaEvent.new event
+
+        expect(ae.send(:slot_vals)[:city]).to eql('saint paul')
+        expect(ae.send(:city)).to eql('saintpaul')
+      end
+    end
+  end
+
   context 'payload' do
     it 'should extract intent' do
       event = request_builder 'LaunchRequest'

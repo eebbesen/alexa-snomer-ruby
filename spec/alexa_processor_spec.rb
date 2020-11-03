@@ -252,30 +252,6 @@ RSpec.describe AlexaProcessor do
     expect(AlexaProcessor.send(:sanitize, 'one man and')).to eql('one man and')
   end
 
-  context 'slots' do
-    %w[LaunchRequest IntentRequest].each do |r|
-      it "handles nils for #{r}" do
-        event = request_builder r, address_perm: false
-        ap = AlexaProcessor.new event
-
-        expect(ap.send(:slot_vals)[:food]).to be_nil
-        expect(ap.send(:city)).to be_nil
-        expect(ap.send(:slot_vals)[:count]).to be_nil
-        expect(ap.send(:state)).to be_nil
-      end
-    end
-
-    context 'saint paul' do
-      it 'handles gyro' do
-        event = request_builder 'IntentRequest', address_perm: false, args: { cityName: 'saint paul' }
-        ap = AlexaProcessor.new event
-
-        expect(ap.send(:slot_vals)[:city]).to eql('saint paul')
-        expect(ap.send(:city)).to eql('saintpaul')
-      end
-    end
-  end
-
   private
 
   def screen_request_builder(intent_type, address_perm: false, args: {})
