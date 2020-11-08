@@ -1,52 +1,49 @@
-{"saintpaul":
-  {"site":"https://www.stpaul.gov/departments/public-works/street-maintenance/snow-emergency-update",
-   "yesCondition": ["saint paul declares snow emergency"],
-   "noCondition": ["there is currently no snow emergency in effect","there is no snow emergency in effect"],
-   "policy": "A Snow Emergency is typically declared after snowfalls of 3 inches or more, or after an accumulation of 3 inches or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed.",
+{"applevalley":
+  {"site":"http://www.ci.apple-valley.mn.us/index.aspx?nid=300",
+   "yesCondition": [],
+   "noCondition": [],
+   "policy": "Parking on City streets between 3 and 6 AM is prohibited every day, all year.",
    "tow":true,
-   "notify":{"phone": "6512667569",
-             "app":"https://www.stpaul.gov/snowapp",
-             "govd":"https://service.govdelivery.com/accounts/STPAUL/subscriber/new?topic_id=STPAUL_91",
-             "sms":{"text":"STPAUL SNOW", "number":"468311"},
-             "blog":"https://www.stpaul.gov/departments/public-works/street-maintenance/snow-emergency-information/snow-plowing-information",
-             "twitter":"https://twitter.com/stpaulpublicw",
-             "facebook":"https://www.facebook.com/cityofsaintpaul"},
-   "threshold":"3",
-   "text":"",
-   "contact":{"phone":"6512669700"}
-  }
-,
-"stpaul":
-  {"site":"https://www.stpaul.gov/departments/public-works/street-maintenance/snow-emergency-update",
-   "yesCondition": ["saint paul declares snow emergency"],
-   "noCondition": ["there is currently no snow emergency in effect","there is no snow emergency in effect"],
-   "policy": "A Snow Emergency is typically declared after snowfalls of 3 inches or more, or after an accumulation of 3 inches or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed.",
-   "tow":true,
-   "notify":{"phone": "6512667569",
-             "app":"https://www.stpaul.gov/snowapp",
-             "govd":"https://service.govdelivery.com/accounts/STPAUL/subscriber/new?topic_id=STPAUL_91",
-             "sms":{"text":"STPAUL SNOW", "number":"468311"},
-             "blog":"https://www.stpaul.gov/departments/public-works/street-maintenance/snow-emergency-information/snow-plowing-information",
-             "twitter":"https://twitter.com/stpaulpublicw",
-             "facebook":"https://www.facebook.com/cityofsaintpaul"},
-   "threshold":"3",
-   "text":"",
-   "contact":{"phone":"6512669700"}
-  }
-,
-"minneapolis":
-  {"site":"http://www2.minneapolismn.gov/snow/index.htm",
-   "yesCondition": ["there is snow emergency declared "],
-   "noCondition": ["currently there is not a snow emergency in effect in the city of minneapolis",
-                   "there is currently no snow emergency"],
-   "policy": "Snow Emergencies are called after significant snowfall and before 6 p.m. on any given day. During a Snow Emergency, special parking rules go into effect that allow City crews to plow streets and emergency vehicles to travel safely.",
-   "tow":true,
-   "notify":{"phone": "6123487669",
-             "app": {"ios": "https://itunes.apple.com/us/app/minneapolis-snow-emergency/id576001987?ls=1&mt=8", "android": "https://play.google.com/store/apps/details?id=gov.minneapolismn.snowrules"},
-             "govd": "https://service.govdelivery.com/service/subscribe.html?code=MPLS_26"},
+   "notify":{"govd": "http://www.ci.apple-valley.mn.us/list.aspx"},
    "threshold":"2",
    "text":"",
-   "contact":{"phone":""}
+   "contact":{"phone": "9529532400"}
+  }
+,
+"blaine":
+  {"site":"https://www.blainemn.gov/158/Snow-Ice-Control",
+   "yesCondition": [],
+   "noCondition": [],
+   "policy": "From November 1 to April 1, no person shall park or permit to be parked any vehicle on any highway, street, or alley between the hours of 2 a.m. and 7 a.m. without an emergency parking permit issued by the city police department.",
+   "tow":true,
+   "notify":{},
+   "threshold":"2",
+   "text":"",
+   "contact":{"email": "pw@blainemn.gov", "phone": "7637856165"}
+  }
+,
+"burnsville":
+  {"site":"",
+   "yesCondition": [],
+   "noCondition": [],
+   "policy": "No overnight parking is allowed on any street between 2 - 6 a.m. daily year-round.",
+   "tow":true,
+   "notify":{},
+   "threshold":"2",
+   "text":"",
+   "contact":{"phone": "9528954550"}
+  }
+,
+"coonrapids":
+  {"site":"http://www.coonrapidsmn.gov/DocumentCenter/View/295",
+   "yesCondition": [],
+   "noCondition": [],
+   "policy": "On Street parking is not allowed in the City of Coon Rapids between the hours of 2:00 a.m. and 6:00 a.m. between the 1st of November and the 1st of April.",
+   "tow":true,
+   "notify":{},
+   "threshold":"3",
+   "text":"",
+   "contact":{}
   }
 ,
 "rochester":
@@ -61,18 +58,6 @@
    "contact":{"phone":"5073282450"}
   }
 ,
-"duluth":
-  {"site":"http://www.duluthmn.gov/winterwatch",
-   "yesCondition": [],
-   "noCondition": [],
-   "policy": "It's complicated :). See http://www.duluthmn.gov/winterwatch/snow-ice-control-policy/ for full details.",
-   "tow":true,
-   "notify":{"phone": "2187305100"},
-   "threshold":"2",
-   "text":"",
-   "contact":{"phone":""}
-  }
-,
 "bloomington":
   {"site":"https://www.bloomingtonmn.gov/mnt/snow-removal-and-snow-emergency-information",
    "yesCondition": [],
@@ -83,6 +68,18 @@
    "threshold":"3",
    "text":"",
    "contact":{"phone":"9525638760"}
+  }
+,
+"brooklyncenter":
+  {"site":"https://www.cityofbrooklyncenter.org/Index.aspx?NID=215",
+   "yesCondition": [],
+   "noCondition": [],
+   "policy": "Street snow removal operations will begin when there has been a snowfall of more than 2.5 inches or if other conditions warrant plowing. Sidewalk snow removal will occur when there has been a snowfall of one inch or more with the goal of completing all residential sidewalks within 8 hours of a snowfall. Crews will begin plowing as soon as the storm subsides. City streets are divided into ten districts, with plows assigned to each district. Arterial streets will be cleared first, followed by residential streets. The snow plow must make several passes up and down the street to remove the snow; two to clear the center and two or more to widen the street gutter to gutter. Because plowing routes are sometimes long, it may be one hour or more between the clearing pass and the final widening pass. No parking is allowed on any City street between 2:00 am and 6:00 am or for more than 6 consecutive hours at any other time. Try not to park on streets, especially during and after a snowfall.",
+   "tow":true,
+   "notify":{"unknown": "http://cityofbrooklyncenter.org/notifyme"},
+   "threshold":"2.5",
+   "text":"",
+   "contact":{}
   }
 ,
 "brooklynpark":
@@ -97,61 +94,25 @@
    "contact":{"phone":"7634938007"}
   }
 ,
-"plymouth":
-  {"site":"http://www.plymouthmn.gov/departments/public-works/streets/snow-removal",
+"cottagegrove":
+  {"site":"https://www.cottagegrovemn.gov/departments/public_works/snow_removal.php",
    "yesCondition": [],
    "noCondition": [],
-   "policy": "If less than 2.5 inches falls, only major streets in the city system are plowed. If more than 2.5 inches of snow falls, a snow emergency is declared and all city streets are plowed curb-to-curb.",
-   "tow":true,
-   "notify":{"enotify": "http://www.plymouthmn.gov/what-s-new/enotify-sign-up"},
-   "threshold":"2.5",
-   "text":"",
-   "contact":{"phone":"7635095950"}
-  }
-,
-"maplegrove":
-  {"site":"https://www.maplegrovemn.gov/departments/public-works/streets/snowplowing/",
-   "yesCondition": [],
-   "noCondition": [],
-   "policy": "Parking on City streets is prohibited following a snowfall of 2 inches or greater until the roadway has been cleared curb-to-curb. Parking on City streets is prohibited from 2 a.m. to 6 a.m. year round.",
+   "policy": "To facilitate plowing, parking on city streets is banned between 2 a.m. and 6 a.m. from November 1 through March 31. City ordinance No. 6-2-1 also prohibits on-street parking anytime there is a snowfall event, until after the street has been completely plowed. This applies to any hour of the day, any time of the year.  This allows the snowplow drivers to work safely and efficiently during the storm.",
    "tow":true,
    "notify":{},
-   "threshold":"2",
+   "threshold":"",
    "text":"",
-   "contact":{"phone":"7634946370"}
+   "contact":{}
   }
 ,
-"woodbury":
-  {"site":"https://www.woodburymn.gov/departments/public_works/10_tips_for_the_plowing_season.php",
+"duluth":
+  {"site":"http://www.duluthmn.gov/winterwatch",
    "yesCondition": [],
    "noCondition": [],
-   "policy": "Don't park your car on the street between 2 a.m. and 6 a.m., or after a two-inch snowfall. ",
+   "policy": "It's complicated :). See http://www.duluthmn.gov/winterwatch/snow-ice-control-policy/ for full details.",
    "tow":true,
-   "notify":{},
-   "threshold":"2",
-   "text":"",
-   "contact":{"phone":"6517143720"}
-  }
-,
-"saintcloud":
-  {"site":"http://www.ci.stcloud.mn.us/369/Policies-Procedures",
-   "yesCondition": [],
-   "noCondition": [],
-   "policy": "Generally, with a normal snowfall of 2 inches or more, the City plows all streets, alleys, parking lots, and affected sidewalks in the system. A normal call-out occurs at midnight or 1 a.m.",
-   "tow":true,
-   "notify":{"govd": "http://www.ci.stcloud.mn.us/list.aspx"},
-   "threshold":"2",
-   "text":"",
-   "contact":{"phone":""}
-  }
-,
-"stcloud":
-  {"site":"http://www.ci.stcloud.mn.us/369/Policies-Procedures",
-   "yesCondition": [],
-   "noCondition": [],
-   "policy": "Generally, with a normal snowfall of 2 inches or more, the City plows all streets, alleys, parking lots, and affected sidewalks in the system. A normal call-out occurs at midnight or 1 a.m.",
-   "tow":true,
-   "notify":{"govd": "http://www.ci.stcloud.mn.us/list.aspx"},
+   "notify":{"phone": "2187305100"},
    "threshold":"2",
    "text":"",
    "contact":{"phone":""}
@@ -193,28 +154,16 @@
    "contact":{"phone":""}
   }
 ,
-"blaine":
-  {"site":"https://www.blainemn.gov/158/Snow-Ice-Control",
+"edina":
+  {"site":"https://www.edinamn.gov/346/Snow-Plowing",
    "yesCondition": [],
    "noCondition": [],
-   "policy": "From November 1 to April 1, no person shall park or permit to be parked any vehicle on any highway, street, or alley between the hours of 2 a.m. and 7 a.m. without an emergency parking permit issued by the city police department.",
+   "policy": "The City of Edina begins snow or ice control operations when there is 1) Snow accumulation of 1.5 inches or more, 2) Drifting of snow that causes problems for travel, and or 3) Icy conditions which seriously affect travel",
    "tow":true,
    "notify":{},
-   "threshold":"2",
+   "threshold":"1.5",
    "text":"",
-   "contact":{"email": "pw@blainemn.gov", "phone": "7637856165"}
-  }
-,
-"coonrapids":
-  {"site":"http://www.coonrapidsmn.gov/DocumentCenter/View/295",
-   "yesCondition": [],
-   "noCondition": [],
-   "policy": "On Street parking is not allowed in the City of Coon Rapids between the hours of 2:00 a.m. and 6:00 a.m. between the 1st of November and the 1st of April.",
-   "tow":true,
-   "notify":{},
-   "threshold":"3",
-   "text":"",
-   "contact":{}
+   "contact":{"phone": ""}
   }
 ,
 "lakeville":
@@ -229,16 +178,70 @@
    "contact":{"phone": "9529852710"}
   }
 ,
-"burnsville":
-  {"site":"",
+"frostbitefalls":
+  {"site":"https://google.com",
+   "yesCondition": ["about"],
+   "noCondition": ["a snow emergency is currently not in effect"],
+   "policy": "The city declares snow emergencies for major snow events of three inches or more. During a snow emergency, you must park your vehicle off the street to avoid ticketing and towing until the street is plowed to the curb.",
+   "tow":true,
+   "notify":{},
+   "threshold":"3",
+   "text":"",
+   "contact":{"phone": "(763) 555-1212"}
+  }
+,
+"mankato":
+  {"site":"https://www.mankatomn.gov/city-services-a-z/city-services-n-z/snow-and-ice-control",
    "yesCondition": [],
    "noCondition": [],
-   "policy": "No overnight parking is allowed on any street between 2 - 6 a.m. daily year-round.",
+   "policy": "Generally, snow emergencies will be called after receiving three inches of snow and/or ice. The media will be notified, the 24-hour snow emergency line updated (507-387-9001) and email and text messages will be sent to those who subscribe. In addition, information is posted to Facebook and Twitter. Every reasonable attempt will be made to provide as much advance notice as possible before towing begins. Ideally, the need for any towing would be eliminated.",
+   "tow":true,
+   "notify":{"facebook": "https://www.facebook.com/MankatoSnowEmergency/",
+             "twitter": "https://twitter.com/MktoSnowAlerts",
+             "email": "https://www.mankatomn.gov/about-mankato/news/subscribe-to-mankato-news"
+   },
+   "threshold":"3",
+   "text":"",
+   "contact":{"phone":" 5073879001"}
+  }
+,
+"maplegrove":
+  {"site":"https://www.maplegrovemn.gov/departments/public-works/streets/snowplowing/",
+   "yesCondition": [],
+   "noCondition": [],
+   "policy": "Parking on City streets is prohibited following a snowfall of 2 inches or greater until the roadway has been cleared curb-to-curb. Parking on City streets is prohibited from 2 a.m. to 6 a.m. year round.",
    "tow":true,
    "notify":{},
    "threshold":"2",
    "text":"",
-   "contact":{"phone": "9528954550"}
+   "contact":{"phone":"7634946370"}
+  }
+,
+"maplewood":
+  {"site":"https://maplewoodmn.gov/430/Snow-Ice-Removal",
+   "yesCondition": [],
+   "noCondition": [],
+   "policy": " The Street Superintendent, or designated representative, determines when operations begin based upon immediate and anticipated conditions. Each snow and ice event is unique due to the many changing weather conditions. Maintenance requirements may vary for each event.",
+   "tow":true,
+   "notify":{},
+   "threshold":"3",
+   "text":"",
+   "contact":{}
+  }
+,
+"minneapolis":
+  {"site":"http://www2.minneapolismn.gov/snow/index.htm",
+   "yesCondition": ["there is snow emergency declared "],
+   "noCondition": ["currently there is not a snow emergency in effect in the city of minneapolis",
+                   "there is currently no snow emergency"],
+   "policy": "Snow Emergencies are called after significant snowfall and before 6 p.m. on any given day. During a Snow Emergency, special parking rules go into effect that allow City crews to plow streets and emergency vehicles to travel safely.",
+   "tow":true,
+   "notify":{"phone": "6123487669",
+             "app": {"ios": "https://itunes.apple.com/us/app/minneapolis-snow-emergency/id576001987?ls=1&mt=8", "android": "https://play.google.com/store/apps/details?id=gov.minneapolismn.snowrules"},
+             "govd": "https://service.govdelivery.com/service/subscribe.html?code=MPLS_26"},
+   "threshold":"2",
+   "text":"",
+   "contact":{"phone":""}
   }
 ,
 "minnetonka":
@@ -253,28 +256,64 @@
    "contact":{"phone": "9529398500"}
   }
 ,
-"applevalley":
-  {"site":"http://www.ci.apple-valley.mn.us/index.aspx?nid=300",
+"moorhead":
+  {"site":"http://www.cityofmoorhead.com/departments/public-works/streets/snow-removal",
    "yesCondition": [],
    "noCondition": [],
-   "policy": "Parking on City streets between 3 and 6 AM is prohibited every day, all year.",
+   "policy": "During the winter season, your Public Works Department gets started as soon as forecasts begin reporting potential snow events in the local area. If temperature and precipitation allows, we start by pre-treating the primary anti-ice routes with a brine solution or a brine/carbohydrate solution for lower temperatures to reduce the potential for icing and slippery conditions during the initial snowfall. Once the snow falls, Public Works crews hit the streets working to keep emergency snow routes open. Snow and Ice Control ManualPrimary snow routes are the first priority, followed by secondary routes. These primary and secondary routes are the major streets that keep traffic moving throughout Moorhead.",
    "tow":true,
-   "notify":{"govd": "http://www.ci.apple-valley.mn.us/list.aspx"},
-   "threshold":"2",
+   "notify":{"enotify": "https://www.cityofmoorhead.com/about-the-city/news/sign-up-for-e-notification"},
+   "threshold":"3",
    "text":"",
-   "contact":{"phone": "9529532400"}
+   "contact":{"phone": "2182995434"}
   }
 ,
-"edina":
-  {"site":"https://www.edinamn.gov/346/Snow-Plowing",
+"plymouth":
+  {"site":"http://www.plymouthmn.gov/departments/public-works/streets/snow-removal",
    "yesCondition": [],
    "noCondition": [],
-   "policy": "The City of Edina begins snow or ice control operations when there is 1) Snow accumulation of 1.5 inches or more, 2) Drifting of snow that causes problems for travel, and or 3) Icy conditions which seriously affect travel",
+   "policy": "If less than 2.5 inches falls, only major streets in the city system are plowed. If more than 2.5 inches of snow falls, a snow emergency is declared and all city streets are plowed curb-to-curb.",
    "tow":true,
-   "notify":{},
-   "threshold":"1.5",
+   "notify":{"enotify": "http://www.plymouthmn.gov/what-s-new/enotify-sign-up"},
+   "threshold":"2.5",
    "text":"",
-   "contact":{"phone": ""}
+   "contact":{"phone":"7635095950"}
+  }
+,
+"roseville":
+  {"site":"https://www.cityofroseville.com/640/Snow-Ice-Removal",
+   "yesCondition": [],
+   "noCondition": [],
+   "policy": " Typically, snow removal begins as soon as practical after snowfall has ended. Once continuous accumulation reaches 2”, the City’s parking ban on City streets takes effect (see City Ordinance 602.09). Depending on the timing of the snowfall event, every effort is made to provide motorists with safe winter driving conditions prior to critical time periods. The most critical time periods are weekday morning and evening rush hours. The City will attempt to remove ice and snow from the City maintained collector and priority streets prior to rush hour periods. Normally, collector and priority streets are plowed first. Once the collector and priority areas are plowed and opened, the remaining streets in the residential, commercial, and industrial areas will be plowed and ice control applied. ",
+   "tow":true,
+   "notify":{"enotify": "http://www.cityofroseville.com/list.aspx"},
+   "threshold":"2",
+   "text":"",
+   "contact":{}
+  }
+,
+"saintcloud":
+  {"site":"http://www.ci.stcloud.mn.us/369/Policies-Procedures",
+   "yesCondition": [],
+   "noCondition": [],
+   "policy": "Generally, with a normal snowfall of 2 inches or more, the City plows all streets, alleys, parking lots, and affected sidewalks in the system. A normal call-out occurs at midnight or 1 a.m.",
+   "tow":true,
+   "notify":{"govd": "http://www.ci.stcloud.mn.us/list.aspx"},
+   "threshold":"2",
+   "text":"",
+   "contact":{"phone":""}
+  }
+,
+"stcloud":
+  {"site":"http://www.ci.stcloud.mn.us/369/Policies-Procedures",
+   "yesCondition": [],
+   "noCondition": [],
+   "policy": "Generally, with a normal snowfall of 2 inches or more, the City plows all streets, alleys, parking lots, and affected sidewalks in the system. A normal call-out occurs at midnight or 1 a.m.",
+   "tow":true,
+   "notify":{"govd": "http://www.ci.stcloud.mn.us/list.aspx"},
+   "threshold":"2",
+   "text":"",
+   "contact":{"phone":""}
   }
 ,
 "saintlouispark":
@@ -300,15 +339,64 @@
    "text":"",
    "contact":{"phone": "(952) 924-2180"}
   },
-"frostbitefalls":
-  {"site":"https://google.com",
-   "yesCondition": ["about"],
-   "noCondition": ["a snow emergency is currently not in effect"],
-   "policy": "The city declares snow emergencies for major snow events of three inches or more. During a snow emergency, you must park your vehicle off the street to avoid ticketing and towing until the street is plowed to the curb.",
+"saintpaul":
+  {"site":"https://www.stpaul.gov/departments/public-works/street-maintenance/snow-emergency-update",
+   "yesCondition": ["saint paul declares snow emergency"],
+   "noCondition": ["there is currently no snow emergency in effect","there is no snow emergency in effect"],
+   "policy": "A Snow Emergency is typically declared after snowfalls of 3 inches or more, or after an accumulation of 3 inches or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed.",
    "tow":true,
-   "notify":{},
+   "notify":{"phone": "6512667569",
+             "app":"https://www.stpaul.gov/snowapp",
+             "govd":"https://service.govdelivery.com/accounts/STPAUL/subscriber/new?topic_id=STPAUL_91",
+             "sms":{"text":"STPAUL SNOW", "number":"468311"},
+             "blog":"https://www.stpaul.gov/departments/public-works/street-maintenance/snow-emergency-information/snow-plowing-information",
+             "twitter":"https://twitter.com/stpaulpublicw",
+             "facebook":"https://www.facebook.com/cityofsaintpaul"},
    "threshold":"3",
    "text":"",
-   "contact":{"phone": "(763) 555-1212"}
+   "contact":{"phone":"6512669700"}
+  }
+,
+"stpaul":
+  {"site":"https://www.stpaul.gov/departments/public-works/street-maintenance/snow-emergency-update",
+   "yesCondition": ["saint paul declares snow emergency"],
+   "noCondition": ["there is currently no snow emergency in effect","there is no snow emergency in effect"],
+   "policy": "A Snow Emergency is typically declared after snowfalls of 3 inches or more, or after an accumulation of 3 inches or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed.",
+   "tow":true,
+   "notify":{"phone": "6512667569",
+             "app":"https://www.stpaul.gov/snowapp",
+             "govd":"https://service.govdelivery.com/accounts/STPAUL/subscriber/new?topic_id=STPAUL_91",
+             "sms":{"text":"STPAUL SNOW", "number":"468311"},
+             "blog":"https://www.stpaul.gov/departments/public-works/street-maintenance/snow-emergency-information/snow-plowing-information",
+             "twitter":"https://twitter.com/stpaulpublicw",
+             "facebook":"https://www.facebook.com/cityofsaintpaul"},
+   "threshold":"3",
+   "text":"",
+   "contact":{"phone":"6512669700"}
+  }
+,
+
+"shakopee":
+  {"site":"https://www.shakopeemn.gov/living-here/my-street/snow-removal",
+   "yesCondition": [],
+   "noCondition": [],
+   "policy": "After a snowfall of 2 inches or more or when the city administrator declares a snow emergency, all vehicles must be removed from city streets to allow for efficient snow removal operations (City Code 90.04). These parking restrictions are effective until the snow has been plowed from curb to curb on those public streets. Read more about winter parking regulations.",
+   "tow":true,
+   "notify":{},
+   "threshold":"2",
+   "text":"",
+   "contact":{}
+  }
+,
+"woodbury":
+  {"site":"https://www.woodburymn.gov/departments/public_works/10_tips_for_the_plowing_season.php",
+   "yesCondition": [],
+   "noCondition": [],
+   "policy": "Don't park your car on the street between 2 a.m. and 6 a.m., or after a two-inch snowfall. ",
+   "tow":true,
+   "notify":{},
+   "threshold":"2",
+   "text":"",
+   "contact":{"phone":"6517143720"}
   }
 }

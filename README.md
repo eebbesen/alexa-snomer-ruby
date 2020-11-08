@@ -73,4 +73,5 @@ I don't know what this is for.
 More to come
 
 # Tools
-https://developer.amazon.com/docs/custom-skills/request-and-response-json-reference.html#response-format
+* https://developer.amazon.com/docs/custom-skills/request-and-response-json-reference.html#response-format
+* https://www.minnesota-demographics.com/cities_by_population
