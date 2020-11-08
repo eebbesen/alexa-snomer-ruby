@@ -11,9 +11,13 @@ class AlexaSlot
     @key = value&.downcase&.gsub(' ', '')
   end
 
-  # default designed for city names
+  # default designed for city and state names
   def display
     @display ||= value&.split&.map(&:capitalize)&.join(' ')
+  end
+
+  def us_state?
+    US_STATES.include? value
   end
 
   # gets slots from an event
@@ -25,8 +29,10 @@ class AlexaSlot
        event['request']['intent'] &&
        event['request']['intent']['slots']
 
-    event['request']['intent']['slots'].collect do |slot|
-      AlexaSlot.new slot.last
+    {}.tap do |h|
+      event['request']['intent']['slots'].collect do |slot|
+        h[slot.first.to_sym] = AlexaSlot.new(slot.last)
+      end
     end
   end
 

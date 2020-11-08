@@ -5,19 +5,31 @@ require 'json'
 require_relative 'spec_helper'
 
 RSpec.describe AlexaSlot do
+  context '#us_state?' do
+    it 'identifies as us state' do
+      s = AlexaSlot.new({'name' => 'stateName', 'value' => 'new jersey' })
+      expect(s.us_state?).to be_truthy
+    end
+
+    it 'identifies not as us state' do
+      s = AlexaSlot.new({'name' => 'stateName', 'value' => 'park' })
+      expect(s.us_state?).to be_falsey
+    end
+  end
+
   context '.parse_slots' do
     it 'generates slots from event' do
       slots = AlexaSlot.parse_slots JSON.parse(event_json_city)
 
       expect(slots.size).to eq(2)
-      expect(slots.first.name).to eq('cityName')
-      expect(slots.first.value).to eq('saint paul')
-      expect(slots.first.key).to eq('saintpaul')
-      expect(slots.first.display).to eq('Saint Paul')
-      expect(slots.last.name).to eq('stateName')
-      expect(slots.last.value).to be_nil
-      expect(slots.last.key).to be_nil
-      expect(slots.last.display).to be_nil
+      expect(slots[:cityName].name).to eq('cityName')
+      expect(slots[:cityName].value).to eq('saint paul')
+      expect(slots[:cityName].key).to eq('saintpaul')
+      expect(slots[:cityName].display).to eq('Saint Paul')
+      expect(slots[:stateName].name).to eq('stateName')
+      expect(slots[:stateName].value).to be_nil
+      expect(slots[:stateName].key).to be_nil
+      expect(slots[:stateName].display).to be_nil
     end
 
     it 'handles events with no slots' do
@@ -37,11 +49,6 @@ RSpec.describe AlexaSlot do
     it 'handles nil event' do
       slots = AlexaSlot.parse_slots nil
       expect(slots.size).to eq(0)
-    end
-  end
-
-  context '#initialize' do
-    it 'stores properly' do
     end
   end
 
