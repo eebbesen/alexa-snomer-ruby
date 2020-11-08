@@ -11,9 +11,13 @@ RSpec.describe AlexaSlot do
 
       expect(slots.size).to eq(2)
       expect(slots.first.name).to eq('cityName')
-      expect(slots.first.value).to eq('eagan')
+      expect(slots.first.value).to eq('saint paul')
+      expect(slots.first.key).to eq('saintpaul')
+      expect(slots.first.display).to eq('Saint Paul')
       expect(slots.last.name).to eq('stateName')
       expect(slots.last.value).to be_nil
+      expect(slots.last.key).to be_nil
+      expect(slots.last.display).to be_nil
     end
 
     it 'handles events with no slots' do
@@ -55,12 +59,12 @@ RSpec.describe AlexaSlot do
       "slots":{
         "cityName":{
           "name":"cityName",
-          "value":"eagan",
+          "value":"SAINT PAUL",
           "confirmationStatus":"NONE",
           "source":"USER",
           "slotValue":{
             "type":"Simple",
-            "value":"eagan"
+            "value":"saint paul"
           }
         },
         "stateName":{

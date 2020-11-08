@@ -2,11 +2,18 @@
 
 ##
 class AlexaSlot
-  attr_reader :name, :value
+  attr_accessor :display
+  attr_reader :name, :value, :key
 
   def initialize(slot)
     @name = slot['name']
-    @value = slot['value']
+    @value = slot['value']&.downcase
+    @key = value&.downcase&.gsub(' ', '')
+  end
+
+  # default designed for city names
+  def display
+    @display ||= value&.split&.map(&:capitalize)&.join(' ')
   end
 
   # gets slots from an event
@@ -22,4 +29,57 @@ class AlexaSlot
       AlexaSlot.new slot.last
     end
   end
+
+  US_STATES = [
+    'alabama',
+    'alaska',
+    'arizona',
+    'arkansas',
+    'california',
+    'colorado',
+    'connecticut',
+    'delaware',
+    'florida',
+    'georgia',
+    'hawaii',
+    'idaho',
+    'illinois',
+    'indiana',
+    'iowa',
+    'kansas',
+    'kentucky',
+    'louisiana',
+    'maine',
+    'maryland',
+    'massachusetts',
+    'michigan',
+    'minnesota',
+    'mississippi',
+    'missouri',
+    'montana',
+    'nebraska',
+    'nevada',
+    'new hampshire',
+    'new jersey',
+    'new mexico',
+    'new york',
+    'north carolina',
+    'north dakota',
+    'ohio',
+    'oklahoma',
+    'oregon',
+    'pennsylvania',
+    'rhode island',
+    'south carolina',
+    'south dakota',
+    'tennessee',
+    'texas',
+    'utah',
+    'vermont',
+    'virginia',
+    'washington',
+    'west virginia',
+    'wisconsin',
+    'wyoming'
+  ].freeze
 end
