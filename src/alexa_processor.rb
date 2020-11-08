@@ -23,11 +23,10 @@ class AlexaProcessor
                  :address,
                  :find_intent_type,
                  :device_permission?,
-                 # :apl?,
                  :amazon_address_request,
                  :city,
                  :state,
-                 :slot_vals,
+                 :slot_val,
                  :original_city
 
   def_delegators :@alexa_device,

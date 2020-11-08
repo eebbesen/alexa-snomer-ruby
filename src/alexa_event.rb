@@ -65,8 +65,10 @@ class AlexaEvent
     'wisconsin',
     'wyoming'
   ].freeze
+
   def initialize(event)
     @event = event
+    process_slot_vals
   end
 
   def system
@@ -91,16 +93,6 @@ class AlexaEvent
 
   def request_id
     @event['request']['requestId']
-  end
-
-  def slots
-    if @event['request'] &&
-       @event['request']['intent'] &&
-       @event['request']['intent']['slots']
-      @event['request']['intent']['slots']
-    else
-      ''
-    end
   end
 
   def address
@@ -141,30 +133,31 @@ class AlexaEvent
   def city
     return @city if @city
 
-    @original_city ||= slot_vals[:city]
-    @city ||= slot_vals[:city] ? slot_vals[:city].downcase.gsub(' ', '') : slot_vals[:city]
+    @original_city ||= slot_vals[:cityName]
+    @city ||= slot_vals[:cityName] ? slot_vals[:cityName].downcase.gsub(' ', '') : slot_vals[:cityName]
   end
 
   def state
     return @state if @state
 
-    @original_state ||= slot_vals[:state]
-    @state ||= slot_vals[:state] ? slot_vals[:state].downcase.gsub(' ', '') : slot_vals[:state]
+    @original_state ||= slot_vals[:stateName]
+    @state ||= slot_vals[:stateName] ? slot_vals[:stateName].downcase.gsub(' ', '') : slot_vals[:stateName]
   end
 
   def slot_vals
-    logger.info("slot_vals: #{slots}")
-    return [] unless slots
-
-    c = slots && slots['cityName'] && slots['cityName']['value']
-    s = slots && slots['stateName'] && slots['stateName']['value']
-    { city: c, state: s }
+    @slot_vals
   end
 
   def original_city
     return '' unless @original_city
 
     @original_city.split.map(&:capitalize).join(' ')
+  end
+
+  def original_state
+    return '' unless @original_state
+
+    @original_state.split.map(&:capitalize).join(' ')
   end
 
   # sometiems Alexa splits a city into city and state
@@ -176,8 +169,28 @@ class AlexaEvent
 
   private
 
+  def process_slot_vals
+    @slot_vals = {}.tap do |sv|
+      slots.keys.collect do |k|
+        sv[k.to_sym] = slots[k]['value']
+      end
+    end
+  end
+
   def logger
     @logger ||= Logger.new($stdout)
+  end
+
+  def slots
+    return @slots if @slots
+
+    @slots = if @event['request'] &&
+       @event['request']['intent'] &&
+       @event['request']['intent']['slots']
+      @event['request']['intent']['slots']
+    else
+      {}
+    end
   end
 
   attr_writer :state, :city

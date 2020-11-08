@@ -21,21 +21,29 @@ RSpec.describe AlexaEvent do
         event = request_builder r, address_perm: false
         ae = AlexaEvent.new event
 
-        expect(ae.send(:slot_vals)[:food]).to be_nil
-        expect(ae.send(:city)).to be_nil
-        expect(ae.send(:slot_vals)[:count]).to be_nil
-        expect(ae.send(:state)).to be_nil
+        expect(ae.slot_vals[:city]).to be_nil
+        expect(ae.slot_vals[:count]).to be_nil
+        expect(ae.city).to be_nil
+        expect(ae.state).to be_nil
       end
     end
 
-    context 'saint paul' do
-      it 'handles gyro' do
-        event = request_builder 'IntentRequest', address_perm: false, args: { cityName: 'saint paul' }
-        ae = AlexaEvent.new event
+    it 'populates city' do
+      event = request_builder 'IntentRequest', address_perm: false, args: { cityName: 'saint paul' }
+      ae = AlexaEvent.new event
 
-        expect(ae.send(:slot_vals)[:city]).to eql('saint paul')
-        expect(ae.send(:city)).to eql('saintpaul')
-      end
+      expect(ae.slot_vals[:cityName]).to eql('saint paul')
+      expect(ae.city).to eql('saintpaul')
+      expect(ae.original_city).to eq('Saint Paul')
+    end
+
+    it 'populates state' do
+      event = request_builder 'IntentRequest', address_perm: false, args: { cityName: 'saint paul', stateName: 'minnesota' }
+      ae = AlexaEvent.new event
+
+      expect(ae.slot_vals[:stateName]).to eql('minnesota')
+      expect(ae.state).to eql('minnesota')
+      expect(ae.original_state).to eq('Minnesota')
     end
   end
 
