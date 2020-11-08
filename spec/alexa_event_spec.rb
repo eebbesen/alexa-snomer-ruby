@@ -7,47 +7,97 @@ require_relative 'spec_helper'
 ENV['GOOGLE_API_KEY'] = 'SECRET'
 
 RSpec.describe AlexaEvent do
+  context '#alternate_city_display' do
+    it 'handles incorrectly split city and state' do
+      ae = AlexaEvent.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'brooklyn', stateName: 'park' }
+      expect(ae.alternate_city_display).to eq('Brooklyn Park')
+    end
+  end
+
+  context '#alternate_city_key' do
+    it 'handles incorrectly split city and state' do
+      ae = AlexaEvent.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'brooklyn', stateName: 'park' }
+      expect(ae.alternate_city_key).to eq('brooklynpark')
+    end
+  end
+
+  context 'slots' do
+    it 'handles nils for LaunchRequest' do
+      event = request_builder 'LaunchRequest', address_perm: false
+      ae = AlexaEvent.new event
+
+      expect(ae.slots[:cityName]).to be_nil
+      expect(ae.slots[:count]).to be_nil
+      expect(ae.city).to be_nil
+      expect(ae.state).to be_nil
+    end
+
+    it 'handles nils for IntentRequest' do
+      event = request_builder 'IntentRequest', address_perm: false
+      ae = AlexaEvent.new event
+
+      expect(ae.slots[:cityName].value).to be_nil
+      expect(ae.slots[:count]).to be_nil
+      expect(ae.city.value).to be_nil
+      expect(ae.state.value).to be_nil
+    end
+
+    it 'populates city' do
+      event = request_builder 'IntentRequest', address_perm: false, args: { cityName: 'saint paul' }
+      ae = AlexaEvent.new event
+
+      expect(ae.city.value).to eql('saint paul')
+    end
+
+    it 'populates state' do
+      event = request_builder 'IntentRequest', address_perm: false, args: { cityName: 'saint paul', stateName: 'minnesota' }
+      ae = AlexaEvent.new event
+
+      expect(ae.state.value).to eql('minnesota')
+    end
+  end
+
   context 'payload' do
     it 'should extract intent' do
       event = request_builder 'LaunchRequest'
-      ap = AlexaEvent.new event
-      expect(ap.send(:find_intent_type)).to eql('LaunchRequest')
+      ae = AlexaEvent.new event
+      expect(ae.send(:find_intent_type)).to eql('LaunchRequest')
     end
 
     it 'confirms address permission yes' do
       event = request_builder 'LaunchRequest', address_perm: true
-      ap = AlexaEvent.new event
-      expect(ap.send(:device_permission?)).to be_truthy
+      ae = AlexaEvent.new event
+      expect(ae.send(:device_permission?)).to be_truthy
     end
 
     it 'confirms address permission no' do
       event = request_builder 'LaunchRequest'
-      ap = AlexaEvent.new event
-      expect(ap.send(:device_permission?)).to be_falsey
+      ae = AlexaEvent.new event
+      expect(ae.send(:device_permission?)).to be_falsey
     end
 
     it 'gets device id' do
       event = request_builder 'LaunchRequest', address_perm: true
-      ap = AlexaEvent.new event
-      expect(ap.send(:device_id)).to eql('amzn1.ask.device.AEGXGYKTLQ')
+      ae = AlexaEvent.new event
+      expect(ae.send(:device_id)).to eql('amzn1.ask.device.AEGXGYKTLQ')
     end
 
     it 'gets api access token' do
       event = request_builder 'LaunchRequest'
-      ap = AlexaEvent.new event
-      expect(ap.send(:api_access_token)).to eql('eyJ0eXA')
+      ae = AlexaEvent.new event
+      expect(ae.send(:api_access_token)).to eql('eyJ0eXA')
     end
 
     it 'gets api endpoint' do
       event = request_builder 'LaunchRequest'
-      ap = AlexaEvent.new event
-      expect(ap.send(:api_endpoint)).to eql('https://api.amazonalexa.com')
+      ae = AlexaEvent.new event
+      expect(ae.send(:api_endpoint)).to eql('https://api.amazonalexa.com')
     end
 
     it 'gets request id' do
       event = request_builder 'LaunchRequest'
-      ap = AlexaEvent.new event
-      expect(ap.send(:request_id)).to eql('amzn1.echo-api.request.888888')
+      ae = AlexaEvent.new event
+      expect(ae.send(:request_id)).to eql('amzn1.echo-api.request.888888')
     end
   end
 
@@ -59,10 +109,10 @@ RSpec.describe AlexaEvent do
       event = request_builder('LaunchRequest', address_perm: true)
       event['context']['System']['device']['deviceId'] = device_id
       event['context']['System']['apiAccessToken'] = api_access_token
-      ap = AlexaEvent.new event
+      ae = AlexaEvent.new event
 
       VCR.use_cassette('address_request') do
-        address = ap.send :amazon_address_request
+        address = ae.send :amazon_address_request
         expect(address).to eql(expected_payload)
       end
     end

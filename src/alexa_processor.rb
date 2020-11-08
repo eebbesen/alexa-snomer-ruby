@@ -23,8 +23,9 @@ class AlexaProcessor
                  :address,
                  :find_intent_type,
                  :device_permission?,
-                 # :apl?,
-                 :amazon_address_request
+                 :amazon_address_request,
+                 :city,
+                 :state
 
   def_delegators :@alexa_device,
                  :round?,
@@ -42,20 +43,20 @@ class AlexaProcessor
              ''
            end
 
-    return "The website for #{original_city} is not responding. #{info['policy']}" if page == 'ERROR'
+    return "The website for #{city.display} is not responding. #{info['policy']}" if page == 'ERROR'
 
     yes = info['yesCondition'].select { |c| page.downcase.include?(c) }.size.positive?
     no = info['noCondition'].select { |c| page.downcase.include?(c) }.size.positive?
 
     if yes
       @snow_emergency = 'yes'
-      "#{original_city} has declared a snow emergency"
+      "#{city.display} has declared a snow emergency"
     elsif no || page.size.positive?
       @snow_emergency = 'no'
-      "There is not a snow emergency in #{original_city}"
+      "There is not a snow emergency in #{city.display}"
     else
       @snow_emergency = 'maybe'
-      "#{original_city} doesn't post snow emergencies."
+      "#{city.display} doesn't post snow emergencies."
     end
   end
 
@@ -97,7 +98,7 @@ class AlexaProcessor
     when 'IntentRequest', 'LocationRequest'
       info = loc_processor
       unless info&.size&.positive?
-        return [respond("I don't have information for #{original_city}. Request another Minnesota city and I'll get snow emergency info for you!")]
+        return [respond("I don't have information for #{city.display}. Request another Minnesota city and I'll get snow emergency info for you!")]
       end
 
       intent_request_handler info, apl?
@@ -136,11 +137,16 @@ class AlexaProcessor
   end
 
   def loc_processor
-    return unless city
+    return unless city.key
 
     file = File.open('database/city_map.json')
     cities = JSON.parse(file.read)
-    cities[city]
+    return cities[city.key] if cities[city.key]
+
+    return unless cities[@alexa_event.alternate_city_key]
+
+    city.display = @alexa_event.alternate_city_display
+    cities[@alexa_event.alternate_city_key]
   end
 
   def parse_loc_data(locs)
@@ -175,30 +181,6 @@ class AlexaProcessor
       }
     end
     d
-  end
-
-  def city
-    @original_city = slot_vals[:city]
-    slot_vals[:city] ? slot_vals[:city].downcase.gsub(' ', '') : slot_vals[:city]
-  end
-
-  def state
-    slot_vals[:state] ? slot_vals[:state].downcase.gsub(' ', '') : slot_vals[:state]
-  end
-
-  def slot_vals
-    logger.info("slot_vals: #{slots}")
-    return [] unless slots
-
-    c = slots && slots['cityName'] && slots['cityName']['value']
-    s = slots && slots['stateName'] && slots['stateName']['value']
-    { city: c, state: s }
-  end
-
-  def original_city
-    return '' unless @original_city
-
-    @original_city.split.map(&:capitalize).join(' ')
   end
 
   # https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY

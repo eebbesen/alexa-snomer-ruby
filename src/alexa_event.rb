@@ -3,6 +3,8 @@
 require 'logger'
 require 'open-uri'
 
+require_relative './alexa_slot'
+
 ##
 class AddressPermissionError < StandardError
   MSG = 'Please grant me permission to access your device address. Without this permission I cannot find locations near you!'
@@ -13,8 +15,11 @@ end
 
 ##
 class AlexaEvent
+  attr_reader :slots
+
   def initialize(event)
     @event = event
+    @slots ||= AlexaSlot.parse_slots @event
   end
 
   def system
@@ -41,23 +46,12 @@ class AlexaEvent
     @event['request']['requestId']
   end
 
-  def slots
-    if @event['request'] &&
-       @event['request']['intent'] &&
-       @event['request']['intent']['slots']
-      @event['request']['intent']['slots']
-    else
-      ''
-    end
-  end
-
   def address
     return raise AddressPermissionError unless device_permission?
 
     @address ||= amazon_address_request
   end
 
-  # expects JSON
   def find_intent_type
     @event['request']['type']
   end
@@ -86,9 +80,31 @@ class AlexaEvent
     return JSON.parse(res.read) if status == '200'
   end
 
+  def city
+    slots[:cityName]
+  end
+
+  def state
+    slots[:stateName]
+  end
+
+  # sometiems Alexa splits a city into city and state
+  # try combining them
+  def alternate_city_key
+    return nil if state.us_state?
+
+    "#{city.value}#{state.value}"
+  end
+
+  def alternate_city_display
+    "#{city.display} #{state.display}"
+  end
+
   private
 
   def logger
     @logger ||= Logger.new($stdout)
   end
+
+  attr_writer :state, :city
 end

@@ -27,6 +27,7 @@ RSpec.describe AlexaProcessor do
         'site' => 'https://www.stpaul.gov/departments/public-works/street-maintenance/snow-emergency-update'
       }
     end
+
     it 'generates APL response' do
       VCR.use_cassette('saint paul') do
         r = @ap.intent_request_handler @loc_info, true
@@ -70,6 +71,12 @@ RSpec.describe AlexaProcessor do
       ap = AlexaProcessor.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'Saint Paul' }
       info = ap.send(:loc_processor)
       expect(info['site']).to eq('https://www.stpaul.gov/departments/public-works/street-maintenance/snow-emergency-update')
+    end
+
+    it 'handles wrong slots' do
+      ap = AlexaProcessor.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'brooklyn', stateName: 'park' }
+      info = ap.send(:loc_processor)
+      expect(info['site']).to eq('http://www.brooklynpark.org/city-government/public-works/snow-removal-information/')
     end
 
     it 'handles non-match' do
@@ -249,30 +256,6 @@ RSpec.describe AlexaProcessor do
     expect(AlexaProcessor.send(:sanitize, 'Hello & goodbye')).to eql('Hello and goodbye')
     expect(AlexaProcessor.send(:sanitize, 'you & me & baby')).to eql('you and me and baby')
     expect(AlexaProcessor.send(:sanitize, 'one man and')).to eql('one man and')
-  end
-
-  context 'slots' do
-    %w[LaunchRequest IntentRequest].each do |r|
-      it "handles nils for #{r}" do
-        event = request_builder r, address_perm: false
-        ap = AlexaProcessor.new event
-
-        expect(ap.send(:slot_vals)[:food]).to be_nil
-        expect(ap.send(:city)).to be_nil
-        expect(ap.send(:slot_vals)[:count]).to be_nil
-        expect(ap.send(:state)).to be_nil
-      end
-    end
-
-    context 'saint paul' do
-      it 'handles gyro' do
-        event = request_builder 'IntentRequest', address_perm: false, args: { cityName: 'saint paul' }
-        ap = AlexaProcessor.new event
-
-        expect(ap.send(:slot_vals)[:city]).to eql('saint paul')
-        expect(ap.send(:city)).to eql('saintpaul')
-      end
-    end
   end
 
   private
