@@ -90,7 +90,13 @@ class AlexaEvent
 
   # sometiems Alexa splits a city into city and state
   # try combining them
-  def combine_city_state
+  def alternate_city_key
+    return nil if state.us_state?
+
+    "#{city.value}#{state.value}"
+  end
+
+  def alternate_city_display
     "#{city.display} #{state.display}"
   end
 

@@ -7,12 +7,12 @@ require_relative 'spec_helper'
 RSpec.describe AlexaSlot do
   context '#us_state?' do
     it 'identifies as us state' do
-      s = AlexaSlot.new({'name' => 'stateName', 'value' => 'new jersey' })
+      s = AlexaSlot.new({ 'name' => 'stateName', 'value' => 'new jersey' })
       expect(s.us_state?).to be_truthy
     end
 
     it 'identifies not as us state' do
-      s = AlexaSlot.new({'name' => 'stateName', 'value' => 'park' })
+      s = AlexaSlot.new({ 'name' => 'stateName', 'value' => 'park' })
       expect(s.us_state?).to be_falsey
     end
   end
@@ -54,34 +54,34 @@ RSpec.describe AlexaSlot do
 
   def event_json_city
     <<~JSON
-{
-  "request":{
-    "type":"IntentRequest",
-    "requestId":"amzn1.echo-api.request.ee5d1985-a317-431f-a0b9-46a1eb923212",
-    "locale":"en-US",
-    "timestamp":"2020-11-07T14:23:24Z",
-    "intent":{
-      "name":"LocationRequest",
-      "confirmationStatus":"NONE",
-      "slots":{
-        "cityName":{
-          "name":"cityName",
-          "value":"SAINT PAUL",
-          "confirmationStatus":"NONE",
-          "source":"USER",
-          "slotValue":{
-            "type":"Simple",
-            "value":"saint paul"
+      {
+        "request":{
+          "type":"IntentRequest",
+          "requestId":"amzn1.echo-api.request.ee5d1985-a317-431f-a0b9-46a1eb923212",
+          "locale":"en-US",
+          "timestamp":"2020-11-07T14:23:24Z",
+          "intent":{
+            "name":"LocationRequest",
+            "confirmationStatus":"NONE",
+            "slots":{
+              "cityName":{
+                "name":"cityName",
+                "value":"SAINT PAUL",
+                "confirmationStatus":"NONE",
+                "source":"USER",
+                "slotValue":{
+                  "type":"Simple",
+                  "value":"saint paul"
+                }
+              },
+              "stateName":{
+                "name":"stateName",
+                "confirmationStatus":"NONE"
+              }
+            }
           }
-        },
-        "stateName":{
-          "name":"stateName",
-          "confirmationStatus":"NONE"
         }
       }
-    }
-  }
-}
     JSON
   end
 end

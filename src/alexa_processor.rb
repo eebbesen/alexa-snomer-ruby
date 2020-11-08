@@ -141,7 +141,12 @@ class AlexaProcessor
 
     file = File.open('database/city_map.json')
     cities = JSON.parse(file.read)
-    cities[city.key]
+    return cities[city.key] if cities[city.key]
+
+    return unless cities[@alexa_event.alternate_city_key]
+
+    city.display = @alexa_event.alternate_city_display
+    cities[@alexa_event.alternate_city_key]
   end
 
   def parse_loc_data(locs)

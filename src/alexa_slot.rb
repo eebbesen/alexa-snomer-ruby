@@ -2,7 +2,7 @@
 
 ##
 class AlexaSlot
-  attr_accessor :display
+  attr_writer :display
   attr_reader :name, :value, :key
 
   def initialize(slot)
@@ -25,9 +25,9 @@ class AlexaSlot
   # since the hash also contains the name, we just get the hash
   def self.parse_slots(event)
     return {} unless event &&
-       event['request'] &&
-       event['request']['intent'] &&
-       event['request']['intent']['slots']
+                     event['request'] &&
+                     event['request']['intent'] &&
+                     event['request']['intent']['slots']
 
     {}.tap do |h|
       event['request']['intent']['slots'].collect do |slot|

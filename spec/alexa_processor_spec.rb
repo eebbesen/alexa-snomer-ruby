@@ -73,6 +73,12 @@ RSpec.describe AlexaProcessor do
       expect(info['site']).to eq('https://www.stpaul.gov/departments/public-works/street-maintenance/snow-emergency-update')
     end
 
+    it 'handles wrong slots' do
+      ap = AlexaProcessor.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'brooklyn', stateName: 'park' }
+      info = ap.send(:loc_processor)
+      expect(info['site']).to eq('http://www.brooklynpark.org/city-government/public-works/snow-removal-information/')
+    end
+
     it 'handles non-match' do
       ap = AlexaProcessor.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'fargo' }
       info = ap.send(:loc_processor)

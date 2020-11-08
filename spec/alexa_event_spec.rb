@@ -7,15 +7,22 @@ require_relative 'spec_helper'
 ENV['GOOGLE_API_KEY'] = 'SECRET'
 
 RSpec.describe AlexaEvent do
-  context '#combine_city_state' do
+  context '#alternate_city_display' do
     it 'handles incorrectly split city and state' do
       ae = AlexaEvent.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'brooklyn', stateName: 'park' }
-      expect(ae.combine_city_state).to eq('Brooklyn Park')
+      expect(ae.alternate_city_display).to eq('Brooklyn Park')
+    end
+  end
+
+  context '#alternate_city_key' do
+    it 'handles incorrectly split city and state' do
+      ae = AlexaEvent.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'brooklyn', stateName: 'park' }
+      expect(ae.alternate_city_key).to eq('brooklynpark')
     end
   end
 
   context 'slots' do
-    it "handles nils for LaunchRequest" do
+    it 'handles nils for LaunchRequest' do
       event = request_builder 'LaunchRequest', address_perm: false
       ae = AlexaEvent.new event
 
@@ -25,7 +32,7 @@ RSpec.describe AlexaEvent do
       expect(ae.state).to be_nil
     end
 
-    it "handles nils for IntentRequest" do
+    it 'handles nils for IntentRequest' do
       event = request_builder 'IntentRequest', address_perm: false
       ae = AlexaEvent.new event
 
