@@ -3,6 +3,8 @@
 require 'logger'
 require 'open-uri'
 
+require_relative './alexa_slot'
+
 ##
 class AddressPermissionError < StandardError
   MSG = 'Please grant me permission to access your device address. Without this permission I cannot find locations near you!'
@@ -13,62 +15,11 @@ end
 
 ##
 class AlexaEvent
-  US_STATES = [
-    'alabama',
-    'alaska',
-    'arizona',
-    'arkansas',
-    'california',
-    'colorado',
-    'connecticut',
-    'delaware',
-    'florida',
-    'georgia',
-    'hawaii',
-    'idaho',
-    'illinois',
-    'indiana',
-    'iowa',
-    'kansas',
-    'kentucky',
-    'louisiana',
-    'maine',
-    'maryland',
-    'massachusetts',
-    'michigan',
-    'minnesota',
-    'mississippi',
-    'missouri',
-    'montana',
-    'nebraska',
-    'nevada',
-    'new hampshire',
-    'new jersey',
-    'new mexico',
-    'new york',
-    'north carolina',
-    'north dakota',
-    'ohio',
-    'oklahoma',
-    'oregon',
-    'pennsylvania',
-    'rhode island',
-    'south carolina',
-    'south dakota',
-    'tennessee',
-    'texas',
-    'utah',
-    'vermont',
-    'virginia',
-    'washington',
-    'west virginia',
-    'wisconsin',
-    'wyoming'
-  ].freeze
+  attr_reader :slots
 
   def initialize(event)
     @event = event
-    process_slot_vals
+    @slots ||= AlexaSlot.parse_slots @event
   end
 
   def system
@@ -101,7 +52,6 @@ class AlexaEvent
     @address ||= amazon_address_request
   end
 
-  # expects JSON
   def find_intent_type
     @event['request']['type']
   end
@@ -131,66 +81,23 @@ class AlexaEvent
   end
 
   def city
-    return @city if @city
-
-    @original_city ||= slot_vals[:cityName]
-    @city ||= slot_vals[:cityName] ? slot_vals[:cityName].downcase.gsub(' ', '') : slot_vals[:cityName]
+    slots[:cityName]
   end
 
   def state
-    return @state if @state
-
-    @original_state ||= slot_vals[:stateName]
-    @state ||= slot_vals[:stateName] ? slot_vals[:stateName].downcase.gsub(' ', '') : slot_vals[:stateName]
-  end
-
-  def slot_vals
-    @slot_vals
-  end
-
-  def original_city
-    return '' unless @original_city
-
-    @original_city.split.map(&:capitalize).join(' ')
-  end
-
-  def original_state
-    return '' unless @original_state
-
-    @original_state.split.map(&:capitalize).join(' ')
+    slots[:stateName]
   end
 
   # sometiems Alexa splits a city into city and state
   # try combining them
   def combine_city_state
-    @city = "#{city} #{state}"
-    @original_city = "#{@original_city} #{@original_state}"
+    "#{city.display} #{state.display}"
   end
 
   private
 
-  def process_slot_vals
-    @slot_vals = {}.tap do |sv|
-      slots.keys.collect do |k|
-        sv[k.to_sym] = slots[k]['value']
-      end
-    end
-  end
-
   def logger
     @logger ||= Logger.new($stdout)
-  end
-
-  def slots
-    return @slots if @slots
-
-    @slots = if @event['request'] &&
-       @event['request']['intent'] &&
-       @event['request']['intent']['slots']
-      @event['request']['intent']['slots']
-    else
-      {}
-    end
   end
 
   attr_writer :state, :city

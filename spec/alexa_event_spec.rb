@@ -10,40 +10,43 @@ RSpec.describe AlexaEvent do
   context '#combine_city_state' do
     it 'handles incorrectly split city and state' do
       ae = AlexaEvent.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'brooklyn', stateName: 'park' }
-      ae.combine_city_state
-      expect(ae.city).to eq('brooklyn park')
+      expect(ae.combine_city_state).to eq('Brooklyn Park')
     end
   end
 
   context 'slots' do
-    %w[LaunchRequest IntentRequest].each do |r|
-      it "handles nils for #{r}" do
-        event = request_builder r, address_perm: false
-        ae = AlexaEvent.new event
+    it "handles nils for LaunchRequest" do
+      event = request_builder 'LaunchRequest', address_perm: false
+      ae = AlexaEvent.new event
 
-        expect(ae.slot_vals[:city]).to be_nil
-        expect(ae.slot_vals[:count]).to be_nil
-        expect(ae.city).to be_nil
-        expect(ae.state).to be_nil
-      end
+      expect(ae.slots[:cityName]).to be_nil
+      expect(ae.slots[:count]).to be_nil
+      expect(ae.city).to be_nil
+      expect(ae.state).to be_nil
+    end
+
+    it "handles nils for IntentRequest" do
+      event = request_builder 'IntentRequest', address_perm: false
+      ae = AlexaEvent.new event
+
+      expect(ae.slots[:cityName].value).to be_nil
+      expect(ae.slots[:count]).to be_nil
+      expect(ae.city.value).to be_nil
+      expect(ae.state.value).to be_nil
     end
 
     it 'populates city' do
       event = request_builder 'IntentRequest', address_perm: false, args: { cityName: 'saint paul' }
       ae = AlexaEvent.new event
 
-      expect(ae.slot_vals[:cityName]).to eql('saint paul')
-      expect(ae.city).to eql('saintpaul')
-      expect(ae.original_city).to eq('Saint Paul')
+      expect(ae.city.value).to eql('saint paul')
     end
 
     it 'populates state' do
       event = request_builder 'IntentRequest', address_perm: false, args: { cityName: 'saint paul', stateName: 'minnesota' }
       ae = AlexaEvent.new event
 
-      expect(ae.slot_vals[:stateName]).to eql('minnesota')
-      expect(ae.state).to eql('minnesota')
-      expect(ae.original_state).to eq('Minnesota')
+      expect(ae.state.value).to eql('minnesota')
     end
   end
 
