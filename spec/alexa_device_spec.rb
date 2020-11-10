@@ -7,32 +7,32 @@ RSpec.describe AlexaDevice do
   context '#pick_font_size' do
     it 'handles round' do
       ad = AlexaDevice.new JSON.parse(slug_hub_json(480, 480))
-      expect(ad.pick_font_size).to eq('170db')
+      expect(ad.pick_font_size).to eq('170dp')
     end
 
     it 'handles small' do
       ad = AlexaDevice.new JSON.parse(slug_hub_json(480, 960))
-      expect(ad.pick_font_size).to eq('30db')
+      expect(ad.pick_font_size).to eq('30dp')
     end
 
     it 'provides default when no match' do
       ad = AlexaDevice.new JSON.parse(slug_hub_json(1, 1))
-      expect(ad.pick_font_size).to eq('40db')
+      expect(ad.pick_font_size).to eq('40dp')
     end
 
     it 'provides default when nil inputs' do
       ad = AlexaDevice.new JSON.parse(slug_hub_json(1, 1))
       ad.instance_variable_set(:@height, nil)
       ad.instance_variable_set(:@width, nil)
-      expect(ad.pick_font_size).to eq('40db')
+      expect(ad.pick_font_size).to eq('40dp')
 
       ad.instance_variable_set(:@height, 1)
       ad.instance_variable_set(:@width, nil)
-      expect(ad.pick_font_size).to eq('40db')
+      expect(ad.pick_font_size).to eq('40dp')
 
       ad.instance_variable_set(:@height, nil)
       ad.instance_variable_set(:@width, 1)
-      expect(ad.pick_font_size).to eq('40db')
+      expect(ad.pick_font_size).to eq('40dp')
     end
   end
 

@@ -7,37 +7,37 @@ class AlexaDevice
       name: 'round',
       height: 480,
       width: 480,
-      font: '170db'
+      font: '170dp'
     },
     {
       name: 'small',
       height: 480,
       width: 960,
-      font: '30db'
+      font: '30dp'
     },
     {
       name: 'medium (old show)',
       height: 600,
       width: 1024,
-      font: '40db'
+      font: '40dp'
     },
     {
       name: 'large',
       height: 800,
       width: 1080,
-      font: '50db'
+      font: '50dp'
     },
     {
       name: 'exlarge',
       height: 800,
       width: 1200,
-      font: '50db'
+      font: '50dp'
     },
     {
       name: 'tv',
       height: 1200,
       width: 2048,
-      font: '40db'
+      font: '40dp'
     }
   ].freeze
 
@@ -48,7 +48,7 @@ class AlexaDevice
   # 40: tv
   # default to '40db'
   def pick_font_size
-    previous = { height: 1_000_000, width: 1_000_000, font: '40db' }
+    previous = { height: 1_000_000, width: 1_000_000, font: '40dp' }
 
     if height && width
       AlexaDevice::DIMENSIONS.each do |d|
