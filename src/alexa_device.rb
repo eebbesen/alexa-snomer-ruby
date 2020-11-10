@@ -2,41 +2,65 @@
 
 ## represents different device types
 class AlexaDevice
-  DIMENSIONS = {
-    round: {
+  DIMENSIONS = [
+    {
+      name: 'round',
       height: 480,
       width: 480,
-      font: "170db"
+      font: '170db'
     },
-    small: {
+    {
+      name: 'small',
       height: 480,
       width: 960,
-      font: "30db"
+      font: '30db'
     },
-    medium: {
+    {
+      name: 'medium (old show)',
       height: 600,
       width: 1024,
-      font: "40db"
+      font: '40db'
     },
-    large: {
+    {
+      name: 'large',
       height: 800,
       width: 1080,
-      font: "50db"
+      font: '50db'
     },
-    tv: {
+    {
+      name: 'exlarge',
+      height: 800,
+      width: 1200,
+      font: '50db'
+    },
+    {
+      name: 'tv',
       height: 1200,
       width: 2048,
-      font: "40db"
+      font: '40db'
     }
-  }
+  ].freeze
 
+  # 170: round
   # 30: hub small landscape
-  # 40: hub meedium
+  # 40: hub medium
   # 50: hub landscape
   # 40: tv
-  def pick_font_size(h, w)
+  # default to '40db'
+  def pick_font_size
+    previous = { height: 1_000_000, width: 1_000_000, font: '40db' }
 
+    if height && width
+      AlexaDevice::DIMENSIONS.each do |d|
+        return d[:font] if height == d[:height] && width == d[:width]
 
+        break if height > d[:height] && width > d[:width]
+
+        previous = d
+      end
+    end
+
+    previous[:font]
   end
 
   def initialize(event)

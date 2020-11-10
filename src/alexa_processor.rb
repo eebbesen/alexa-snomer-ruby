@@ -83,7 +83,7 @@ class AlexaProcessor
           to_speak: respond(text),
           header_background_color: AlexaProcessor.color_picker(@snow_emergency),
           header_theme: @snow_emergency == 'maybe' ? 'light' : 'dark',
-          # font_size: pick_font_size(nil, nil)
+          font_size: pick_font_size
         }
         directives = AplAssembler.build_directives data, :text
       end
