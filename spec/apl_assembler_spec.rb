@@ -131,7 +131,8 @@ RSpec.describe AplAssembler do
               }
             },
             "logoUrl": "https://images-na.ssl-images-amazon.com/images/I/81QXYqxgqhL._SL210_QL95_BG0,0,0,0_FMpng_.png",
-            "speechSSML": "<speak>There is a snow emergency in saintpaul</speak>"
+            "speechSSML": "<speak>There is a snow emergency in saintpaul</speak>",
+            "fontSize": "30dp"
           },
           "transformers": [
               {
@@ -162,7 +163,8 @@ RSpec.describe AplAssembler do
       text: 'A Snow Emergency is typically declared after snowfalls of 3 inches or more, or after an accumulation of 3 inches or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed.',
       to_speak: '<speak>There is a snow emergency in saintpaul</speak>',
       app_name: ENV['APP_NAME'],
-      logo_url: ENV['LOGO_URL']
+      logo_url: ENV['LOGO_URL'],
+      font_size: '30dp'
     }
 
     ret = AplAssembler.build_directives data, :text

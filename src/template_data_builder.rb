@@ -73,7 +73,8 @@ class TemplateDataBuilder
                 }
             },
             "logoUrl": "%{logo_url}",
-            "speechSSML": "%{text_to_speak}"
+            "speechSSML": "%{text_to_speak}",
+            "fontSize": "%{font_size}"
         },
         "transformers": [
             {
@@ -135,7 +136,8 @@ class TemplateDataBuilder
       card_text: data[:text],
       text_to_speak: data[:to_speak],
       app_name: ENV['APP_NAME'],
-      logo_url: ENV['LOGO_URL']
+      logo_url: ENV['LOGO_URL'],
+      font_size: data[:font_size]
     }
 
     JSON.parse "{#{LT % d}}"
