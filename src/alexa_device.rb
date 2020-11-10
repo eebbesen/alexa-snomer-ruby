@@ -31,10 +31,16 @@ class AlexaDevice
       name: 'exlarge',
       height: 800,
       width: 1200,
-      font: '50dp'
+      font: '55dp'
     },
     {
       name: 'tv',
+      height: 1080,
+      width: 1920,
+      font: '40dp'
+    },
+    {
+      name: 'largetv',
       height: 1200,
       width: 2048,
       font: '40dp'
