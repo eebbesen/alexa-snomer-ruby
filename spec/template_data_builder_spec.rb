@@ -167,7 +167,8 @@ RSpec.describe TemplateDataBuilder do
                         }
                     },
                     "logoUrl": "https://images-na.ssl-images-amazon.com/images/I/81QXYqxgqhL._SL210_QL95_BG0,0,0,0_FMpng_.png",
-                    "speechSSML": "<speak>There is not a snow emergency in saint paul.</speak>"
+                    "speechSSML": "<speak>There is not a snow emergency in saint paul.</speak>",
+                    "fontSize": "40dp"
                 },
                 "transformers": [
                     {
@@ -183,7 +184,8 @@ RSpec.describe TemplateDataBuilder do
       d = {
         title: 'No snow emergency in Saint Paul',
         text: 'A Snow Emergency is typically declared after snowfalls of 3 inches or more, or after an accumulation of 3 inches or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed.',
-        to_speak: '<speak>There is not a snow emergency in saint paul.</speak>'
+        to_speak: '<speak>There is not a snow emergency in saint paul.</speak>',
+        font_size: '40dp'
       }
 
       ret = TemplateDataBuilder.send(:build_data_template_text, d)

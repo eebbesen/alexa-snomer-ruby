@@ -2,6 +2,73 @@
 
 ## represents different device types
 class AlexaDevice
+  DIMENSIONS = [
+    {
+      name: 'round',
+      height: 480,
+      width: 480,
+      font: '170dp'
+    },
+    {
+      name: 'small',
+      height: 480,
+      width: 960,
+      font: '30dp'
+    },
+    {
+      name: 'medium (old show)',
+      height: 600,
+      width: 1024,
+      font: '40dp'
+    },
+    {
+      name: 'large',
+      height: 800,
+      width: 1080,
+      font: '50dp'
+    },
+    {
+      name: 'exlarge',
+      height: 800,
+      width: 1200,
+      font: '55dp'
+    },
+    {
+      name: 'tv',
+      height: 1080,
+      width: 1920,
+      font: '40dp'
+    },
+    {
+      name: 'largetv',
+      height: 1200,
+      width: 2048,
+      font: '40dp'
+    }
+  ].freeze
+
+  # 170: round
+  # 30: hub small landscape
+  # 40: hub medium
+  # 50: hub landscape
+  # 40: tv
+  # default to '40db'
+  def pick_font_size
+    previous = { height: 1_000_000, width: 1_000_000, font: '40dp' }
+
+    if height && width
+      AlexaDevice::DIMENSIONS.each do |d|
+        return d[:font] if height == d[:height] && width == d[:width]
+
+        break if height > d[:height] && width > d[:width]
+
+        previous = d
+      end
+    end
+
+    previous[:font]
+  end
+
   def initialize(event)
     if event['context']['Viewport']
       @shape = event['context']['Viewport']['shape']

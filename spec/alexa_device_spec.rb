@@ -4,6 +4,38 @@ require_relative '../src/alexa_device'
 require_relative 'spec_helper'
 
 RSpec.describe AlexaDevice do
+  context '#pick_font_size' do
+    it 'handles round' do
+      ad = AlexaDevice.new JSON.parse(slug_hub_json(480, 480))
+      expect(ad.pick_font_size).to eq('170dp')
+    end
+
+    it 'handles small' do
+      ad = AlexaDevice.new JSON.parse(slug_hub_json(480, 960))
+      expect(ad.pick_font_size).to eq('30dp')
+    end
+
+    it 'provides default when no match' do
+      ad = AlexaDevice.new JSON.parse(slug_hub_json(1, 1))
+      expect(ad.pick_font_size).to eq('40dp')
+    end
+
+    it 'provides default when nil inputs' do
+      ad = AlexaDevice.new JSON.parse(slug_hub_json(1, 1))
+      ad.instance_variable_set(:@height, nil)
+      ad.instance_variable_set(:@width, nil)
+      expect(ad.pick_font_size).to eq('40dp')
+
+      ad.instance_variable_set(:@height, 1)
+      ad.instance_variable_set(:@width, nil)
+      expect(ad.pick_font_size).to eq('40dp')
+
+      ad.instance_variable_set(:@height, nil)
+      ad.instance_variable_set(:@width, 1)
+      expect(ad.pick_font_size).to eq('40dp')
+    end
+  end
+
   it 'creates with small round Viewport JSON' do
     ad = AlexaDevice.new JSON.parse(small_hub_json)
 
@@ -25,6 +57,38 @@ RSpec.describe AlexaDevice do
   end
 
   private
+
+  def slug_hub_json(h, w)
+    <<-JSON
+      {
+        "context": {
+          "Viewport": {
+            "shape": "ROUND",
+            "pixelWidth": #{w},
+            "pixelHeight": #{h},
+            "currentPixelWidth": #{w},
+            "currentPixelHeight": #{h}
+          },
+          "System": {
+            "device": {
+              "deviceId": "amzn1.ask.device.DDDD",
+              "supportedInterfaces": {
+                "Alexa.Presentation.APL": {
+                  "runtime": {
+                    "maxVersion": "1.5"
+                  }
+                },
+                "Display": {
+                  "templateVersion": "1.0",
+                  "markupVersion": "1.0"
+                }
+              }
+            }
+          }
+        }
+      }
+    JSON
+  end
 
   def medium_hub_json
     <<-JSON

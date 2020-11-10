@@ -29,7 +29,8 @@ class AlexaProcessor
 
   def_delegators :@alexa_device,
                  :round?,
-                 :apl?
+                 :apl?,
+                 :pick_font_size
 
   def initialize(event)
     @alexa_event = AlexaEvent.new event
@@ -81,7 +82,8 @@ class AlexaProcessor
           text: loc_info['policy'],
           to_speak: respond(text),
           header_background_color: AlexaProcessor.color_picker(@snow_emergency),
-          header_theme: @snow_emergency == 'maybe' ? 'light' : 'dark'
+          header_theme: @snow_emergency == 'maybe' ? 'light' : 'dark',
+          font_size: pick_font_size
         }
         directives = AplAssembler.build_directives data, :text
       end
@@ -203,6 +205,14 @@ class AlexaProcessor
     logger.error("Error accessing #{url}:\n#{e.message}")
     'ERROR'
   end
+
+  # # 30: hub small landscape
+  # # 40: hub meedium
+  # # 50: hub landscape
+  # # 40: tv
+  # def pick_font_size(h, w)
+
+  # end
 
   private_class_method def self.sanitize(text)
     text.gsub(/&/, 'and')
