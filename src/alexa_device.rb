@@ -31,7 +31,7 @@ class AlexaDevice
       name: 'exlarge',
       height: 800,
       width: 1200,
-      font: '55dp'
+      font: '50dp'
     },
     {
       name: 'tv',
@@ -60,7 +60,7 @@ class AlexaDevice
       AlexaDevice::DIMENSIONS.each do |d|
         return d[:font] if height == d[:height] && width == d[:width]
 
-        break if height > d[:height] && width > d[:width]
+        break if height < d[:height] && width < d[:width]
 
         previous = d
       end
