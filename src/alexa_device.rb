@@ -60,7 +60,7 @@ class AlexaDevice
       AlexaDevice::DIMENSIONS.each do |d|
         return d[:font] if height == d[:height] && width == d[:width]
 
-        break if height > d[:height] && width > d[:width]
+        break if height < d[:height] && width < d[:width]
 
         previous = d
       end
