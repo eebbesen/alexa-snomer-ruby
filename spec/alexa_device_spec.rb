@@ -17,7 +17,7 @@ RSpec.describe AlexaDevice do
 
     it 'handles exlarge' do
       ad = AlexaDevice.new JSON.parse(slug_hub_json(800, 1200))
-      expect(ad.pick_font_size).to eq('55dp')
+      expect(ad.pick_font_size).to eq('50dp')
     end
 
     it 'provides default when no match' do
