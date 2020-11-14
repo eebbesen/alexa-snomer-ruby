@@ -16,7 +16,7 @@ class AlexaDevice
       font: '30dp'
     },
     {
-      name: 'medium (old show)',
+      name: 'medium (echo show 1st gen)',
       height: 600,
       width: 1024,
       font: '40dp'
@@ -28,7 +28,7 @@ class AlexaDevice
       font: '50dp'
     },
     {
-      name: 'exlarge',
+      name: 'exlarge (echo show 2nd gen 10.1")',
       height: 800,
       width: 1200,
       font: '50dp'
