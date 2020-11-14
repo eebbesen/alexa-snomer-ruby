@@ -25,9 +25,11 @@
                 "items": [
                     {
                         "type": "Text",
+                        "id": "Content",
                         "paddingTop": "12dp",
                         "paddingBottom": "12dp",
                         "text": "${payload.roundTextTemplateData.properties.text}",
+                        "speech": "${payload.roundTextTemplateData.properties.infoSpeech}",
                         "fontSize": "170dp",
                         "textAlign": "center",
                         "textAlignVertical": "center"

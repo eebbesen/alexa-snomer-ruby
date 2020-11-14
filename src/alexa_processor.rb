@@ -72,7 +72,8 @@ class AlexaProcessor
       directives = nil
       if round?
         data = {
-          text: @snow_emergency == 'maybe' ? '?' : @snow_emergency.upcase
+          text: @snow_emergency == 'maybe' ? '?' : @snow_emergency.upcase,
+          to_speak: respond(text)
         }
 
         directives = AplAssembler.build_directives data, :round
