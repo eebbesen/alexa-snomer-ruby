@@ -25,6 +25,7 @@
                 "items": [
                     {
                         "type": "Text",
+                        "id": "Content",
                         "paddingTop": "12dp",
                         "paddingBottom": "12dp",
                         "text": "${payload.roundTextTemplateData.properties.text}",
