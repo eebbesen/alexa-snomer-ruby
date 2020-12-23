@@ -341,7 +341,7 @@
   },
 "saintpaul":
   {"site":"https://www.stpaul.gov/departments/public-works/street-maintenance/snow-emergency-update",
-   "yesCondition": ["saint paul declares snow emergency"],
+   "yesCondition": ["saint paul declares snow emergency", "SNOW EMERGENCY DECLARED"],
    "noCondition": ["there is currently no snow emergency in effect","there is no snow emergency in effect"],
    "policy": "A Snow Emergency is typically declared after snowfalls of 3 inches or more, or after an accumulation of 3 inches or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed.",
    "tow":true,
