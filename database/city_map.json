@@ -230,8 +230,8 @@
   }
 ,
 "minneapolis":
-  {"site":"http://www2.minneapolismn.gov/snow/index.htm",
-   "yesCondition": ["there is snow emergency declared "],
+  {"site":"https://www.minneapolismn.gov/media/minneapolismngov/site-assets/javascript/site-wide-notices/emergency-en-1.json",
+   "yesCondition": ["there is snow emergency declared", "has declared a snow emergency"],
    "noCondition": ["currently there is not a snow emergency in effect in the city of minneapolis",
                    "there is currently no snow emergency"],
    "policy": "Snow Emergencies are called after significant snowfall and before 6 p.m. on any given day. During a Snow Emergency, special parking rules go into effect that allow City crews to plow streets and emergency vehicles to travel safely.",
@@ -341,7 +341,7 @@
   },
 "saintpaul":
   {"site":"https://www.stpaul.gov/departments/public-works/street-maintenance/snow-emergency-update",
-   "yesCondition": ["saint paul declares snow emergency"],
+   "yesCondition": ["saint paul declares snow emergency", "snow emergency declared"],
    "noCondition": ["there is currently no snow emergency in effect","there is no snow emergency in effect"],
    "policy": "A Snow Emergency is typically declared after snowfalls of 3 inches or more, or after an accumulation of 3 inches or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed.",
    "tow":true,
@@ -359,7 +359,7 @@
 ,
 "stpaul":
   {"site":"https://www.stpaul.gov/departments/public-works/street-maintenance/snow-emergency-update",
-   "yesCondition": ["saint paul declares snow emergency"],
+   "yesCondition": ["saint paul declares snow emergency", "snow emergency declared"],
    "noCondition": ["there is currently no snow emergency in effect","there is no snow emergency in effect"],
    "policy": "A Snow Emergency is typically declared after snowfalls of 3 inches or more, or after an accumulation of 3 inches or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed.",
    "tow":true,

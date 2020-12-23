@@ -64,7 +64,7 @@ RSpec.describe AlexaProcessor do
     it 'finds city info case insensitive' do
       ap = AlexaProcessor.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'Minneapolis' }
       info = ap.send(:loc_processor)
-      expect(info['site']).to eq('http://www2.minneapolismn.gov/snow/index.htm')
+      expect(info['site']).to eq('https://www.minneapolismn.gov/media/minneapolismngov/site-assets/javascript/site-wide-notices/emergency-en-1.json')
     end
 
     it 'finds city info multi-word' do
