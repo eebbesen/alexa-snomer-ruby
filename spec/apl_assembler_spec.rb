@@ -162,8 +162,8 @@ RSpec.describe AplAssembler do
       title: 'Saint Paul: No snow emergency',
       text: 'A Snow Emergency is typically declared after snowfalls of 3 inches or more, or after an accumulation of 3 inches or more from several snowfalls. When a snow emergency is declared, which officially goes into effect at 9 p.m., residents are asked to follow specific parking guidelines to allow for efficient snow removal operations. Vehicles in violation of parking restrictions are ticketed and towed.',
       to_speak: '<speak>There is a snow emergency in saintpaul</speak>',
-      app_name: ENV['APP_NAME'],
-      logo_url: ENV['LOGO_URL'],
+      app_name: ENV.fetch('APP_NAME', nil),
+      logo_url: ENV.fetch('LOGO_URL', nil),
       font_size: '30dp'
     }
 
@@ -207,8 +207,8 @@ RSpec.describe AplAssembler do
     data = {
       text: 'YES',
       to_speak: '<speak>There is a snow emergency in saintpaul</speak>',
-      app_name: ENV['APP_NAME'],
-      logo_url: ENV['LOGO_URL']
+      app_name: ENV.fetch('APP_NAME', nil),
+      logo_url: ENV.fetch('LOGO_URL', nil)
     }
 
     ret = AplAssembler.build_directives data, :round

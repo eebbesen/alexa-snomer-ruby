@@ -123,8 +123,8 @@ class TemplateDataBuilder
     d = {
       list_size: list.size,
       list_items: list.join(','),
-      app_name: ENV['APP_NAME'],
-      logo_url: ENV['LOGO_URL']
+      app_name: ENV.fetch('APP_NAME', nil),
+      logo_url: ENV.fetch('LOGO_URL', nil)
     }
 
     JSON.parse "{#{LIH % d}}"
@@ -135,8 +135,8 @@ class TemplateDataBuilder
       card_title: data[:title],
       card_text: data[:text],
       text_to_speak: data[:to_speak],
-      app_name: ENV['APP_NAME'],
-      logo_url: ENV['LOGO_URL'],
+      app_name: ENV.fetch('APP_NAME', nil),
+      logo_url: ENV.fetch('LOGO_URL', nil),
       font_size: data[:font_size]
     }
 
