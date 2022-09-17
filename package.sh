@@ -7,6 +7,7 @@
 # bundle clean
 # bundle install --path vendor/bundle --without development test
 # zip -r target/iag-ruby.zip lambda_function.rb alexa_processor.rb vendor
+mkdir -p target
 rm "target/iag*zip"
 rm version.txt
 version=$(git rev-parse HEAD)
