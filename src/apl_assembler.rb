@@ -58,7 +58,7 @@ class AplAssembler
     distance = meters_to_miles d[:distance]
 
     {
-      id: id,
+      id:,
       ordinal_no: o,
       primary_text: truncate_text(d[:name]),
       secondary_text: d[:street],
