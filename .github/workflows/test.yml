@@ -12,6 +12,8 @@ jobs:
       with:
         ruby-version: "3.1"
         bundler-cache: true
+    - name: bundle install
+      run: bundle install
     - name: rubocop
       run: bundle exec rubocop
     - name: Build and test with rspec
