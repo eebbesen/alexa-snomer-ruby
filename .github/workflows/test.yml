@@ -5,6 +5,7 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v3
     - name: Set up Ruby 3.1
@@ -12,7 +13,6 @@ jobs:
       with:
         ruby-version: "3.1"
         bundler-cache: true
-    - run:
     - name: rubocop
       run: |
         bundle install
@@ -22,6 +22,6 @@ jobs:
         APP_NAME: snomer
         LOGO_URL: https://www.stpaul.gov/
         RAILS_ENV: test
-    - run: |
+      run: |
         bundle install
         bundle exec rake
