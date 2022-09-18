@@ -1,0 +1,20 @@
+current directory: /Users/eebbesen/p3/alexa-snomer-ruby/vendor/bundle/ruby/3.1.0/gems/byebug-11.1.3/ext/byebug
+/Users/eebbesen/.rbenv/versions/3.1.2/bin/ruby -I /Users/eebbesen/.rbenv/versions/3.1.2/lib/ruby/3.1.0 -r ./siteconf20220918-75708-awv6tl.rb extconf.rb
+creating Makefile
+
+current directory: /Users/eebbesen/p3/alexa-snomer-ruby/vendor/bundle/ruby/3.1.0/gems/byebug-11.1.3/ext/byebug
+make DESTDIR\= clean
+
+current directory: /Users/eebbesen/p3/alexa-snomer-ruby/vendor/bundle/ruby/3.1.0/gems/byebug-11.1.3/ext/byebug
+make DESTDIR\=
+compiling breakpoint.c
+compiling byebug.c
+compiling context.c
+compiling locker.c
+compiling threads.c
+linking shared-object byebug/byebug.bundle
+ld: warning: -undefined dynamic_lookup may not work with chained fixups
+
+current directory: /Users/eebbesen/p3/alexa-snomer-ruby/vendor/bundle/ruby/3.1.0/gems/byebug-11.1.3/ext/byebug
+make DESTDIR\= install
+/usr/bin/install -c -m 0755 byebug.bundle ./.gem.20220918-75708-tq79e1/byebug

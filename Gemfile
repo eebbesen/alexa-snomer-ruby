@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
+ruby '3.1.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -11,9 +11,9 @@ group :development, :test do
   gem 'rake'
 end
 
-group :development do
-  gem 'rubocop'
-end
+# group :development do
+#   gem 'rubocop'
+# end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
