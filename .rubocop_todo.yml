@@ -42,3 +42,7 @@ Security/Open:
 # URISchemes: http, https
 Layout/LineLength:
   Max: 146
+
+Style/HashSyntax:
+  Exclude:
+    - 'src/apl_assembler.rb'
