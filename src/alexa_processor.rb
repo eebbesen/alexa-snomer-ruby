@@ -189,7 +189,7 @@ class AlexaProcessor
   # https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
   def geocode(address)
     logger.info 'starting geocode'
-    url = "https://maps.googleapis.com/maps/api/geocode/json?key=#{ENV['GOOGLE_API_KEY']}&address="
+    url = "https://maps.googleapis.com/maps/api/geocode/json?key=#{ENV.fetch('GOOGLE_API_KEY', nil)}&address="
     a = CGI.escape([address['addressLine1'], address['city'], address['stateOrRegion'], address['postalCode']].compact.join(','))
     raise "You don't have any address information with your device" if a == ''
 

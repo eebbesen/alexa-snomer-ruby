@@ -28,7 +28,7 @@ def process(payload, cassette = 'ex_address_request')
     VCR.use_cassette('ex_google_geocode_request_zip_only') do
       event = JSON.parse payload
       context = event['context']
-      lambda_handler(event: event, context: context)
+      lambda_handler(event:, context:)
     end
   end
 end
