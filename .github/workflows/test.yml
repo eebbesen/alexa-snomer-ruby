@@ -12,7 +12,7 @@ jobs:
       with:
         ruby-version: "3.1"
         bundler-cache: true
-      run:
+    - run:
     - name: rubocop
       run: |
         bundle install
@@ -22,6 +22,6 @@ jobs:
         APP_NAME: snomer
         LOGO_URL: https://www.stpaul.gov/
         RAILS_ENV: test
-      run: |
+    - run: |
         bundle install
         bundle exec rake
