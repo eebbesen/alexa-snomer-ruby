@@ -1,5 +1,5 @@
 current directory: /Users/eebbesen/p3/alexa-snomer-ruby/vendor/bundle/ruby/3.1.0/gems/nokogiri-1.10.10/ext/nokogiri
-/Users/eebbesen/.rbenv/versions/3.1.2/bin/ruby -I /Users/eebbesen/.rbenv/versions/3.1.2/lib/ruby/3.1.0 -r ./siteconf20220917-86862-5aq4fp.rb extconf.rb
+/Users/eebbesen/.rbenv/versions/3.1.2/bin/ruby -I /Users/eebbesen/.rbenv/versions/3.1.2/lib/ruby/3.1.0 -r ./siteconf20220918-76595-ct9ft.rb extconf.rb
 checking if the C compiler accepts  -I /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/libxml2... yes
 checking if the C compiler accepts -Wno-error=unused-command-line-argument-hard-error-in-future... no
 Building nokogiri using packaged libraries.
