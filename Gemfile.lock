@@ -99,6 +99,8 @@ PLATFORMS
 DEPENDENCIES
   byebug
   capybara
+  nokogiri (>= 1.14.3)
+  rack (>= 3.0.6.1)
   rake
   rspec
   rubocop

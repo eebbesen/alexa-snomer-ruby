@@ -59,14 +59,7 @@ We'll save the document values in the `apl` directory. Your file should look lik
 }
 ```
 
-#### datasources
-We'll generate our datasources dynamically at runtime
 
-#### sources
-I don't know what this is for.
-
-## request payload examples
-More to come
 
 # Tools
 * https://developer.amazon.com/docs/custom-skills/request-and-response-json-reference.html#response-format
