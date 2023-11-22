@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative './alexa_event'
-require_relative './alexa_device'
-require_relative './apl_assembler'
+require_relative 'alexa_event'
+require_relative 'alexa_device'
+require_relative 'apl_assembler'
 require 'cgi'
 require 'forwardable'
 require 'logger'
@@ -216,6 +216,6 @@ class AlexaProcessor
   # end
 
   private_class_method def self.sanitize(text)
-    text.gsub(/&/, 'and')
+    text.gsub('&', 'and')
   end
 end
