@@ -3,15 +3,14 @@ name: unit tests
 on: [push, pull_request]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
     - name: Set up Ruby 3.2
-      uses: actions/setup-ruby@v1
+      uses: ruby/setup-ruby@v1
       with:
-        ruby-version: "3.2.2"
         bundler-cache: true
     - name: rubocop
       run: |
@@ -22,6 +21,4 @@ jobs:
         APP_NAME: snomer
         LOGO_URL: https://www.stpaul.gov/
         RAILS_ENV: test
-      run: |
-        bundle install
-        bundle exec rake
+      run: bundle exec rake
