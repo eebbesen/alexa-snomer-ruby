@@ -33,10 +33,6 @@ ruby src/ex.rb
 ```bash
 bundle exec rspec
 ```
-or
-```bash
-bundle exec rake
-```
 
 ## APL
 ### generate templates in the developer console
