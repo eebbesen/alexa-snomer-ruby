@@ -1,0 +1,19 @@
+current directory: /Users/eebbesen/projects/alexa-snomer-ruby/vendor/bundle/ruby/3.2.0/gems/racc-1.7.3/ext/racc/cparse
+/Users/eebbesen/.rbenv/versions/3.2.2/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /Users/eebbesen/projects/alexa-snomer-ruby/vendor/bundle/ruby/3.2.0/gems/racc-1.7.3/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20231121-93994-o4dsh6 sitelibdir\=./.gem.20231121-93994-o4dsh6 clean
+
+current directory: /Users/eebbesen/projects/alexa-snomer-ruby/vendor/bundle/ruby/3.2.0/gems/racc-1.7.3/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20231121-93994-o4dsh6 sitelibdir\=./.gem.20231121-93994-o4dsh6
+compiling cparse.c
+linking shared-object racc/cparse.bundle
+ld: warning: -undefined dynamic_lookup may not work with chained fixups
+
+current directory: /Users/eebbesen/projects/alexa-snomer-ruby/vendor/bundle/ruby/3.2.0/gems/racc-1.7.3/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20231121-93994-o4dsh6 sitelibdir\=./.gem.20231121-93994-o4dsh6 install
+/usr/bin/install -c -m 0755 cparse.bundle ./.gem.20231121-93994-o4dsh6/racc
+
+current directory: /Users/eebbesen/projects/alexa-snomer-ruby/vendor/bundle/ruby/3.2.0/gems/racc-1.7.3/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20231121-93994-o4dsh6 sitelibdir\=./.gem.20231121-93994-o4dsh6 clean

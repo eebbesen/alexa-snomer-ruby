@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative './template_data_builder'
+require_relative 'template_data_builder'
 
 ## Class to build APL templates
 # You'll need to custom define

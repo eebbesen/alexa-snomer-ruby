@@ -3,7 +3,7 @@
 require 'logger'
 require 'open-uri'
 
-require_relative './alexa_slot'
+require_relative 'alexa_slot'
 
 ##
 class AddressPermissionError < StandardError
@@ -77,7 +77,7 @@ class AlexaEvent
     logger.info "ending address request\\n#{res}"
     status = res.status[0]
 
-    return JSON.parse(res.read) if status == '200'
+    JSON.parse(res.read) if status == '200'
   end
 
   def city

@@ -2,8 +2,8 @@
 
 require 'json'
 require 'logger'
-require_relative './alexa_event'
-require_relative './alexa_processor'
+require_relative 'alexa_event'
+require_relative 'alexa_processor'
 
 ##
 # for APL, we don't have an outputSpeech entry because APL audio takes care of it
