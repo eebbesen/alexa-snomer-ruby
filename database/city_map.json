@@ -231,7 +231,9 @@
 ,
 "minneapolis":
   {"site":"https://www.minneapolismn.gov/",
-   "yesCondition": ["snow emergency"],
+   "yesCondition": ["declared a snow emergency",
+                    "snow emergency declared",
+                    "snow emergency has been declared"],
    "noCondition": ["not a snow emergency",
                    "no snow emergency"],
    "policy": "Snow Emergencies are called after significant snowfall and before 6 p.m. on any given day. During a Snow Emergency, special parking rules go into effect that allow City crews to plow streets and emergency vehicles to travel safely.",
