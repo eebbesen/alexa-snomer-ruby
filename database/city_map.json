@@ -230,10 +230,10 @@
   }
 ,
 "minneapolis":
-  {"site":"https://www.minneapolismn.gov/media/minneapolismngov/site-assets/javascript/site-wide-notices/emergency-en-1.json",
-   "yesCondition": ["there is snow emergency declared", "has declared a snow emergency"],
-   "noCondition": ["currently there is not a snow emergency in effect in the city of minneapolis",
-                   "there is currently no snow emergency"],
+  {"site":"https://www.minneapolismn.gov/",
+   "yesCondition": ["snow emergency"],
+   "noCondition": ["not a snow emergency",
+                   "no snow emergency"],
    "policy": "Snow Emergencies are called after significant snowfall and before 6 p.m. on any given day. During a Snow Emergency, special parking rules go into effect that allow City crews to plow streets and emergency vehicles to travel safely.",
    "tow":true,
    "notify":{"phone": "6123487669",
