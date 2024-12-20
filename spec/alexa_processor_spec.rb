@@ -98,6 +98,17 @@ RSpec.describe AlexaProcessor do
       end
     end
 
+    it 'yes condition exists minneapolis 12.2024' do
+      ap = AlexaProcessor.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'Minneapolis' }
+      VCR.use_cassette('minneapolis_emergency') do
+        info = ap.send(:loc_processor)
+        t = ap.generate_text info
+
+        expect(t).to eq('Minneapolis has declared a snow emergency')
+        expect(ap.instance_variable_get(:@snow_emergency)).to eq('yes')
+      end
+    end
+
     it 'no condition exists' do
       ap = AlexaProcessor.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'Saint Paul' }
       VCR.use_cassette('saint paul') do
