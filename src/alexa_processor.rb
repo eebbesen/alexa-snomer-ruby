@@ -45,8 +45,6 @@ class AlexaProcessor
              ''
            end
 
-    return "The website for #{city.display} is not responding. #{info['policy']}" if page == 'ERROR'
-
     page = Minneapolis.parse_notices(JSON.parse(page)) if city.display == 'Minneapolis'
 
     page
@@ -54,6 +52,8 @@ class AlexaProcessor
 
   def generate_text(info)
     page = page_helper(info)
+
+    return "The website for #{city.display} is not responding. #{info['policy']}" if page == 'ERROR'
 
     yes = info['yesCondition'].select { |c| page.downcase.include?(c) }.size.positive?
     no = info['noCondition'].select { |c| page.downcase.include?(c) }.size.positive?

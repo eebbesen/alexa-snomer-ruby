@@ -190,6 +190,18 @@
    "contact":{"phone": "(763) 555-1212"}
   }
 ,
+"frostbitefails":
+  {"site":"http://www2.minneapolismn.gov/snow/index.htm",
+   "yesCondition": ["about"],
+   "noCondition": ["a snow emergency is currently not in effect"],
+   "policy": "The city declares snow emergencies for major snow events of three inches or more. During a snow emergency, you must park your vehicle off the street to avoid ticketing and towing until the street is plowed to the curb.",
+   "tow":true,
+   "notify":{},
+   "threshold":"3",
+   "text":"",
+   "contact":{"phone": "(763) 555-1212"}
+  }
+,
 "mankato":
   {"site":"https://www.mankatomn.gov/city-services-a-z/city-services-n-z/snow-and-ice-control",
    "yesCondition": [],

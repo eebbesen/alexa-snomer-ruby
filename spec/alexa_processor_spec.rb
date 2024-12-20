@@ -136,15 +136,15 @@ RSpec.describe AlexaProcessor do
       end
     end
 
-    # it 'municipality website error' do
-    #   ap = AlexaProcessor.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'Minneapolis' }
-    #   VCR.use_cassette('minneapolis_503') do
-    #     info = ap.send(:loc_processor)
-    #     t = ap.generate_text info
+    it 'municipality website error' do
+      ap = described_class.new request_builder 'LocationRequest', address_perm: false, args: { cityName: 'frostbitefails' }
+      VCR.use_cassette('503') do
+        info = ap.send(:loc_processor)
+        t = ap.generate_text info
 
-    #     expect(t).to eq('The website for Minneapolis is not responding. Snow Emergencies are called after significant snowfall and before 6 p.m. on any given day. During a Snow Emergency, special parking rules go into effect that allow City crews to plow streets and emergency vehicles to travel safely.')
-    #   end
-    # end
+        expect(t).to eq('The website for Frostbitefails is not responding. The city declares snow emergencies for major snow events of three inches or more. During a snow emergency, you must park your vehicle off the street to avoid ticketing and towing until the street is plowed to the curb.')
+      end
+    end
   end
 
   context 'when payload' do
