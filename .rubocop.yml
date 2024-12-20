@@ -1,5 +1,10 @@
 inherit_from: .rubocop_todo.yml
 
+require:
+  - rubocop-capybara
+  - rubocop-rake
+  - rubocop-rspec
+
 AllCops:
   NewCops: enable
 
@@ -10,6 +15,10 @@ Layout/LineLength:
 Metrics/BlockLength:
   Exclude:
     - spec/**/*
+
+Metrics/ClassLength:
+  Exclude:
+    - src/alexa_processor.rb
 
 Metrics/CyclomaticComplexity:
   Exclude:
@@ -25,6 +34,14 @@ Metrics/PerceivedComplexity:
 
 Naming/MethodParameterName:
   Enabled: false
+
+RSpec/ExampleLength:
+  Exclude:
+    - spec/**/*
+
+RSpec/MultipleExpectations:
+  Exclude:
+    - spec/**/*
 
 Style/FormatStringToken:
   Enabled: false

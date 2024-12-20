@@ -70,6 +70,12 @@ GEM
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.30.0)
       parser (>= 3.2.1.0)
+    rubocop-capybara (2.21.0)
+      rubocop (~> 1.41)
+    rubocop-rake (0.6.0)
+      rubocop (~> 1.0)
+    rubocop-rspec (3.0.0)
+      rubocop (~> 1.40)
     ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
     selenium-webdriver (4.10.0)
@@ -110,6 +116,9 @@ DEPENDENCIES
   rake
   rspec
   rubocop
+  rubocop-capybara
+  rubocop-rake
+  rubocop-rspec
   selenium-webdriver
   simplecov
   vcr

@@ -4,29 +4,29 @@ require_relative '../src/alexa_device'
 require_relative 'spec_helper'
 
 RSpec.describe AlexaDevice do
-  context '#pick_font_size' do
+  describe '#pick_font_size' do
     it 'handles round' do
-      ad = AlexaDevice.new JSON.parse(slug_hub_json(480, 480))
+      ad = described_class.new JSON.parse(slug_hub_json(480, 480))
       expect(ad.pick_font_size).to eq('170dp')
     end
 
     it 'handles small' do
-      ad = AlexaDevice.new JSON.parse(slug_hub_json(480, 960))
+      ad = described_class.new JSON.parse(slug_hub_json(480, 960))
       expect(ad.pick_font_size).to eq('30dp')
     end
 
     it 'handles exlarge' do
-      ad = AlexaDevice.new JSON.parse(slug_hub_json(800, 1200))
+      ad = described_class.new JSON.parse(slug_hub_json(800, 1200))
       expect(ad.pick_font_size).to eq('50dp')
     end
 
     it 'provides default when no match' do
-      ad = AlexaDevice.new JSON.parse(slug_hub_json(1, 1))
+      ad = described_class.new JSON.parse(slug_hub_json(1, 1))
       expect(ad.pick_font_size).to eq('40dp')
     end
 
     it 'provides default when nil inputs' do
-      ad = AlexaDevice.new JSON.parse(slug_hub_json(1, 1))
+      ad = described_class.new JSON.parse(slug_hub_json(1, 1))
       ad.instance_variable_set(:@height, nil)
       ad.instance_variable_set(:@width, nil)
       expect(ad.pick_font_size).to eq('40dp')
@@ -42,21 +42,21 @@ RSpec.describe AlexaDevice do
   end
 
   it 'creates with small round Viewport JSON' do
-    ad = AlexaDevice.new JSON.parse(small_hub_json)
+    ad = described_class.new JSON.parse(small_hub_json)
 
-    expect(ad.round?).to be_truthy
-    expect(ad.rectangle?).to be_falsey
-    expect(ad.apl?).to be_truthy
+    expect(ad).to be_round
+    expect(ad).not_to be_rectangle
+    expect(ad).to be_apl
     expect(ad.height).to eq(480)
     expect(ad.width).to eq(480)
   end
 
   it 'creates with medium Viewport JSON' do
-    ad = AlexaDevice.new JSON.parse(medium_hub_json)
+    ad = described_class.new JSON.parse(medium_hub_json)
 
-    expect(ad.round?).to be_falsey
-    expect(ad.rectangle?).to be_truthy
-    expect(ad.apl?).to be_truthy
+    expect(ad).not_to be_round
+    expect(ad).to be_rectangle
+    expect(ad).to be_apl
     expect(ad.height).to eq(799)
     expect(ad.width).to eq(1363)
   end
