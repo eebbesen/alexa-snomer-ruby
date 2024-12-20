@@ -5,7 +5,7 @@ require 'json'
 require 'spec_helper'
 
 RSpec.describe AplAssembler do
-  before(:each) do
+  before do
     ENV['APP_NAME'] = 'Snow Emergency'
     ENV['LOGO_URL'] = 'https://images-na.ssl-images-amazon.com/images/I/81QXYqxgqhL._SL210_QL95_BG0,0,0,0_FMpng_.png'
   end
@@ -85,13 +85,13 @@ RSpec.describe AplAssembler do
       { city: 'Saint Paul', name: 'Gyro Hero', street: '100 Peach Ave N', distance: 1006.7278773057899 }
     ]
 
-    ret = AplAssembler.build_directives locs, :list
+    ret = described_class.build_directives locs, :list
 
     expect(JSON.parse("{#{ret}}")).to eql(JSON.parse(ex))
   end
 
   it 'raises error with invalid type' do
-    AplAssembler.build_directives nil, :html
+    described_class.build_directives nil, :html
     raise StandardError, 'should have thrown error'
   rescue StandardError => e
     expect(e.message).to eq('unrecognized APL type: html. Only :list and :text are valid.')
@@ -167,7 +167,7 @@ RSpec.describe AplAssembler do
       font_size: '30dp'
     }
 
-    ret = AplAssembler.build_directives data, :text
+    ret = described_class.build_directives data, :text
 
     expect(JSON.parse("{#{ret}}")).to eql(JSON.parse(ex))
   end
@@ -211,24 +211,24 @@ RSpec.describe AplAssembler do
       logo_url: ENV.fetch('LOGO_URL', nil)
     }
 
-    ret = AplAssembler.build_directives data, :round
+    ret = described_class.build_directives data, :round
 
     expect(JSON.parse("{#{ret}}")).to eql(JSON.parse(ex))
   end
 
-  context 'converts meters to miles' do
+  context 'when converts meters to miles' do
     it 'handles less than a mile' do
-      expect(AplAssembler.meters_to_miles(100)).to eql(0.06)
+      expect(described_class.meters_to_miles(100)).to be(0.06)
     end
 
     it 'handles more than a mile' do
-      expect(AplAssembler.meters_to_miles(3000)).to eql(1.86)
+      expect(described_class.meters_to_miles(3000)).to be(1.86)
     end
   end
 
   it 'transforms loc' do
     d = { city: 'Saint Paul', name: 'Greek Grille & Happy Fun Time Place', street: '88 Elm Street', distance: 254.7828343564675 }
-    ret = AplAssembler.send(:transform_loc, d, 2)
+    ret = described_class.send(:transform_loc, d, 2)
     expect(ret).to eql({
                          id: 'greekgrillehappyfuntimeplace',
                          ordinal_no: 2,
@@ -245,9 +245,9 @@ RSpec.describe AplAssembler do
       { city: 'Saint Paul', name: 'Gyro Hero', street: '100 Peach Ave N', distance: 1006.7278773057899 }
     ]
 
-    ret = AplAssembler.transform_locs locs
+    ret = described_class.transform_locs locs
 
-    expect(ret.count).to eql(2)
+    expect(ret.count).to be(2)
     expect(ret.first).to eql({
                                id: 'greekgrille',
                                ordinal_no: 1,
@@ -267,19 +267,19 @@ RSpec.describe AplAssembler do
                             })
   end
 
-  context 'truncates names' do
+  context 'when truncates names' do
     it 'preserves short strings' do
-      ret = AplAssembler.send(:truncate_text, 'Gyro Hero')
+      ret = described_class.send(:truncate_text, 'Gyro Hero')
       expect(ret).to eql('Gyro Hero')
     end
 
     it 'truncates long strings with spaces' do
-      ret = AplAssembler.send(:truncate_text, 'Greek Kitchen Modern Mediterranean')
+      ret = described_class.send(:truncate_text, 'Greek Kitchen Modern Mediterranean')
       expect(ret).to eql('Greek Kitchen Modern')
     end
 
     it 'truncates long strings without spaces' do
-      ret = AplAssembler.send(:truncate_text, 'averynicedayisfromthebestpartofanywhere')
+      ret = described_class.send(:truncate_text, 'averynicedayisfromthebestpartofanywhere')
       expect(ret).to eql('averynicedayisfromthebestparto')
     end
   end

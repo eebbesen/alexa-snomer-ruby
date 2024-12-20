@@ -5,12 +5,12 @@ require 'json'
 require 'spec_helper'
 
 RSpec.describe TemplateDataBuilder do
-  before(:each) do
+  before do
     ENV['APP_NAME'] = 'Snow Emergency'
     ENV['LOGO_URL'] = 'https://images-na.ssl-images-amazon.com/images/I/81QXYqxgqhL._SL210_QL95_BG0,0,0,0_FMpng_.png'
   end
 
-  context 'final template' do
+  context 'when final template' do
     it 'builds template' do
       d = [{
         id: 'gyrohero',
@@ -87,13 +87,13 @@ RSpec.describe TemplateDataBuilder do
         }
       TTT
 
-      ret = TemplateDataBuilder.send(:build_data_template_list, d)
+      ret = described_class.send(:build_data_template_list, d)
 
       expect(ret).to eql(ex)
     end
   end
 
-  context 'list items' do
+  context 'when list items' do
     it 'handles one item' do
       ex = JSON.parse <<~TTT
         {
@@ -126,13 +126,13 @@ RSpec.describe TemplateDataBuilder do
         token: 'gyrohero'
       }
 
-      ret = JSON.parse(TemplateDataBuilder.send(:build_list_item, d))
+      ret = JSON.parse(described_class.send(:build_list_item, d))
 
       expect(ret).to eql(ex)
     end
   end
 
-  context 'long text' do
+  context 'when long text' do
     it 'formats entry' do
       ex = JSON.parse <<~LONG_TEXT
         {
@@ -188,13 +188,13 @@ RSpec.describe TemplateDataBuilder do
         font_size: '40dp'
       }
 
-      ret = TemplateDataBuilder.send(:build_data_template_text, d)
+      ret = described_class.send(:build_data_template_text, d)
 
       expect(ret).to eql(ex)
     end
   end
 
-  context 'round text' do
+  context 'when round text' do
     it 'formats entry' do
       ex = JSON.parse <<~ROUND_TEXT
         {
@@ -221,7 +221,7 @@ RSpec.describe TemplateDataBuilder do
         text: 'NO'
       }
 
-      ret = TemplateDataBuilder.send(:build_data_template_round, d)
+      ret = described_class.send(:build_data_template_round, d)
 
       expect(ret).to eql(ex)
     end

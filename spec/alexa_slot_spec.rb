@@ -5,21 +5,21 @@ require 'json'
 require_relative 'spec_helper'
 
 RSpec.describe AlexaSlot do
-  context '#us_state?' do
+  describe '#us_state?' do
     it 'identifies as us state' do
-      s = AlexaSlot.new({ 'name' => 'stateName', 'value' => 'new jersey' })
-      expect(s.us_state?).to be_truthy
+      s = described_class.new({ 'name' => 'stateName', 'value' => 'new jersey' })
+      expect(s).to be_us_state
     end
 
     it 'identifies not as us state' do
-      s = AlexaSlot.new({ 'name' => 'stateName', 'value' => 'park' })
-      expect(s.us_state?).to be_falsey
+      s = described_class.new({ 'name' => 'stateName', 'value' => 'park' })
+      expect(s).not_to be_us_state
     end
   end
 
-  context '.parse_slots' do
+  describe '.parse_slots' do
     it 'generates slots from event' do
-      slots = AlexaSlot.parse_slots JSON.parse(event_json_city)
+      slots = described_class.parse_slots JSON.parse(event_json_city)
 
       expect(slots.size).to eq(2)
       expect(slots[:cityName].name).to eq('cityName')
@@ -33,21 +33,21 @@ RSpec.describe AlexaSlot do
     end
 
     it 'handles events with no slots' do
-      slots = AlexaSlot.parse_slots JSON.parse('{"request": {"intent": {"slots": {}}}}')
+      slots = described_class.parse_slots JSON.parse('{"request": {"intent": {"slots": {}}}}')
       expect(slots.size).to eq(0)
 
-      slots = AlexaSlot.parse_slots JSON.parse('{"request": {"intent": {}}}')
+      slots = described_class.parse_slots JSON.parse('{"request": {"intent": {}}}')
       expect(slots.size).to eq(0)
 
-      slots = AlexaSlot.parse_slots JSON.parse('{"request": {}}')
+      slots = described_class.parse_slots JSON.parse('{"request": {}}')
       expect(slots.size).to eq(0)
 
-      slots = AlexaSlot.parse_slots JSON.parse('{}')
+      slots = described_class.parse_slots JSON.parse('{}')
       expect(slots.size).to eq(0)
     end
 
     it 'handles nil event' do
-      slots = AlexaSlot.parse_slots nil
+      slots = described_class.parse_slots nil
       expect(slots.size).to eq(0)
     end
   end

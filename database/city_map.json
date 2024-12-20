@@ -190,6 +190,18 @@
    "contact":{"phone": "(763) 555-1212"}
   }
 ,
+"frostbitefails":
+  {"site":"http://www2.minneapolismn.gov/snow/index.htm",
+   "yesCondition": ["about"],
+   "noCondition": ["a snow emergency is currently not in effect"],
+   "policy": "The city declares snow emergencies for major snow events of three inches or more. During a snow emergency, you must park your vehicle off the street to avoid ticketing and towing until the street is plowed to the curb.",
+   "tow":true,
+   "notify":{},
+   "threshold":"3",
+   "text":"",
+   "contact":{"phone": "(763) 555-1212"}
+  }
+,
 "mankato":
   {"site":"https://www.mankatomn.gov/city-services-a-z/city-services-n-z/snow-and-ice-control",
    "yesCondition": [],
@@ -230,10 +242,11 @@
   }
 ,
 "minneapolis":
-  {"site":"https://www.minneapolismn.gov/",
+  {"site":"https://www.minneapolismn.gov/media/minneapolismngov/site-assets/javascript/site-wide-notices/emergency-en.json",
    "yesCondition": ["declared a snow emergency",
                     "snow emergency declared",
-                    "snow emergency has been declared"],
+                    "snow emergency has been declared",
+                    "rules are in effect"],
    "noCondition": ["not a snow emergency",
                    "no snow emergency"],
    "policy": "Snow Emergencies are called after significant snowfall and before 6 p.m. on any given day. During a Snow Emergency, special parking rules go into effect that allow City crews to plow streets and emergency vehicles to travel safely.",

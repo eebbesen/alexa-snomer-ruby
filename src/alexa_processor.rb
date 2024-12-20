@@ -3,6 +3,7 @@
 require_relative 'alexa_event'
 require_relative 'alexa_device'
 require_relative 'apl_assembler'
+require_relative 'minneapolis'
 require 'cgi'
 require 'forwardable'
 require 'logger'
@@ -37,12 +38,20 @@ class AlexaProcessor
     @alexa_device = AlexaDevice.new event
   end
 
-  def generate_text(info)
+  def page_helper(info)
     page = if info['yesCondition'].size.positive?
              get_page info['site']
            else
              ''
            end
+
+    page = Minneapolis.parse_notices(JSON.parse(page)) if city.display == 'Minneapolis'
+
+    page
+  end
+
+  def generate_text(info)
+    page = page_helper(info)
 
     return "The website for #{city.display} is not responding. #{info['policy']}" if page == 'ERROR'
 
@@ -52,7 +61,7 @@ class AlexaProcessor
     if yes
       @snow_emergency = 'yes'
       "#{city.display} has declared a snow emergency"
-    elsif no || page.size.positive?
+    elsif no || page.size.positive? || city.display == 'Minneapolis'
       @snow_emergency = 'no'
       "There is not a snow emergency in #{city.display}"
     else

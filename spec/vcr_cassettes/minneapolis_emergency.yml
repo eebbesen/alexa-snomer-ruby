@@ -1,0 +1,175 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.minneapolismn.gov/media/minneapolismngov/site-assets/javascript/site-wide-notices/emergency-en.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '9127'
+      Connection:
+      - keep-alive
+      Date:
+      - Fri, 20 Dec 2024 20:07:41 GMT
+      Expires:
+      - Fri, 20 Dec 2024 20:08:41 GMT
+      Set-Cookie:
+      - AWSALB=sKhJgJfQ6jIEF6tHgHaHZjX0n1ethwHX8YEssg9et/QbP10GQGpc4HBV5goKHghabyA+kQxStxKNAGap8z6Y571dnmtQ1gzm9YJpf00irPlQOoZBLuRLp+3dY/6l;
+        Expires=Fri, 27 Dec 2024 20:07:41 GMT; Path=/
+      - AWSALBCORS=sKhJgJfQ6jIEF6tHgHaHZjX0n1ethwHX8YEssg9et/QbP10GQGpc4HBV5goKHghabyA+kQxStxKNAGap8z6Y571dnmtQ1gzm9YJpf00irPlQOoZBLuRLp+3dY/6l;
+        Expires=Fri, 27 Dec 2024 20:07:41 GMT; Path=/; SameSite=None; Secure
+      Server:
+      - Apache
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Frame-Options:
+      - SAMEORIGIN
+      Last-Modified:
+      - Fri, 20 Dec 2024 20:01:49 GMT
+      Etag:
+      - '"23a7-629b91e09f2e8-gzip"'
+      Accept-Ranges:
+      - bytes
+      Vary:
+      - Accept-Encoding,User-Agent
+      Cache-Control:
+      - max-age=60
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 f43ae31ebd011dd2296923e420a7df3c.cloudfront.net (CloudFront)
+      X-Amz-Cf-Pop:
+      - MSP50-P1
+      X-Amz-Cf-Id:
+      - 2Zjdc-lgOPX54wQPSEd_IKgt2L5bbN9udVrUWXsKJMFdjlahhz1-MA==
+    body:
+      encoding: ASCII-8BIT
+      string: "{\n    \"notices\": [\n        \n\t\t\n\t\t{\n \"publishDate\": \"2024-11-20T09:50:00-06:00\",\n
+        \"expireDate\": \"\",\n \"html\": \"<section class=\\\"organism--global-alert\\\"><div
+        class=\\\"emergencynotice\\\" aria-live=\\\"assertive\\\" data-id=\\\"snow-emergency\\\"
+        data-version=\\\"202412204711516.0\\\"><div class=\\\"notice notice\\\"><div
+        class=\\\"row\\\"><div class=\\\"notice-body\\\"><div class=\\\"date\\\"><span
+        class=\\\"dateDay\\\">Friday,<\\/span><br>December 20<\\/div><div class=\\\"icon\\\"><div
+        class=\\\"atom--pulse-bullet\\\"><div class=\\\"pulse-css\\\"><\\/div><\\/div><\\/div><div
+        class=\\\"message\\\"><h2 class=\\\"show-for-sr\\\">A snow emergency is not
+        currently in effect. Normal parking rules apply.<\\/h2><p aria-hidden=\\\"true\\\">A
+        snow emergency is not currently in effect. Normal parking rules apply.<\\/p><\\/div><a
+        href=\\\"https://www.minneapolismn.gov/getting-around/snow/snow-emergencies/snow-updates/\\\"
+        class=\\\"atom atom--shadow-button button tiny short\\\" tabindex=\\\"0\\\">Snow
+        Emergency Updates<\\/a><button class=\\\"atom atom--close-button button close-button
+        tiny short clear\\\" id=\\\"close-button-47115\\\" type=\\\"button\\\" aria-label=\\\"Close\\\"
+        data-close> Close <span class=\\\"close-x fas fa-times\\\"><\\/span> <\\/button><\\/div><\\/div><\\/div><\\/div><\\/section>\",\n
+        \"id\": \"snow-emergency\",\n \"noticetype\": \"notice\",\n \"version\": \"202412204711516.0\"\n},\n\t\t{\n
+        \"date\": \"2024-12-20T14:01:45-06:00\",\n \"noticetype\": \"warning\",\n
+        \"publishDate\": \"2024-12-19T11:59:00-06:00\",\n \"expireDate\": \"2024-12-19T21:00:00-06:00\",\n
+        \"html\": \"<section class=\\\"organism--global-alert\\\"><div class=\\\"emergencynotice\\\"
+        aria-live=\\\"assertive\\\" data-id=\\\"snow-emergency\\\" data-version=\\\"2522323.0\\\"><div
+        class=\\\"notice warning\\\"><div class=\\\"row\\\"><div class=\\\"notice-body\\\"><div
+        class=\\\"date\\\"><span class=\\\"dateDay\\\">Friday,<\\/span><br>December
+        20<\\/div><div class=\\\"icon\\\"><img src=\\\"https://www.minneapolismn.gov/media/-www-content-assets/images/snow-emergency-icon-small.svg\\\"
+        style=\\\"max-width: 2.625rem;max-height: 2.625rem;\\\" alt=\\\"Snow Emergency
+        in effect\\\" /><\\/div><div class=\\\"message\\\"><h2 class=\\\"show-for-sr\\\">The
+        City has declared a Snow Emergency. Day 1 rules begin at 9 p.m. tonight.<\\/h2><p
+        aria-hidden=\\\"true\\\">The City has declared a Snow Emergency. Day 1 rules
+        begin at 9 p.m. tonight.<\\/p><\\/div><a href=\\\"https://www.minneapolismn.gov/getting-around/snow/snow-emergencies/snow-parking-rules/\\\"
+        class=\\\"atom atom--shadow-button button tiny short\\\" tabindex=\\\"0\\\">Snow
+        Emergency Parking Rules<\\/a><button class=\\\"atom atom--close-button button
+        close-button tiny short clear\\\" id=\\\"close-button-25223\\\" type=\\\"button\\\"
+        aria-label=\\\"Close\\\" data-close> Close <span class=\\\"close-x fas fa-times\\\"><\\/span>
+        <\\/button><\\/div><\\/div><\\/div><\\/div><\\/section>\",\n \"id\": \"snow-emergency\",\n
+        \"version\": \"2522323.0\"\n},{\n \"date\": \"2024-12-20T14:01:46-06:00\",\n
+        \"noticetype\": \"warning\",\n \"publishDate\": \"2024-12-19T21:00:00-06:00\",\n
+        \"expireDate\": \"2024-12-20T08:00:00-06:00\",\n \"html\": \"<section class=\\\"organism--global-alert\\\"><div
+        class=\\\"emergencynotice\\\" aria-live=\\\"assertive\\\" data-id=\\\"snow-emergency\\\"
+        data-version=\\\"2385630.0\\\"><div class=\\\"notice warning\\\"><div class=\\\"row\\\"><div
+        class=\\\"notice-body\\\"><div class=\\\"date\\\"><span class=\\\"dateDay\\\">Friday,<\\/span><br>December
+        20<\\/div><div class=\\\"icon\\\"><img src=\\\"https://www.minneapolismn.gov/media/-www-content-assets/images/snow-emergency-icon-small.svg\\\"
+        style=\\\"max-width: 2.625rem;max-height: 2.625rem;\\\" alt=\\\"Snow Emergency
+        in effect\\\" /><\\/div><div class=\\\"message\\\"><h2 class=\\\"show-for-sr\\\">Snow
+        Emergency Day 1 rules are in effect from 9 p.m. until 8 a.m. (overnight).
+        Do not park on either side of Snow Emergency Routes.<\\/h2><p aria-hidden=\\\"true\\\">Snow
+        Emergency Day 1 rules are in effect from 9 p.m. until 8 a.m. (overnight).
+        Do not park on either side of Snow Emergency Routes.<\\/p><\\/div><a href=\\\"https://www.minneapolismn.gov/getting-around/snow/snow-emergencies/snow-parking-rules/\\\"
+        class=\\\"atom atom--shadow-button button tiny short\\\" tabindex=\\\"0\\\">Snow
+        Emergency Parking Rules<\\/a><button class=\\\"atom atom--close-button button
+        close-button tiny short clear\\\" id=\\\"close-button-23856\\\" type=\\\"button\\\"
+        aria-label=\\\"Close\\\" data-close> Close <span class=\\\"close-x fas fa-times\\\"><\\/span>
+        <\\/button><\\/div><\\/div><\\/div><\\/div><\\/section>\",\n \"id\": \"snow-emergency\",\n
+        \"version\": \"2385630.0\"\n},{\n \"date\": \"2024-12-20T14:01:46-06:00\",\n
+        \"noticetype\": \"warning\",\n \"publishDate\": \"2024-12-20T08:00:00-06:00\",\n
+        \"expireDate\": \"2024-12-20T20:00:00-06:00\",\n \"html\": \"<section class=\\\"organism--global-alert\\\"><div
+        class=\\\"emergencynotice\\\" aria-live=\\\"assertive\\\" data-id=\\\"snow-emergency\\\"
+        data-version=\\\"2384425.0\\\"><div class=\\\"notice warning\\\"><div class=\\\"row\\\"><div
+        class=\\\"notice-body\\\"><div class=\\\"date\\\"><span class=\\\"dateDay\\\">Friday,<\\/span><br>December
+        20<\\/div><div class=\\\"icon\\\"><img src=\\\"https://www.minneapolismn.gov/media/-www-content-assets/images/snow-emergency-icon-small.svg\\\"
+        style=\\\"max-width: 2.625rem;max-height: 2.625rem;\\\" alt=\\\"Snow Emergency
+        in effect\\\" /><\\/div><div class=\\\"message\\\"><h2 class=\\\"show-for-sr\\\">Snow
+        Emergency Day 2 rules are in effect from 8 a.m. until 8 p.m. tonight. Do not
+        park on the even side of streets that are not Snow Emergency Routes. Do not
+        park on either side of parkways.<\\/h2><p aria-hidden=\\\"true\\\">Snow Emergency
+        Day 2 rules are in effect from 8 a.m. until 8 p.m. tonight. Do not park on
+        the even side of streets that are not Snow Emergency Routes. Do not park on
+        either side of parkways.<\\/p><\\/div><a href=\\\"https://www.minneapolismn.gov/getting-around/snow/snow-emergencies/snow-parking-rules/\\\"
+        class=\\\"atom atom--shadow-button button tiny short\\\" tabindex=\\\"0\\\">Snow
+        Emergency Parking Rules<\\/a><button class=\\\"atom atom--close-button button
+        close-button tiny short clear\\\" id=\\\"close-button-23844\\\" type=\\\"button\\\"
+        aria-label=\\\"Close\\\" data-close> Close <span class=\\\"close-x fas fa-times\\\"><\\/span>
+        <\\/button><\\/div><\\/div><\\/div><\\/div><\\/section>\",\n \"id\": \"snow-emergency\",\n
+        \"version\": \"2384425.0\"\n},{\n \"date\": \"2024-12-20T14:01:47-06:00\",\n
+        \"noticetype\": \"warning\",\n \"publishDate\": \"2024-12-20T20:00:00-06:00\",\n
+        \"expireDate\": \"2024-12-21T08:00:00-06:00\",\n \"html\": \"<section class=\\\"organism--global-alert\\\"><div
+        class=\\\"emergencynotice\\\" aria-live=\\\"assertive\\\" data-id=\\\"snow-emergency\\\"
+        data-version=\\\"281508.0\\\"><div class=\\\"notice warning\\\"><div class=\\\"row\\\"><div
+        class=\\\"notice-body\\\"><div class=\\\"date\\\"><span class=\\\"dateDay\\\">Friday,<\\/span><br>December
+        20<\\/div><div class=\\\"icon\\\"><img src=\\\"https://www.minneapolismn.gov/media/-www-content-assets/images/snow-emergency-icon-small.svg\\\"
+        style=\\\"max-width: 2.625rem;max-height: 2.625rem;\\\" alt=\\\"Snow Emergency
+        in effect\\\" /><\\/div><div class=\\\"message\\\"><h2 class=\\\"show-for-sr\\\">A
+        Snow Emergency is in effect. Day 2 ended at 8 p.m. Between 8 p.m. - 8 a.m.,
+        move your vehicle from the odd side of streets that are not Snow Emergency
+        Routes. Day 3 rules begin at 8 a.m.<\\/h2><p aria-hidden=\\\"true\\\">A Snow
+        Emergency is in effect. Day 2 ended at 8 p.m. Between 8 p.m. - 8 a.m., move
+        your vehicle from the odd side of streets that are not Snow Emergency Routes.
+        Day 3 rules begin at 8 a.m.<\\/p><\\/div><a href=\\\"https://www.minneapolismn.gov/getting-around/snow/snow-emergencies/snow-parking-rules/\\\"
+        class=\\\"atom atom--shadow-button button tiny short\\\" tabindex=\\\"0\\\">Snow
+        Emergency Parking Rules<\\/a><button class=\\\"atom atom--close-button button
+        close-button tiny short clear\\\" id=\\\"close-button-28150\\\" type=\\\"button\\\"
+        aria-label=\\\"Close\\\" data-close> Close <span class=\\\"close-x fas fa-times\\\"><\\/span>
+        <\\/button><\\/div><\\/div><\\/div><\\/div><\\/section>\",\n \"id\": \"snow-emergency\",\n
+        \"version\": \"281508.0\"\n},{\n \"date\": \"2024-12-20T14:01:48-06:00\",\n
+        \"noticetype\": \"warning\",\n \"publishDate\": \"2024-12-21T08:00:00-06:00\",\n
+        \"expireDate\": \"2024-12-21T20:00:00-06:00\",\n \"html\": \"<section class=\\\"organism--global-alert\\\"><div
+        class=\\\"emergencynotice\\\" aria-live=\\\"assertive\\\" data-id=\\\"snow-emergency\\\"
+        data-version=\\\"2390014.0\\\"><div class=\\\"notice warning\\\"><div class=\\\"row\\\"><div
+        class=\\\"notice-body\\\"><div class=\\\"date\\\"><span class=\\\"dateDay\\\">Friday,<\\/span><br>December
+        20<\\/div><div class=\\\"icon\\\"><img src=\\\"https://www.minneapolismn.gov/media/-www-content-assets/images/snow-emergency-icon-small.svg\\\"
+        style=\\\"max-width: 2.625rem;max-height: 2.625rem;\\\" alt=\\\"Snow Emergency
+        in effect\\\" /><\\/div><div class=\\\"message\\\"><h2 class=\\\"show-for-sr\\\">Snow
+        Emergency Day 3 rules are in effect from 8 a.m. until 8 p.m. tonight.<\\/h2><p
+        aria-hidden=\\\"true\\\">Snow Emergency Day 3 rules are in effect from 8 a.m.
+        until 8 p.m. tonight.<\\/p><\\/div><a href=\\\"https://www.minneapolismn.gov/getting-around/snow/snow-emergencies/snow-parking-rules/\\\"
+        class=\\\"atom atom--shadow-button button tiny short\\\" tabindex=\\\"0\\\">Snow
+        Emergency Parking Rules<\\/a><button class=\\\"atom atom--close-button button
+        close-button tiny short clear\\\" id=\\\"close-button-23900\\\" type=\\\"button\\\"
+        aria-label=\\\"Close\\\" data-close> Close <span class=\\\"close-x fas fa-times\\\"><\\/span>
+        <\\/button><\\/div><\\/div><\\/div><\\/div><\\/section>\",\n \"id\": \"snow-emergency\",\n
+        \"version\": \"2390014.0\"\n},\n        {\n            \"\": \"\"\n        }\n
+        \   ]\n}\n\n\n\n\n\n\n"
+  recorded_at: Fri, 20 Dec 2024 20:07:41 GMT
+recorded_with: VCR 6.2.0
