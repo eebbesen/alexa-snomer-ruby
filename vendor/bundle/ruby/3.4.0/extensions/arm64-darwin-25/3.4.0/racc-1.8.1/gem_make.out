@@ -1,0 +1,18 @@
+current directory: /Users/ericebbesen/projects/alexa-snomer-ruby/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+/Users/ericebbesen/.rbenv/versions/3.4.2/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /Users/ericebbesen/projects/alexa-snomer-ruby/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20260505-5527-cmeryp sitelibdir\=./.gem.20260505-5527-cmeryp clean
+
+current directory: /Users/ericebbesen/projects/alexa-snomer-ruby/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20260505-5527-cmeryp sitelibdir\=./.gem.20260505-5527-cmeryp
+compiling cparse.c
+linking shared-object racc/cparse.bundle
+
+current directory: /Users/ericebbesen/projects/alexa-snomer-ruby/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20260505-5527-cmeryp sitelibdir\=./.gem.20260505-5527-cmeryp install
+/usr/bin/install -c -m 0755 cparse.bundle ./.gem.20260505-5527-cmeryp/racc
+
+current directory: /Users/ericebbesen/projects/alexa-snomer-ruby/vendor/bundle/ruby/3.4.0/gems/racc-1.8.1/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20260505-5527-cmeryp sitelibdir\=./.gem.20260505-5527-cmeryp clean
