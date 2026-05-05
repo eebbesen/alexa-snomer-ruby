@@ -8,8 +8,8 @@ class Minneapolis
     now = DateTime.now
 
     notice = notices.detect do |n|
-      (!n['publishDate'].to_s.empty? && DateTime.parse(n['publishDate']) < now) &&
-        (!n['expireDate'].to_s.empty? && DateTime.parse(n['expireDate']) > now)
+      !n['publishDate'].to_s.empty? && DateTime.parse(n['publishDate']) < now &&
+        !n['expireDate'].to_s.empty? && DateTime.parse(n['expireDate']) > now
     end
 
     notice ? notice['html'] || '' : ''

@@ -1,0 +1,22 @@
+current directory: /Users/ericebbesen/projects/alexa-snomer-ruby/vendor/bundle/ruby/3.4.0/gems/byebug-13.0.0/ext/byebug
+/Users/ericebbesen/.rbenv/versions/3.4.2/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /Users/ericebbesen/projects/alexa-snomer-ruby/vendor/bundle/ruby/3.4.0/gems/byebug-13.0.0/ext/byebug
+make DESTDIR\= sitearchdir\=./.gem.20260505-5527-9d82gl sitelibdir\=./.gem.20260505-5527-9d82gl clean
+
+current directory: /Users/ericebbesen/projects/alexa-snomer-ruby/vendor/bundle/ruby/3.4.0/gems/byebug-13.0.0/ext/byebug
+make DESTDIR\= sitearchdir\=./.gem.20260505-5527-9d82gl sitelibdir\=./.gem.20260505-5527-9d82gl
+compiling breakpoint.c
+compiling byebug.c
+compiling context.c
+compiling locker.c
+compiling threads.c
+linking shared-object byebug/byebug.bundle
+
+current directory: /Users/ericebbesen/projects/alexa-snomer-ruby/vendor/bundle/ruby/3.4.0/gems/byebug-13.0.0/ext/byebug
+make DESTDIR\= sitearchdir\=./.gem.20260505-5527-9d82gl sitelibdir\=./.gem.20260505-5527-9d82gl install
+/usr/bin/install -c -m 0755 byebug.bundle ./.gem.20260505-5527-9d82gl/byebug
+
+current directory: /Users/ericebbesen/projects/alexa-snomer-ruby/vendor/bundle/ruby/3.4.0/gems/byebug-13.0.0/ext/byebug
+make DESTDIR\= sitearchdir\=./.gem.20260505-5527-9d82gl sitelibdir\=./.gem.20260505-5527-9d82gl clean

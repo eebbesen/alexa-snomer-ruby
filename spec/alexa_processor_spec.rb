@@ -332,12 +332,12 @@ RSpec.describe AlexaProcessor do
           "System": {
             "user": {
               "permissions": {
-                #{address_perm ? address_permission_string : ''}
+                #{address_permission_string if address_perm}
               }
             },
             "device": {
               "deviceId": "amzn1.ask.device.AEGXGYKTLQ"
-              #{screen ? apl_string : ''}
+              #{apl_string if screen}
             },
             "apiEndpoint": "https://api.amazonalexa.com",
             "apiAccessToken": "eyJ0eXA"
@@ -354,7 +354,7 @@ RSpec.describe AlexaProcessor do
           "timestamp": "2019-01-19T17:48:25Z",
           "locale": "en-US",
           "shouldLinkResultBeReturned": false
-            #{intent_type == 'LaunchRequest' ? '' : intent_string}
+            #{intent_string unless intent_type == 'LaunchRequest'}
         }
       }
     JSONT

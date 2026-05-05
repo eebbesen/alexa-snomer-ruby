@@ -151,8 +151,9 @@ class AlexaProcessor
   def loc_processor
     return unless city.key
 
-    file = File.open('database/city_map.json')
-    cities = JSON.parse(file.read)
+    cities = File.open('database/city_map.json') do |f|
+      JSON.parse(f.read)
+    end
     return cities[city.key] if cities[city.key]
 
     return unless cities[@alexa_event.alternate_city_key]
